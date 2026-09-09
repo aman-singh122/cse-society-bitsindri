@@ -1,92 +1,74 @@
+import React from "react";
+import TechnicalLabel from "@/components/ui/TechnicalLabel";
+import InteractiveRow from "@/components/ui/InteractiveRow";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+
 const pillars = [
   {
     number: "01",
-    title: "Learn",
+    title: "LEARN",
+    subtitle: "KNOWLEDGE & MASTERCLASSES",
     description:
-      "Explore new technologies, strengthen your fundamentals and learn from peers, mentors and industry experiences.",
+      "Deep-dive technical workshops, peer learning sessions, and hands-on bootcamps covering modern web development, algorithms, artificial intelligence, and operating systems.",
+    tags: ["Algorithms", "System Design", "Machine Learning", "Web Architecture"],
   },
   {
     number: "02",
-    title: "Build",
+    title: "BUILD",
+    subtitle: "SOFTWARE & OPEN SOURCE",
     description:
-      "Turn ideas into working solutions through projects, experimentation and hands-on technical initiatives.",
+      "Transforming theoretical concepts into functional products. Students collaborate on web platforms, CLI tools, utility APIs, and open-source contributions to real-world codebases.",
+    tags: ["Next.js", "TypeScript", "Python", "Docker", "Git Workflow"],
   },
   {
     number: "03",
-    title: "Compete",
+    title: "COMPETE",
+    subtitle: "HACKATHONS & ALGORITHMS",
     description:
-      "Challenge yourself through hackathons, coding competitions and problem-solving experiences.",
+      "Organizing high-stakes hackathons, speed programming rounds, and algorithm challenges that hone critical thinking, problem-solving, and team execution under pressure.",
+    tags: ["CodeSprint", "Hackathon", "Competitive Coding", "Data Structures"],
   },
   {
     number: "04",
-    title: "Connect",
+    title: "CONNECT",
+    subtitle: "ALUMNI & INDUSTRY NETWORK",
     description:
-      "Build meaningful connections with fellow students, alumni, mentors and the wider technology community.",
+      "Bridging campus talent with global industry leadership through mentorship programs, tech talks, resume reviews, and career insights from alumni working at top tech firms.",
+    tags: ["Microsoft", "Amazon", "Tech Talks", "Mentorship"],
   },
 ];
 
 export default function Impact() {
   return (
-    <section className="border-t border-black/10 px-6 py-28 lg:px-10 lg:py-40">
+    <section className="border-b border-black/15 bg-[#f5f3ee] px-4 py-20 sm:px-6 lg:px-10 lg:py-32">
       <div className="mx-auto max-w-7xl">
-
-        {/* Section heading */}
-        <div className="grid gap-8 lg:grid-cols-12">
-          <div className="lg:col-span-3">
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-400">
-                02
-              </span>
-
-              <span className="h-px w-8 bg-black/20" />
-
-              <p className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-500">
-                What Drives Us
-              </p>
+        <AnimatedSection>
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <TechnicalLabel index="03" title="OUR IMPACT" category="PILLARS" />
+              <h2 className="mt-4 text-clamp-display font-medium tracking-tight text-[#141413]">
+                What drives <span className="text-neutral-400">our society.</span>
+              </h2>
             </div>
-          </div>
-
-          <div className="lg:col-span-8 lg:col-start-5">
-            <h2 className="max-w-4xl text-4xl font-medium leading-[1.05] tracking-[-0.04em] text-neutral-950 sm:text-5xl lg:text-6xl">
-              Technology is only the beginning.
-            </h2>
-
-            <p className="mt-7 max-w-xl text-base leading-7 text-neutral-500">
-              We create an environment where students can explore ideas,
-              develop practical skills and grow together beyond the
-              classroom.
+            <p className="max-w-md text-sm leading-6 text-neutral-600 font-mono">
+              [ Interactive rows — Hover or tap to expand detailed domain focus ]
             </p>
           </div>
-        </div>
 
-        {/* Pillars */}
-        <div className="mt-20 border-t border-black/10">
-          {pillars.map((pillar) => (
-            <div
-              key={pillar.number}
-              className="group grid gap-6 border-b border-black/10 py-8 transition-colors duration-300 hover:bg-black/[0.02] lg:grid-cols-12 lg:items-start lg:gap-8"
-            >
-              <div className="lg:col-span-2">
-                <span className="text-xs tracking-[0.2em] text-neutral-400">
-                  {pillar.number}
-                </span>
-              </div>
-
-              <div className="lg:col-span-4">
-                <h3 className="text-2xl font-medium tracking-tight text-neutral-950">
-                  {pillar.title}
-                </h3>
-              </div>
-
-              <div className="lg:col-span-5 lg:col-start-8">
-                <p className="max-w-lg text-sm leading-6 text-neutral-500">
-                  {pillar.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
+          <div className="mt-12 border-t border-black/15">
+            {pillars.map((pillar, index) => (
+              <InteractiveRow
+                key={pillar.number}
+                number={pillar.number}
+                title={pillar.title}
+                subtitle={pillar.subtitle}
+                description={pillar.description}
+                tags={pillar.tags}
+                defaultExpanded={index === 0}
+              />
+            ))}
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );

@@ -1,4 +1,9 @@
+import React from "react";
 import Link from "next/link";
+import TechnicalLabel from "@/components/ui/TechnicalLabel";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import TechMarquee from "@/components/ui/TechMarquee";
+import { ArrowRight, ArrowUpRight, Award, Beaker, BookOpen, Clock } from "lucide-react";
 
 const areas = [
   "Algorithms & Data Structures",
@@ -22,237 +27,183 @@ const labs = [
   "Software Engineering Lab",
 ];
 
+const timeline = [
+  { year: "1987", title: "Department Established", desc: "Founding of the Department of Computer Science & Engineering at BIT Sindri." },
+  { year: "1991", title: "First Batch Graduated", desc: "First cohort of B.Tech CSE graduates entered leading tech industries and academia." },
+  { year: "2010s", title: "Expansion of Computing Infrastructure", desc: "State-of-the-art labs and high-speed network facilities added across campus." },
+  { year: "Present", title: "Student Society & AI Era", desc: "Active student community building modern web platforms, competitive programming culture, and AI research." },
+];
+
 export default function AboutPage() {
   return (
-    <main className="pt-24">
+    <main className="pt-24 w-full overflow-x-hidden">
       {/* Hero */}
-      <section className="px-6 pb-28 pt-20 lg:px-10 lg:pb-40 lg:pt-28">
+      <section className="border-b border-black/15 bg-[#f5f3ee] px-4 py-20 sm:px-6 lg:px-10 lg:py-32">
         <div className="mx-auto max-w-7xl">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-10 bg-black/25" />
+          <TechnicalLabel index="ABOUT / 01" title="DEPARTMENT & SOCIETY" category="BIT SINDRI" />
 
-            <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-neutral-500">
-              CSE · BIT Sindri
-            </p>
-          </div>
-
-          <div className="mt-10 max-w-6xl">
-            <h1 className="text-5xl font-semibold leading-[0.92] tracking-[-0.06em] text-neutral-950 sm:text-6xl lg:text-[7rem]">
-              Computer Science
-              <br />
-              <span className="text-neutral-400">
-                & Engineering.
-              </span>
+          <div className="mt-8 max-w-6xl">
+            <h1 className="text-clamp-hero font-semibold tracking-[-0.055em] text-[#141413]">
+              Computer Science <br />
+              <span className="text-neutral-400 font-normal">& Engineering.</span>
             </h1>
           </div>
 
-          <div className="mt-16 grid border-t border-black/10 pt-8 lg:grid-cols-12">
+          <div className="mt-14 grid gap-8 border-t border-black/15 pt-8 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-4">
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-400">
-                Established
+              <p className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-400">
+                FOUNDATION YEAR
               </p>
-
-              <p className="mt-3 text-5xl font-medium tracking-[-0.04em] text-neutral-950">
+              <p className="mt-2 font-mono text-6xl font-bold tracking-tight text-[#141413] sm:text-7xl">
                 1987
               </p>
             </div>
 
-            <div className="mt-10 lg:col-span-5 lg:col-start-8 lg:mt-0">
-              <p className="text-[15px] leading-7 text-neutral-600">
-                The Department of Computer Science & Engineering at BIT Sindri
-                has been part of the institute's engineering education journey
-                since 1987, combining foundational computer science education
-                with practical and evolving areas of technology.
+            <div className="lg:col-span-8 lg:pl-6">
+              <p className="text-base leading-8 text-neutral-600 sm:text-lg">
+                The Department of Computer Science & Engineering at BIT Sindri has been a cornerstone of engineering education since 1987. We combine deep theoretical computer science with evolving software paradigms, empowering students to innovate across web technologies, systems programming, and artificial intelligence.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Legacy */}
-      <section className="border-t border-black/10 px-6 py-28 lg:px-10 lg:py-40">
+      {/* Marquee Accent */}
+      <TechMarquee
+        items={["EST. 1987", "BIT SINDRI", "COMPUTATIONAL EXCELLENCE", "SOFTWARE ENGINEERING", "SYSTEM DESIGN"]}
+        speed={25}
+        variant="dark"
+      />
+
+      {/* History Timeline Section */}
+      <section className="border-b border-black/15 bg-[#faf9f6] px-4 py-20 sm:px-6 lg:px-10 lg:py-32">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-3">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-400">
-                  01
-                </span>
-
-                <span className="h-px w-8 bg-black/20" />
-
-                <p className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-500">
-                  Legacy
-                </p>
-              </div>
-            </div>
-
-            <div className="lg:col-span-8 lg:col-start-5">
-              <h2 className="text-4xl font-medium leading-[1.05] tracking-[-0.045em] text-neutral-950 sm:text-5xl lg:text-6xl">
-                Four decades of
-                <span className="text-neutral-400">
-                  {" "}
-                  computer science education.
-                </span>
-              </h2>
-
-              <p className="mt-8 max-w-2xl text-[15px] leading-7 text-neutral-600">
-                Established in 1987, the department has grown alongside the
-                changing landscape of computing. Its academic foundation
-                continues to span core computer science disciplines while
-                opening opportunities to explore emerging technologies.
-              </p>
-
-              <p className="mt-6 max-w-2xl text-[15px] leading-7 text-neutral-600">
-                The department's first undergraduate batch graduated in 1991,
-                marking the beginning of a long line of graduates who have
-                moved into professional and academic careers.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Areas */}
-      <section className="border-t border-black/10 px-6 py-28 lg:px-10 lg:py-40">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-12">
-            <div className="lg:col-span-3">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-400">
-                  02
-                </span>
-
-                <span className="h-px w-8 bg-black/20" />
-
-                <p className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-500">
-                  Areas of Study
-                </p>
-              </div>
-            </div>
-
-            <div className="lg:col-span-8 lg:col-start-5">
-              <h2 className="text-4xl font-medium leading-[1.05] tracking-[-0.04em] text-neutral-950 sm:text-5xl lg:text-6xl">
-                From fundamentals
-                <br />
-                <span className="text-neutral-400">
-                  to emerging technologies.
-                </span>
-              </h2>
-
-              <p className="mt-7 max-w-xl text-[15px] leading-7 text-neutral-600">
-                Computer science at BIT Sindri spans the fundamental systems
-                and software disciplines that form the foundation of modern
-                computing.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-20 grid border-t border-black/10 sm:grid-cols-2 lg:grid-cols-4">
-            {areas.map((area, index) => (
-              <div
-                key={area}
-                className="border-b border-black/10 px-1 py-7 sm:px-5"
-              >
-                <span className="text-[10px] tracking-[0.2em] text-neutral-400">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-
-                <p className="mt-4 text-sm font-medium text-neutral-900">
-                  {area}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Labs */}
-      <section className="border-t border-black/10 px-6 py-28 lg:px-10 lg:py-40">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-3">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-400">
-                  03
-                </span>
-
-                <span className="h-px w-8 bg-black/20" />
-
-                <p className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-500">
-                  Laboratories
-                </p>
-              </div>
-            </div>
-
-            <div className="lg:col-span-8 lg:col-start-5">
-              <h2 className="text-4xl font-medium leading-[1.05] tracking-[-0.04em] text-neutral-950 sm:text-5xl lg:text-6xl">
-                Learning doesn't stop
-                <span className="text-neutral-400">
-                  {" "}
-                  at the lecture.
-                </span>
-              </h2>
-
-              <p className="mt-7 max-w-xl text-[15px] leading-7 text-neutral-600">
-                Practical work is an important part of computer science
-                education. The department lists dedicated laboratories across
-                core areas of computing and software engineering.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-20 border-t border-black/10">
-            {labs.map((lab, index) => (
-              <div
-                key={lab}
-                className="grid grid-cols-12 items-center border-b border-black/10 py-6"
-              >
-                <span className="col-span-2 text-xs tracking-[0.2em] text-neutral-400 lg:col-span-1">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-
-                <p className="col-span-9 text-base font-medium text-neutral-900 lg:col-span-6">
-                  {lab}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Society */}
-      <section className="border-t border-black/10 px-6 py-28 lg:px-10 lg:py-40">
-        <div className="mx-auto max-w-7xl">
-          <div className="bg-black px-7 py-14 text-white sm:px-12 lg:px-16 lg:py-20">
-            <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-white/40">
-              CSE Society
-            </p>
-
-            <h2 className="mt-7 max-w-4xl text-4xl font-medium leading-[1.02] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-              The department gives us
-              <br />
-              the foundation.
-              <br />
-              <span className="text-white/40">
-                The community takes it forward.
-              </span>
+          <AnimatedSection>
+            <TechnicalLabel index="02" title="DEPARTMENT LEGACY" category="TIMELINE" />
+            <h2 className="mt-4 text-clamp-display font-medium tracking-tight text-[#141413]">
+              Four decades of <span className="text-neutral-400 font-normal">engineering education.</span>
             </h2>
 
-            <p className="mt-8 max-w-xl text-[15px] leading-7 text-white/60">
-              The CSE Society provides a student-driven space for technical
-              exploration, collaboration, events and experiences beyond the
-              formal curriculum.
+            <div className="mt-16 border-t border-black/15">
+              {timeline.map((item, idx) => (
+                <div
+                  key={item.year}
+                  className="group grid gap-6 border-b border-black/15 py-8 md:grid-cols-12 md:items-center"
+                >
+                  <div className="md:col-span-3">
+                    <span className="font-mono text-3xl font-bold tracking-tight text-neutral-400 group-hover:text-black transition-colors">
+                      {item.year}
+                    </span>
+                  </div>
+
+                  <div className="md:col-span-4">
+                    <h3 className="text-xl font-semibold text-[#141413] group-hover:text-black">
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  <div className="md:col-span-5">
+                    <p className="text-sm leading-6 text-neutral-600">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Academic Disciplines Grid */}
+      <section className="border-b border-black/15 bg-[#f5f3ee] px-4 py-20 sm:px-6 lg:px-10 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <AnimatedSection>
+            <TechnicalLabel index="03" title="CURRICULUM FOCUS" category="AREAS OF STUDY" />
+            <h2 className="mt-4 text-clamp-display font-medium tracking-tight text-[#141413]">
+              From fundamentals <span className="text-neutral-400 font-normal">to modern tech.</span>
+            </h2>
+
+            <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {areas.map((area, index) => (
+                <div
+                  key={area}
+                  className="group flex flex-col justify-between border border-black/15 bg-[#faf9f6] p-6 transition-all duration-300 hover:border-black hover:shadow-lg"
+                >
+                  <span className="font-mono text-xs font-semibold text-neutral-400 group-hover:text-black">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <div className="mt-8">
+                    <h3 className="font-mono text-sm font-bold uppercase tracking-wider text-[#141413]">
+                      {area}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Laboratories Catalog */}
+      <section className="border-b border-black/15 bg-[#faf9f6] px-4 py-20 sm:px-6 lg:px-10 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <AnimatedSection>
+            <TechnicalLabel index="04" title="INFRASTRUCTURE" category="LABORATORIES" />
+            <h2 className="mt-4 text-clamp-display font-medium tracking-tight text-[#141413]">
+              Dedicated computing <span className="text-neutral-400 font-normal">labs.</span>
+            </h2>
+
+            <div className="mt-14 border-t border-black/15">
+              {labs.map((lab, index) => (
+                <div
+                  key={lab}
+                  className="group flex items-center justify-between border-b border-black/15 py-6 transition-colors hover:bg-black/[0.015]"
+                >
+                  <div className="flex items-center gap-6">
+                    <span className="font-mono text-xs text-neutral-400 group-hover:text-black">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-lg font-semibold text-[#141413]">
+                      {lab}
+                    </span>
+                  </div>
+
+                  <span className="font-mono text-xs uppercase tracking-wider text-neutral-400 group-hover:text-black">
+                    DEPT OF CSE · BIT SINDRI
+                  </span>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Society Vision Dark CTA */}
+      <section className="bg-[#141413] px-4 py-20 text-[#f5f3ee] sm:px-6 lg:px-10 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <AnimatedSection>
+            <TechnicalLabel index="05" title="SOCIETY MANDATE" category="VISION" dark />
+
+            <h2 className="mt-8 max-w-4xl text-clamp-section font-medium leading-tight text-[#f5f3ee]">
+              The department provides the foundation. <br />
+              <span className="text-white/40">The community takes it forward.</span>
+            </h2>
+
+            <p className="mt-8 max-w-2xl text-base leading-7 text-white/70">
+              The CSE Society is a student-run ecosystem fostering continuous learning, competition, project development, and alumni mentorship beyond classroom bounds.
             </p>
 
-            <Link
-              href="/events"
-              className="mt-10 inline-flex bg-white px-6 py-3.5 text-sm font-medium text-black transition-transform duration-200 hover:-translate-y-0.5"
-            >
-              Explore our activities
-              <span className="ml-4">→</span>
-            </Link>
-          </div>
+            <div className="mt-10">
+              <Link
+                href="/events"
+                className="group inline-flex items-center gap-3 bg-white px-8 py-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#141413] transition-all hover:bg-neutral-200"
+              >
+                <span>EXPLORE SOCIETY ACTIVITIES</span>
+                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </main>

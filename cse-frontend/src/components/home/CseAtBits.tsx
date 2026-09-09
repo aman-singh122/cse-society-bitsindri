@@ -1,75 +1,73 @@
-import Link from "next/link";
+import React from "react";
+import TechnicalLabel from "@/components/ui/TechnicalLabel";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+
+const disciplines = [
+  { id: "01", name: "ALGORITHMS & DATA STRUCTURES", desc: "Complexity, optimization, graph theoretical models" },
+  { id: "02", name: "ARTIFICIAL INTELLIGENCE", desc: "Machine learning, neural networks, computer vision" },
+  { id: "03", name: "COMPUTER NETWORKS", desc: "Protocols, distributed systems, internet architecture" },
+  { id: "04", name: "DATABASE SYSTEMS", desc: "Relational algebra, NoSQL indexing, query tuning" },
+  { id: "05", name: "WEB TECHNOLOGIES", desc: "Full-stack frameworks, microservices, cloud deployments" },
+  { id: "06", name: "OPERATING SYSTEMS", desc: "Kernel concurrency, memory management, file systems" },
+  { id: "07", name: "COMPILER DESIGN", desc: "Lexical analysis, AST parsing, bytecode generation" },
+  { id: "08", name: "SOFTWARE ENGINEERING", desc: "Agile methodologies, testing pipelines, CI/CD" },
+];
 
 export default function CseAtBits() {
   return (
-    <section className="border-t border-black/10 px-6 py-28 lg:px-10 lg:py-40">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative overflow-hidden border-b border-black/15 bg-[#f5f3ee] px-4 py-20 sm:px-6 lg:px-10 lg:py-36">
+      {/* Giant 1987 Watermark */}
+      <div className="pointer-events-none absolute -right-10 top-10 select-none font-mono text-[14rem] font-bold text-black/[0.035] leading-none sm:text-[22rem]">
+        1987
+      </div>
 
-        {/* Section label */}
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-400">
-            05
-          </span>
-
-          <span className="h-px w-8 bg-black/20" />
-
-          <p className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-500">
-            CSE @ BIT Sindri
-          </p>
-        </div>
-
-        {/* Main content */}
-        <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:items-end">
-
-          {/* Heading */}
-          <div className="lg:col-span-7">
-            <h2 className="max-w-4xl text-4xl font-medium leading-[1.02] tracking-[-0.045em] text-neutral-950 sm:text-5xl lg:text-[4.25rem]">
-              A legacy of engineering.
-              <br />
-              <span className="text-neutral-400">
-                A future shaped by technology.
-              </span>
-            </h2>
-          </div>
-
-          {/* Description */}
-          <div className="lg:col-span-4 lg:col-start-9">
-            <p className="text-[15px] leading-7 text-neutral-600">
-              Rooted in the legacy of BIT Sindri, the Computer Science and
-              Engineering community continues to evolve with the changing
-              landscape of technology, education and innovation.
-            </p>
-
-            <Link
-              href="/about"
-              className="group mt-8 inline-flex items-center gap-3 text-sm font-medium text-neutral-900"
-            >
-              <span className="border-b border-black pb-1">
-                Explore our story
-              </span>
-
-              <span className="transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Visual placeholder */}
-        <div className="mt-20 overflow-hidden bg-[#e9e7e0]">
-          <div className="flex aspect-[16/7] items-center justify-center">
-            <div className="text-center">
-              <p className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-400">
-                BIT Sindri
-              </p>
-
-              <p className="mt-3 text-2xl font-medium tracking-tight text-neutral-700 sm:text-3xl">
-                Computer Science & Engineering
+      <div className="relative mx-auto max-w-7xl">
+        <AnimatedSection>
+          {/* Header */}
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-8">
+              <TechnicalLabel index="07" title="DEPARTMENTAL ACADEMICS" category="CSE @ BIT SINDRI" />
+              <h2 className="mt-4 text-clamp-display font-medium tracking-tight text-[#141413]">
+                CSE @ BIT Sindri
+              </h2>
+              <p className="mt-4 max-w-2xl text-lg text-neutral-600 sm:text-xl">
+                A department built around rigorous engineering, computational thinking, and real-world problem solving since 1987.
               </p>
             </div>
-          </div>
-        </div>
 
+            <div className="lg:col-span-4 lg:text-right font-mono text-xs text-neutral-500">
+              <p className="font-semibold text-black uppercase tracking-widest">ESTABLISHED IN 1987</p>
+              <p className="mt-1">BIT SINDRI, DHANBAD</p>
+            </div>
+          </div>
+
+          {/* Editorial Discipline Grid */}
+          <div className="mt-16 grid border-t border-black/15 sm:grid-cols-2 lg:grid-cols-4">
+            {disciplines.map((disc) => (
+              <div
+                key={disc.id}
+                className="group cursor-pointer border-b border-r border-black/15 bg-transparent p-7 transition-all duration-300 hover:bg-[#faf9f6] hover:shadow-lg"
+              >
+                <div className="flex items-center justify-between font-mono text-xs text-neutral-400 group-hover:text-black">
+                  <span>{disc.id}</span>
+                  <span className="opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    →
+                  </span>
+                </div>
+
+                <h3 className="mt-6 font-mono text-sm font-bold tracking-wider text-[#141413] group-hover:text-black">
+                  {disc.name}
+                </h3>
+
+                <p className="mt-3 text-xs leading-5 text-neutral-500">
+                  {disc.desc}
+                </p>
+
+                <div className="mt-6 h-0.5 w-0 bg-black transition-all duration-300 group-hover:w-full" />
+              </div>
+            ))}
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );

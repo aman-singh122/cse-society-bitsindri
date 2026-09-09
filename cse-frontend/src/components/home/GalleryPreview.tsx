@@ -1,125 +1,106 @@
-import Link from "next/link";
+import React from "react";
+import Image from "next/image";
+import TechnicalLabel from "@/components/ui/TechnicalLabel";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 const galleryItems = [
   {
     id: "01",
-    title: "Technical Sessions",
-    category: "LEARNING",
-    size: "large",
+    title: "Computer Science Laboratory Session",
+    category: "LABORATORY",
+    aspect: "aspect-[16/10]",
+    imagePath: "/images/gallery/lab_session.png",
+    colSpan: "lg:col-span-8",
   },
   {
     id: "02",
-    title: "Hackathons & Competitions",
-    category: "BUILD",
-    size: "small",
+    title: "Annual Hackathon & Problem Solving",
+    category: "COMPETITION",
+    aspect: "aspect-[4/5]",
+    colSpan: "lg:col-span-4",
   },
   {
     id: "03",
-    title: "Community & Collaboration",
-    category: "COMMUNITY",
-    size: "small",
+    title: "Technical Masterclass & Bootcamps",
+    category: "WORKSHOP",
+    aspect: "aspect-[4/3]",
+    colSpan: "lg:col-span-5",
   },
   {
     id: "04",
-    title: "Workshops & Experiences",
-    category: "EXPERIENCE",
-    size: "large",
+    title: "Student Project Demos & Innovation",
+    category: "SHOWCASE",
+    aspect: "aspect-[16/9]",
+    colSpan: "lg:col-span-7",
   },
 ];
 
 export default function GalleryPreview() {
   return (
-    <section className="border-t border-black/10 px-6 py-28 lg:px-10 lg:py-40">
+    <section className="border-b border-black/15 bg-[#f5f3ee] px-4 py-20 sm:px-6 lg:px-10 lg:py-36">
       <div className="mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-3">
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-400">
-                07
-              </span>
-
-              <span className="h-px w-8 bg-black/20" />
-
-              <p className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-500">
-                Gallery
-              </p>
+        <AnimatedSection>
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <TechnicalLabel index="09" title="CULTURE & MOMENTS" category="GALLERY" />
+              <h2 className="mt-4 text-clamp-display font-medium tracking-tight text-[#141413]">
+                Life inside <span className="text-neutral-400 font-normal">the society.</span>
+              </h2>
             </div>
-          </div>
-
-          <div className="lg:col-span-8 lg:col-start-5">
-            <h2 className="max-w-5xl text-4xl font-medium leading-[1.02] tracking-[-0.045em] text-neutral-950 sm:text-5xl lg:text-[4.25rem]">
-              Moments that
-              <br />
-              <span className="text-neutral-400">define the community.</span>
-            </h2>
-
-            <p className="mt-7 max-w-xl text-[15px] leading-7 text-neutral-600">
-              From classrooms and workshops to competitions and celebrations,
-              these are the experiences that bring the CSE community together.
+            <p className="max-w-md font-mono text-xs text-neutral-500">
+              [ Moments of collaboration, coding, hackathons, and technical presentations ]
             </p>
           </div>
-        </div>
 
-        {/* Gallery Grid */}
-        <div className="mt-20 grid gap-4 md:grid-cols-2">
-          {galleryItems.map((item) => (
-            <div
-              key={item.id}
-              className={`group relative overflow-hidden bg-[#e9e7e0] ${
-                item.size === "large"
-                  ? "min-h-[360px] md:min-h-[500px]"
-                  : "min-h-[280px] md:min-h-[360px]"
-              }`}
-            >
-              {/* Placeholder visual */}
-              <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 group-hover:scale-[1.02]">
-                <div className="text-center">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-neutral-400">
-                    CSE Society
-                  </p>
+          {/* Asymmetric Gallery Grid */}
+          <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-12">
+            {galleryItems.map((item) => (
+              <div
+                key={item.id}
+                className={`group relative overflow-hidden border border-black/15 bg-[#141413] text-[#f5f3ee] ${item.colSpan}`}
+              >
+                {/* Visual Area */}
+                <div className={`relative w-full ${item.aspect} overflow-hidden bg-neutral-900`}>
+                  {item.imagePath ? (
+                    <Image
+                      src={item.imagePath}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  ) : (
+                    /* High-tech stylized placeholder graphic */
+                    <div className="absolute inset-0 flex flex-col justify-between p-6 bg-tech-grid opacity-80 transition-transform duration-700 group-hover:scale-105">
+                      <div className="flex items-center justify-between font-mono text-xs text-white/50">
+                        <span>{item.id}</span>
+                        <span className="border border-white/20 px-2 py-0.5 uppercase tracking-wider text-[10px]">
+                          {item.category}
+                        </span>
+                      </div>
 
-                  <p className="mt-3 text-xl font-medium tracking-tight text-neutral-600 sm:text-2xl">
-                    {item.title}
-                  </p>
+                      <div className="font-mono text-4xl font-bold text-white/10 select-none">
+                        CSE / BIT SINDRI
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
                 </div>
-              </div>
 
-              {/* Overlay information */}
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6">
-                <div>
-                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-400">
+                {/* Caption Overlay */}
+                <div className="absolute bottom-0 inset-x-0 p-6 transition-transform duration-300">
+                  <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.24em] text-white/60">
                     {item.category}
-                  </p>
-
-                  <h3 className="mt-2 text-lg font-medium text-neutral-800">
+                  </span>
+                  <h3 className="mt-1 text-xl font-medium text-white sm:text-2xl">
                     {item.title}
                   </h3>
                 </div>
-
-                <span className="text-xs tracking-[0.2em] text-neutral-400">
-                  {item.id}
-                </span>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div className="mt-8 flex justify-end">
-          <Link
-            href="/gallery"
-            className="group inline-flex items-center gap-3 text-sm font-medium text-neutral-900"
-          >
-            <span className="border-b border-black pb-1">
-              Explore the gallery
-            </span>
-
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
-          </Link>
-        </div>
+            ))}
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );

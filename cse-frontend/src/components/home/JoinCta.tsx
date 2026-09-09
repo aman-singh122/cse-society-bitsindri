@@ -1,52 +1,48 @@
+import React from "react";
 import Link from "next/link";
+import TechnicalLabel from "@/components/ui/TechnicalLabel";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import { ArrowRight } from "lucide-react";
 
 export default function JoinCta() {
   return (
-    <section className="border-t border-black/10 px-6 py-28 lg:px-10 lg:py-40">
-      <div className="mx-auto max-w-7xl">
-        <div className="bg-black px-7 py-14 text-white sm:px-12 sm:py-16 lg:px-16 lg:py-20">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
-            {/* Label */}
-            <div className="lg:col-span-3">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-medium uppercase tracking-[0.25em] text-white/40">
-                  08
-                </span>
+    <section className="relative overflow-hidden bg-[#141413] px-4 py-24 text-[#f5f3ee] sm:px-6 lg:px-10 lg:py-40">
+      {/* Background Dot pattern */}
+      <div className="pointer-events-none absolute inset-0 opacity-10 bg-dot-pattern" />
 
-                <span className="h-px w-8 bg-white/30" />
+      <div className="relative mx-auto max-w-7xl">
+        <AnimatedSection>
+          <TechnicalLabel index="10" title="JOIN THE COMMUNITY" category="MEMBERSHIP" dark />
 
-                <p className="text-xs font-medium uppercase tracking-[0.25em] text-white/50">
-                  Join Society
-                </p>
+          <div className="mt-10 max-w-6xl">
+            <h2 className="text-clamp-hero font-medium tracking-[-0.055em] text-[#f5f3ee]">
+              BUILD SOMETHING <br />
+              <span className="text-white/40 italic">WORTH REMEMBERING.</span>
+            </h2>
+          </div>
+
+          <div className="mt-14 grid gap-8 border-t border-white/15 pt-10 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-7 lg:col-span-6">
+              <p className="text-base leading-8 text-white/70 sm:text-lg">
+                Whether you are passionate about full-stack engineering, competitive programming, AI research, or digital design, the CSE Society offers a community of peers and mentors to build with.
+              </p>
+
+              <div className="mt-4 font-mono text-xs text-white/50">
+                <span>OPEN TO ALL CSE STUDENTS · BIT SINDRI</span>
               </div>
             </div>
 
-            {/* Main Content */}
-            <div className="lg:col-span-8 lg:col-start-5">
-              <h2 className="max-w-4xl text-4xl font-medium leading-[1.02] tracking-[-0.045em] sm:text-5xl lg:text-[4.5rem]">
-                Build something
-                <br />
-                <span className="text-white/40">worth being part of.</span>
-              </h2>
-
-              <p className="mt-7 max-w-xl text-[15px] leading-7 text-white/60">
-                Join a community of students who learn, build, compete and
-                create together. Your next idea could start here.
-              </p>
-
+            <div className="md:col-span-5 md:flex md:justify-end lg:col-span-6">
               <Link
                 href="/join"
-                className="group mt-10 inline-flex items-center gap-4 bg-white px-6 py-3.5 text-sm font-medium text-black transition-transform duration-200 hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-4 bg-white px-9 py-5 font-mono text-sm font-bold uppercase tracking-[0.2em] text-[#141413] transition-all duration-300 hover:bg-neutral-200 hover:shadow-2xl hover:-translate-y-1"
               >
-                <span>Join the Society</span>
-
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
+                <span>JOIN THE CSE SOCIETY</span>
+                <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1.5" />
               </Link>
             </div>
           </div>
-        </div>
+        </AnimatedSection>
       </div>
     </section>
   );
