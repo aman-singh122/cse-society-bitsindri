@@ -1,7 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin } from "lucide-react";
-import { InstagramIcon, LinkedinIcon, GithubIcon, YoutubeIcon, TwitterIcon } from "@/components/ui/SocialIcons";
+import {
+  InstagramIcon,
+  LinkedinIcon,
+  GithubIcon,
+  YoutubeIcon,
+  TwitterIcon,
+} from "@/components/ui/SocialIcons";
 
 const footerLinks = [
   { name: "About", href: "/about" },
@@ -53,55 +59,80 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-black/15 bg-[#f5f3ee] px-6 pb-12 pt-20 lg:px-10">
+    <footer className="border-t border-black/15 bg-[#f5f3ee] px-4 pb-8 pt-12 sm:px-6 lg:px-10 lg:pt-14">
       <div className="mx-auto max-w-7xl">
-        {/* Top Header */}
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
-          {/* Brand & Identity */}
-          <div className="lg:col-span-5">
-            <Link href="/" className="inline-flex items-center gap-3.5">
-              <div className="flex h-10 w-10 items-center justify-center bg-[#141413] font-mono text-base font-bold text-[#f5f3ee] shadow-sm">
+
+        {/* =====================================================
+            MAIN FOOTER GRID
+        ====================================================== */}
+        <div className="grid gap-10 lg:grid-cols-12">
+
+          {/* BRAND */}
+          <div className="lg:col-span-6">
+            <Link
+              href="/"
+              className="group inline-flex items-center gap-3"
+            >
+              <div className="flex h-10 w-10 items-center justify-center bg-[#141413] font-mono text-base font-bold text-[#f5f3ee] transition-transform duration-300 group-hover:-rotate-3">
                 C
               </div>
+
               <div className="leading-none">
                 <p className="font-mono text-sm font-bold tracking-tight text-[#141413]">
                   CSE SOCIETY
                 </p>
-                <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.28em] text-neutral-500">
+
+                <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.28em] text-neutral-500">
                   BIT SINDRI
                 </p>
               </div>
             </Link>
 
-            <p className="mt-6 max-w-sm text-sm leading-7 text-neutral-600">
-              The official Computer Science & Engineering Society of BIT Sindri. A student community of curious minds, ambitious builders, and technical leaders shaping the future of computation.
+            <p className="mt-5 max-w-lg text-sm leading-6 text-neutral-600">
+              The official Computer Science & Engineering Society of BIT
+              Sindri — a student community built around technology,
+              collaboration, problem solving, and continuous learning.
             </p>
 
-            <div className="mt-6 inline-flex items-center gap-2 border border-black/10 bg-[#faf9f6] px-3.5 py-1.5 font-mono text-xs text-neutral-600">
-              <MapPin size={13} className="text-rose-600" />
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>23.6558° N, 86.4711° E · SINDRI, DHANBAD</span>
+            {/* LOCATION */}
+            <div className="mt-5 inline-flex max-w-full items-center gap-2 border border-black/10 bg-[#faf9f6] px-3 py-2">
+              <MapPin
+                size={13}
+                className="shrink-0 text-neutral-500"
+              />
+
+              <span className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-emerald-500" />
+
+              <span className="truncate font-mono text-[9px] uppercase tracking-wider text-neutral-500">
+                SINDRI · DHANBAD · JHARKHAND
+              </span>
             </div>
 
-            {/* Social Icons Row */}
-            <div className="mt-8">
-              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-500 mb-3">
+            {/* SOCIALS */}
+            <div className="mt-7">
+              <p className="mb-3 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-neutral-400">
                 OFFICIAL SOCIAL HANDLES
               </p>
-              <div className="flex flex-wrap items-center gap-2.5">
-                {socialLinks.map((s) => {
-                  const Icon = s.icon;
+
+              <div className="flex flex-wrap gap-2">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+
                   return (
                     <a
-                      key={s.name}
-                      href={s.href}
+                      key={social.name}
+                      href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      title={s.label}
-                      className={`flex h-10 items-center gap-2 border border-black/15 bg-white px-3.5 py-2 font-mono text-xs font-semibold text-neutral-700 transition-all duration-200 shadow-xs hover:shadow-md ${s.color}`}
+                      title={social.label}
+                      aria-label={social.label}
+                      className={`group inline-flex h-9 items-center gap-2 border border-black/12 bg-[#faf9f6] px-3 font-mono text-[9px] font-semibold uppercase tracking-wider text-neutral-600 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-md ${social.color}`}
                     >
-                      <Icon size={16} />
-                      <span className="hidden sm:inline-block">{s.name}</span>
+                      <Icon className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:scale-105" />
+
+                      <span className="hidden sm:inline">
+                        {social.name}
+                      </span>
                     </a>
                   );
                 })}
@@ -109,77 +140,100 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Navigation Links */}
-          <div className="lg:col-span-3 lg:col-start-7">
-            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-neutral-400">
-              SOCIETY DIRECTORY
+          {/* DIRECTORY */}
+          <div className="lg:col-span-2 lg:col-start-7">
+            <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-neutral-400">
+              DIRECTORY
             </p>
 
-            <ul className="mt-6 space-y-3.5">
+            <ul className="mt-5 space-y-2.5">
               {footerLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="group inline-flex items-center gap-2 text-sm font-medium text-neutral-700 transition-colors hover:text-black"
+                    className="group inline-flex items-center gap-1.5 text-sm text-neutral-700 transition-colors hover:text-black"
                   >
                     <span>{link.name}</span>
-                    <ArrowUpRight size={14} className="opacity-40 transition-opacity duration-200 group-hover:opacity-100 group-hover:translate-x-0.5" />
+
+                    <ArrowUpRight
+                      size={12}
+                      className="text-neutral-300 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-black"
+                    />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact Details */}
-          <div className="lg:col-span-3">
-            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-neutral-400">
-              CONTACT & INQUIRY
+          {/* CONTACT */}
+          <div className="lg:col-span-4">
+            <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-neutral-400">
+              CONTACT
             </p>
 
-            <div className="mt-6 space-y-5">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-wider text-neutral-400 font-bold">
-                  Department
-                </p>
-                <p className="mt-1 text-sm font-semibold text-neutral-800">
-                  Dept. of Computer Science & Engineering
-                </p>
-                <p className="text-xs text-neutral-500 mt-0.5">
-                  BIT Sindri, Dhanbad, Jharkhand 828123
-                </p>
-              </div>
+            <div className="mt-5 border-l border-black/15 pl-4">
+              <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-neutral-400">
+                Department
+              </p>
 
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-wider text-neutral-400 font-bold">
-                  Official Email
-                </p>
-                <a
-                  href="mailto:cse.society@bitsindri.ac.in"
-                  className="mt-1 inline-flex items-center gap-1.5 text-sm font-medium text-[#141413] hover:underline"
-                >
-                  <Mail size={14} />
-                  <span>cse.society@bitsindri.ac.in</span>
-                </a>
-              </div>
+              <p className="mt-1 text-sm font-medium text-neutral-800">
+                Computer Science & Engineering
+              </p>
+
+              <p className="mt-0.5 text-xs leading-5 text-neutral-500">
+                BIT Sindri, Dhanbad, Jharkhand 828123
+              </p>
+            </div>
+
+            <div className="mt-5 border-l border-black/15 pl-4">
+              <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-neutral-400">
+                Official Email
+              </p>
+
+              <a
+                href="mailto:cse.society@bitsindri.ac.in"
+                className="group mt-1 inline-flex items-center gap-2 text-sm font-medium text-[#141413] transition-colors hover:text-neutral-500"
+              >
+                <Mail size={13} />
+
+                <span className="break-all">
+                  cse.society@bitsindri.ac.in
+                </span>
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Big Typographic Graphic Tag */}
-        <div className="mt-20 border-t border-black/10 pt-12 text-center lg:text-left">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400 font-semibold">
-            COMPUTE • COLLABORATE • INNOVATE • BIT SINDRI 1987-2026
-          </p>
+        {/* =====================================================
+            LARGE TYPOGRAPHIC STRIP
+        ====================================================== */}
+        <div className="mt-10 overflow-hidden border-y border-black/10 py-5">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.22em] text-neutral-400">
+              COMPUTE · COLLABORATE · INNOVATE
+            </span>
+
+            <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-neutral-300">
+              CSE / BIT SINDRI
+            </span>
+          </div>
+
+          <div className="mt-1 select-none whitespace-nowrap text-[clamp(2.5rem,7vw,6.5rem)] font-semibold leading-none tracking-[-0.075em] text-black/[0.055]">
+            COMPUTER SCIENCE
+          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-8 flex flex-col gap-4 border-t border-black/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-xs text-neutral-500">
-            © {currentYear} Computer Science & Engineering Society, BIT Sindri. All rights reserved.
+        {/* =====================================================
+            BOTTOM BAR
+        ====================================================== */}
+        <div className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-mono text-[9px] uppercase tracking-wider text-neutral-400">
+            © {currentYear} CSE Society · BIT Sindri
           </p>
-          <div className="flex items-center gap-4 font-mono text-xs text-neutral-500">
+
+          <div className="flex items-center gap-3 font-mono text-[9px] uppercase tracking-wider text-neutral-400">
             <span>EST. 1987</span>
-            <span>•</span>
+            <span className="text-neutral-300">/</span>
             <span>BIT SINDRI</span>
           </div>
         </div>
