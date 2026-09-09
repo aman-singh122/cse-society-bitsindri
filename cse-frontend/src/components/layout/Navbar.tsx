@@ -229,13 +229,15 @@ export default function Navbar() {
               DESKTOP NAVIGATION
           ================================================== */}
 
-       <div
+<div
   className="
-    absolute left-[48%]
+    desktop-nav-links
+    absolute left-1/2
     hidden -translate-x-1/2
-    items-center gap-5
+    items-center
+    gap-4
     md:flex
-    lg:gap-7
+    lg:gap-6
     xl:gap-8
   "
 >
@@ -302,15 +304,13 @@ export default function Navbar() {
               DESKTOP RIGHT SIDE
           ================================================== */}
 
-          <div className="ml-auto hidden items-center gap-4 md:flex">
+          <div className="desktop-nav-actions ml-auto hidden items-center gap-3 md:flex">
             <div className="nav-live hidden items-center gap-2 border-r border-black/10 pr-3 lg:flex">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inset-0 animate-ping rounded-full bg-emerald-500/50" />
                 <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
-              <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.18em] text-black/52">
-                ONLINE
-              </span>
+            
             </div>
 
             {/* SOCIALS */}
@@ -354,23 +354,6 @@ export default function Navbar() {
                 "
               >
                 <LinkedinIcon className="h-[15px] w-[15px]" />
-              </a>
-
-              <a
-                href="https://github.com/cse-bitsindri"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                title="GitHub"
-                className="
-                  flex h-8 w-8 items-center justify-center
-                  text-black/65
-                  transition-all duration-300
-                  hover:-translate-y-0.5
-                  hover:text-[#141413]
-                "
-              >
-                <GithubIcon className="h-[15px] w-[15px]" />
               </a>
             </div>
 

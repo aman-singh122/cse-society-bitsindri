@@ -2479,3 +2479,68 @@ html.dark-theme .about-page .about-cta p {
     margin-left: 1rem !important;
   }
 }
+
+/* =========================================================
+   NAVBAR — RESPONSIVE SPACING FIX
+   Prevent desktop nav from colliding with socials
+   ========================================================= */
+
+.desktop-nav-links {
+  white-space: nowrap;
+}
+
+.desktop-nav-actions {
+  flex-shrink: 0;
+}
+
+/* Medium desktop / laptop */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .desktop-nav-links {
+    left: 40%;
+    gap: 2px !important;
+  }
+
+  .desktop-nav-links .nav-link {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+
+  .desktop-nav-actions {
+    gap: 4px !important;
+  }
+
+  .desktop-nav-actions .nav-live {
+    display: none !important;
+  }
+
+  .desktop-nav-actions > div:last-of-type {
+    padding-right: 6px;
+  }
+
+  .desktop-nav-actions .theme-toggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .desktop-nav-actions > a {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 9px;
+  }
+}
+
+/* Normal desktop */
+@media (min-width: 1200px) {
+  .desktop-nav-links {
+    gap: 8px;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1400px) {
+  .desktop-nav-links {
+    gap: 16px;
+  }
+}
