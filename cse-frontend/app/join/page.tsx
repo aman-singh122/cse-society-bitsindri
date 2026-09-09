@@ -45,9 +45,9 @@ export default function JoinPage() {
     };
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/applications",
-        {
+     const response = await fetch(
+  `${process.env.NEXT_PUBLIC_API_URL}/api/applications`,
+  {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
