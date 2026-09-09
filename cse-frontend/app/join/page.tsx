@@ -1,10 +1,24 @@
 "use client";
 
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useMemo, useState } from "react";
+import Link from "next/link";
+import {
+  AlertCircle,
+  ArrowRight,
+  Check,
+  CheckCircle2,
+  ChevronRight,
+  Code2,
+  ExternalLink,
+  GraduationCap,
+  Mail,
+  Sparkles,
+  UserRound,
+} from "lucide-react";
+
 import TechnicalLabel from "@/components/ui/TechnicalLabel";
-import AnimatedSection from "@/components/ui/AnimatedSection";
 import TechMarquee from "@/components/ui/TechMarquee";
-import { ArrowRight, CheckCircle2, AlertCircle, Sparkles, User, BookOpen, Code2 } from "lucide-react";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 const domains = [
   "Web Development",
@@ -23,11 +37,50 @@ const domains = [
 
 const years = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
 
+const steps = [
+  {
+    number: "01",
+    title: "Personal",
+    icon: UserRound,
+  },
+  {
+    number: "02",
+    title: "Academic",
+    icon: GraduationCap,
+  },
+  {
+    number: "03",
+    title: "Technical",
+    icon: Code2,
+  },
+];
+
 export default function JoinPage() {
   const [domain, setDomain] = useState("");
+  const [year, setYear] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const progress = useMemo(() => {
+    let completed = 0;
+
+    if (typeof window !== "undefined") {
+      const form = document.querySelector("form");
+
+      if (form) {
+        const requiredFields = Array.from(
+          form.querySelectorAll<HTMLInputElement | HTMLSelectElement>(
+            "[required]"
+          )
+        );
+
+        completed = requiredFields.filter((field) => field.value.trim()).length;
+      }
+    }
+
+    return Math.min(Math.round((completed / 5) * 100), 100);
+  }, [domain, year]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -73,374 +126,630 @@ export default function JoinPage() {
       setStatus("success");
       form.reset();
       setDomain("");
+      setYear("");
     } catch (error: any) {
       console.error("Application submission failed:", error);
+
       setStatus("error");
-      setErrorMessage(error.message || "Something went wrong while submitting your application. Please try again.");
+      setErrorMessage(
+        error.message ||
+          "Something went wrong while submitting your application. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <main className="pt-24 w-full overflow-x-hidden">
-      {/* Hero Header */}
-      <section className="border-b border-black/15 bg-[#f5f3ee] px-4 py-20 sm:px-6 lg:px-10 lg:py-32">
-        <div className="mx-auto max-w-7xl">
-          <TechnicalLabel index="APPLICATION / 01" title="SOCIETY MEMBERSHIP" category="BIT SINDRI" />
+    <main className="w-full overflow-x-hidden bg-[#f5f3ee] text-[#141413]">
+      {/* =====================================================
+          HERO
+      ====================================================== */}
+      <section className="relative overflow-hidden border-b border-black/15 pt-24">
+        <div className="pointer-events-none absolute inset-0 opacity-50">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(20,20,19,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(20,20,19,.045) 1px, transparent 1px)",
+              backgroundSize: "54px 54px",
+            }}
+          />
+        </div>
 
-          <div className="mt-8 max-w-6xl">
-            <h1 className="text-clamp-hero font-semibold tracking-[-0.055em] text-[#141413]">
-              Join the <br />
-              <span className="text-neutral-400 font-normal">community.</span>
+        <div className="pointer-events-none absolute right-[-120px] top-20 hidden h-[420px] w-[420px] rounded-full border border-black/10 lg:block" />
+        <div className="pointer-events-none absolute right-[-70px] top-45 hidden h-[320px] w-[320px] rounded-full border border-black/10 lg:block" />
+
+        <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-10 lg:py-17">
+          <div className="flex items-start justify-between">
+            <TechnicalLabel
+              index="APPLICATION / 01"
+              title="SOCIETY MEMBERSHIP"
+              category="BIT SINDRI"
+            />
+
+            <div className="hidden text-right font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-400 sm:block">
+              <div>APPLICATION SYSTEM</div>
+              <div className="mt-1 text-neutral-700">CSE / SOCIETY</div>
+            </div>
+          </div>
+
+          <div className="mt-9 max-w-5xl">
+            <h1 className="text-[clamp(3.5rem,8vw,7.4rem)] font-medium leading-[0.86] tracking-[-0.065em]">
+              Join the
+              <br />
+              <span className="font-normal text-neutral-400">
+                community.
+              </span>
             </h1>
           </div>
 
-          <div className="mt-14 grid gap-8 border-t border-black/15 pt-8 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-8">
-              <p className="text-base leading-8 text-neutral-600 sm:text-lg">
-                Tell us about yourself and your technical interests. Join a community of curious minds exploring technology, building software projects, and learning together at BIT Sindri.
-              </p>
-            </div>
+          <div className="mt-10 grid gap-7 border-t border-black/15 pt-6 md:grid-cols-12 md:items-end">
+            <p className="max-w-2xl text-sm leading-7 text-neutral-600 sm:text-base md:col-span-8">
+              Tell us about yourself, your academic background, and the
+              technical areas you want to explore with the CSE Society.
+            </p>
 
-            <div className="md:col-span-4 md:text-right">
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-400">
-                MEMBERSHIP
-              </span>
-              <p className="mt-1 font-mono text-2xl font-bold tracking-tight text-[#141413]">
-                CSE SOCIETY
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+            <div className="grid grid-cols-2 gap-6 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-400 md:col-span-4 md:text-right">
+              <div>
+                <span className="block text-xl font-semibold tracking-tight text-[#141413]">
+                  03
+                </span>
+                <span>Application steps</span>
+              </div>
 
-      {/* Marquee */}
-      <TechMarquee
-        items={["APPLY NOW", "WEB DEV", "AI / ML", "COMPETITIVE PROGRAMMING", "CYBERSECURITY", "OPEN SOURCE", "BIT SINDRI"]}
-        speed={28}
-        variant="dark"
-      />
-
-      {/* Main Form Section */}
-      <section className="border-b border-black/15 bg-[#faf9f6] px-4 py-20 sm:px-6 lg:px-10 lg:py-32">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-12">
-            {/* Form Sidebar Info */}
-            <div className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start">
-              <div className="border border-black/15 bg-[#f5f3ee] p-7">
-                <TechnicalLabel index="FORM" title="INSTRUCTIONS" />
-                <h3 className="mt-4 text-2xl font-semibold tracking-tight text-[#141413]">
-                  Application Guidelines
-                </h3>
-                <p className="mt-4 text-xs leading-6 text-neutral-600">
-                  Please complete the form with accurate academic details and primary technical interests. Fields marked with <span className="text-black font-bold">*</span> are required.
-                </p>
-
-                <div className="mt-8 space-y-4 border-t border-black/10 pt-6 font-mono text-xs text-neutral-500">
-                  <div className="flex items-center gap-2">
-                    <Sparkles size={14} className="text-black" />
-                    <span>Open to all CSE years</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 size={14} className="text-black" />
-                    <span>Direct society onboarding</span>
-                  </div>
-                </div>
+              <div>
+                <span className="block text-xl font-semibold tracking-tight text-[#141413]">
+                  12
+                </span>
+                <span>Technical domains</span>
               </div>
             </div>
-
-            {/* Form Area */}
-            <div className="lg:col-span-8">
-              {status === "success" ? (
-                <AnimatedSection>
-                  <div className="border border-black/20 bg-[#f5f3ee] p-8 sm:p-14">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white">
-                      <CheckCircle2 size={24} />
-                    </div>
-
-                    <p className="mt-6 font-mono text-xs uppercase tracking-[0.24em] text-neutral-400">
-                      APPLICATION RECEIVED
-                    </p>
-
-                    <h2 className="mt-3 text-3xl font-medium tracking-tight text-[#141413] sm:text-4xl">
-                      Thank you for applying.
-                    </h2>
-
-                    <p className="mt-4 max-w-lg text-sm leading-7 text-neutral-600">
-                      Your application has been received. The CSE Society team will review your details and contact you regarding upcoming onboarding and events.
-                    </p>
-
-                    <button
-                      type="button"
-                      onClick={() => setStatus("idle")}
-                      className="mt-8 border border-black/20 bg-[#141413] px-7 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#f5f3ee] transition-all hover:bg-neutral-800"
-                    >
-                      Submit another application
-                    </button>
-                  </div>
-                </AnimatedSection>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-12">
-                  {/* Step 01: Personal Information */}
-                  <div className="border border-black/15 bg-[#f5f3ee] p-7 sm:p-10">
-                    <div className="mb-8 flex items-center justify-between border-b border-black/15 pb-4">
-                      <div className="flex items-center gap-3">
-                        <User size={18} className="text-black" />
-                        <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#141413]">
-                          01 / PERSONAL INFORMATION
-                        </span>
-                      </div>
-                      <span className="font-mono text-[10px] text-neutral-400">STEP 1 OF 3</span>
-                    </div>
-
-                    <div className="space-y-8">
-                      {/* Full Name */}
-                      <div>
-                        <label
-                          htmlFor="fullName"
-                          className="block font-mono text-xs font-semibold uppercase tracking-wider text-neutral-700"
-                        >
-                          Full Name <span className="text-black font-bold">*</span>
-                        </label>
-                        <input
-                          id="fullName"
-                          name="fullName"
-                          type="text"
-                          required
-                          autoComplete="name"
-                          placeholder="Enter your full name"
-                          className="mt-2 w-full border-b-2 border-black/20 bg-transparent py-3 font-sans text-base text-[#141413] outline-none placeholder:text-neutral-400 focus:border-black transition-colors"
-                        />
-                      </div>
-
-                      {/* Primary Email */}
-                      <div>
-                        <label
-                          htmlFor="email"
-                          className="block font-mono text-xs font-semibold uppercase tracking-wider text-neutral-700"
-                        >
-                          Email Address <span className="text-black font-bold">*</span>
-                        </label>
-                        <input
-                          id="email"
-                          name="email"
-                          type="email"
-                          required
-                          autoComplete="email"
-                          placeholder="you@example.com"
-                          className="mt-2 w-full border-b-2 border-black/20 bg-transparent py-3 font-sans text-base text-[#141413] outline-none placeholder:text-neutral-400 focus:border-black transition-colors"
-                        />
-                      </div>
-
-                      {/* Student Email */}
-                      <div>
-                        <div className="flex items-center justify-between">
-                          <label
-                            htmlFor="studentEmail"
-                            className="block font-mono text-xs font-semibold uppercase tracking-wider text-neutral-700"
-                          >
-                            Student Email ID
-                          </label>
-                          <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
-                            OPTIONAL
-                          </span>
-                        </div>
-                        <input
-                          id="studentEmail"
-                          name="studentEmail"
-                          type="email"
-                          autoComplete="email"
-                          placeholder="your@student-email"
-                          className="mt-2 w-full border-b-2 border-black/20 bg-transparent py-3 font-sans text-base text-[#141413] outline-none placeholder:text-neutral-400 focus:border-black transition-colors"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Step 02: Academic Information */}
-                  <div className="border border-black/15 bg-[#f5f3ee] p-7 sm:p-10">
-                    <div className="mb-8 flex items-center justify-between border-b border-black/15 pb-4">
-                      <div className="flex items-center gap-3">
-                        <BookOpen size={18} className="text-black" />
-                        <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#141413]">
-                          02 / ACADEMIC INFORMATION
-                        </span>
-                      </div>
-                      <span className="font-mono text-[10px] text-neutral-400">STEP 2 OF 3</span>
-                    </div>
-
-                    <div className="space-y-8">
-                      {/* Registration Number */}
-                      <div>
-                        <label
-                          htmlFor="registrationNumber"
-                          className="block font-mono text-xs font-semibold uppercase tracking-wider text-neutral-700"
-                        >
-                          Registration Number <span className="text-black font-bold">*</span>
-                        </label>
-                        <input
-                          id="registrationNumber"
-                          name="registrationNumber"
-                          type="text"
-                          required
-                          placeholder="Enter your institute reg. number"
-                          className="mt-2 w-full border-b-2 border-black/20 bg-transparent py-3 font-sans text-base text-[#141413] outline-none placeholder:text-neutral-400 focus:border-black transition-colors"
-                        />
-                      </div>
-
-                      {/* Year of Study */}
-                      <div>
-                        <label
-                          htmlFor="year"
-                          className="block font-mono text-xs font-semibold uppercase tracking-wider text-neutral-700"
-                        >
-                          Year of Study <span className="text-black font-bold">*</span>
-                        </label>
-                        <select
-                          id="year"
-                          name="year"
-                          required
-                          defaultValue=""
-                          className="mt-2 w-full border-b-2 border-black/20 bg-transparent py-3 font-sans text-base text-[#141413] outline-none focus:border-black transition-colors"
-                        >
-                          <option value="" disabled className="bg-[#f5f3ee] text-neutral-500">
-                            Select your current year
-                          </option>
-                          {years.map((yr) => (
-                            <option key={yr} value={yr} className="bg-[#f5f3ee] text-[#141413]">
-                              {yr}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Step 03: Technical Interests */}
-                  <div className="border border-black/15 bg-[#f5f3ee] p-7 sm:p-10">
-                    <div className="mb-8 flex items-center justify-between border-b border-black/15 pb-4">
-                      <div className="flex items-center gap-3">
-                        <Code2 size={18} className="text-black" />
-                        <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#141413]">
-                          03 / TECHNICAL INTERESTS
-                        </span>
-                      </div>
-                      <span className="font-mono text-[10px] text-neutral-400">STEP 3 OF 3</span>
-                    </div>
-
-                    <div className="space-y-8">
-                      {/* Primary Domain Select */}
-                      <div>
-                        <label
-                          htmlFor="domain"
-                          className="block font-mono text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-2"
-                        >
-                          Primary Domain <span className="text-black font-bold">*</span>
-                        </label>
-                        
-                        <select
-                          id="domain"
-                          name="domain"
-                          required
-                          value={domain}
-                          onChange={(e) => setDomain(e.target.value)}
-                          className="w-full border-b-2 border-black/20 bg-transparent py-3 font-sans text-base text-[#141413] outline-none focus:border-black transition-colors"
-                        >
-                          <option value="" disabled className="bg-[#f5f3ee] text-neutral-500">
-                            Select your primary domain of interest
-                          </option>
-                          {domains.map((item) => (
-                            <option key={item} value={item} className="bg-[#f5f3ee] text-[#141413]">
-                              {item}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-
-                      {/* Other Domain conditional input */}
-                      {domain === "Other" && (
-                        <div>
-                          <label
-                            htmlFor="otherDomain"
-                            className="block font-mono text-xs font-semibold uppercase tracking-wider text-neutral-700"
-                          >
-                            Specify Your Domain <span className="text-black font-bold">*</span>
-                          </label>
-                          <input
-                            id="otherDomain"
-                            name="otherDomain"
-                            type="text"
-                            required
-                            placeholder="Specify your technical domain"
-                            className="mt-2 w-full border-b-2 border-black/20 bg-transparent py-3 font-sans text-base text-[#141413] outline-none placeholder:text-neutral-400 focus:border-black transition-colors"
-                          />
-                        </div>
-                      )}
-
-                      {/* Profile URL */}
-                      <div>
-                        <div className="flex items-center justify-between">
-                          <label
-                            htmlFor="profileUrl"
-                            className="block font-mono text-xs font-semibold uppercase tracking-wider text-neutral-700"
-                          >
-                            GitHub / LinkedIn / Portfolio URL
-                          </label>
-                          <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
-                            OPTIONAL
-                          </span>
-                        </div>
-                        <input
-                          id="profileUrl"
-                          name="profileUrl"
-                          type="url"
-                          placeholder="https://github.com/yourhandle"
-                          className="mt-2 w-full border-b-2 border-black/20 bg-transparent py-3 font-sans text-base text-[#141413] outline-none placeholder:text-neutral-400 focus:border-black transition-colors"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Submit Bar */}
-                  <div className="border border-black/15 bg-[#f5f3ee] p-7">
-                    <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-                      <p className="max-w-md text-xs leading-5 text-neutral-500">
-                        By submitting this application, you confirm that your academic details are accurate and you agree to receive society communications.
-                      </p>
-
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="group inline-flex shrink-0 items-center justify-center gap-3 bg-[#141413] px-8 py-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#f5f3ee] transition-all hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-50"
-                      >
-                        {isSubmitting ? (
-                          <span>SUBMITTING...</span>
-                        ) : (
-                          <>
-                            <span>SUBMIT APPLICATION</span>
-                            <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-                          </>
-                        )}
-                      </button>
-                    </div>
-
-                    {/* Error Banner */}
-                    {status === "error" && (
-                      <div className="mt-6 flex items-center gap-3 border border-red-500/20 bg-red-50 p-4 text-red-900">
-                        <AlertCircle size={18} className="shrink-0 text-red-600" />
-                        <p className="text-xs font-medium">
-                          {errorMessage}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </form>
-              )}
-            </div>
           </div>
         </div>
       </section>
+
+      {/* =====================================================
+          MARQUEE
+      ====================================================== */}
+      <div className="border-b border-black/15 bg-[#141413] py-1 text-[#f5f3ee]">
+        <TechMarquee
+          items={[
+            "APPLY NOW",
+            "WEB DEVELOPMENT",
+            "AI / ML",
+            "COMPETITIVE PROGRAMMING",
+            "CYBERSECURITY",
+            "OPEN SOURCE",
+            "RESEARCH",
+            "BIT SINDRI",
+          ]}
+          speed={30}
+          variant="dark"
+        />
+      </div>
+
+      {/* =====================================================
+          APPLICATION AREA
+      ====================================================== */}
+      <section className="border-b border-black/15 bg-[#faf9f6] px-4 py-10 sm:px-6 lg:px-10 lg:py-14">
+        <div className="mx-auto max-w-7xl">
+          {status === "success" ? (
+            <SuccessState onReset={() => setStatus("idle")} />
+          ) : (
+            <div className="grid gap-8 lg:grid-cols-[260px_minmax(0,1fr)]">
+              {/* =================================================
+                  LEFT APPLICATION NAV
+              ================================================== */}
+              <aside className="hidden lg:block">
+                <div className="sticky top-24">
+                  <TechnicalLabel
+                    index="FORM"
+                    title="APPLICATION"
+                    category="03 STEPS"
+                  />
+
+                  <div className="mt-6 border-y border-black/15">
+                    {steps.map((step, index) => {
+                      const Icon = step.icon;
+
+                      return (
+                        <div
+                          key={step.number}
+                          className="group flex items-center gap-3 border-b border-black/10 py-4 last:border-b-0"
+                        >
+                          <div className="flex h-8 w-8 items-center justify-center border border-black/10 bg-[#f5f3ee] transition-colors group-hover:border-black">
+                            <Icon size={14} strokeWidth={1.7} />
+                          </div>
+
+                          <div className="min-w-0">
+                            <span className="block font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                              STEP {step.number}
+                            </span>
+
+                            <span className="text-sm font-medium">
+                              {step.title}
+                            </span>
+                          </div>
+
+                          {index < steps.length - 1 && (
+                            <ChevronRight
+                              size={13}
+                              className="ml-auto text-neutral-300"
+                            />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <div className="mt-6 border border-black/10 bg-[#f5f3ee] p-4">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                        FORM STATUS
+                      </span>
+
+                      <span className="font-mono text-[9px] font-bold">
+                        {progress}%
+                      </span>
+                    </div>
+
+                    <div className="mt-3 h-1 bg-black/10">
+                      <div
+                        className="h-full bg-[#141413] transition-all duration-500"
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+
+                    <p className="mt-3 text-[11px] leading-5 text-neutral-500">
+                      Complete the required fields before submitting your
+                      application.
+                    </p>
+                  </div>
+
+                  <div className="mt-5 font-mono text-[9px] uppercase leading-5 tracking-wider text-neutral-400">
+                    CSE SOCIETY
+                    <br />
+                    BIT SINDRI
+                  </div>
+                </div>
+              </aside>
+
+              {/* =================================================
+                  FORM
+              ================================================== */}
+              <div className="min-w-0">
+                <AnimatedSection>
+                  <form onSubmit={handleSubmit} className="space-y-3">
+                    {/* -----------------------------------------
+                        STEP 01
+                    ------------------------------------------ */}
+                    <FormSection
+                      number="01"
+                      title="Personal information"
+                      description="Basic details so we know who you are."
+                    >
+                      <div className="grid gap-6 sm:grid-cols-2">
+                        <Field
+                          label="Full Name"
+                          required
+                          htmlFor="fullName"
+                          className="sm:col-span-2"
+                        >
+                          <input
+                            id="fullName"
+                            name="fullName"
+                            type="text"
+                            required
+                            autoComplete="name"
+                            placeholder="Your full name"
+                            className={inputClass}
+                          />
+                        </Field>
+
+                        <Field
+                          label="Email Address"
+                          required
+                          htmlFor="email"
+                        >
+                          <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            required
+                            autoComplete="email"
+                            placeholder="you@example.com"
+                            className={inputClass}
+                          />
+                        </Field>
+
+                        <Field
+                          label="Student Email"
+                          optional
+                          htmlFor="studentEmail"
+                        >
+                          <input
+                            id="studentEmail"
+                            name="studentEmail"
+                            type="email"
+                            autoComplete="email"
+                            placeholder="Institutional email"
+                            className={inputClass}
+                          />
+                        </Field>
+                      </div>
+                    </FormSection>
+
+                    {/* -----------------------------------------
+                        STEP 02
+                    ------------------------------------------ */}
+                    <FormSection
+                      number="02"
+                      title="Academic information"
+                      description="A little context about your current academic stage."
+                    >
+                      <div className="grid gap-6 sm:grid-cols-2">
+                        <Field
+                          label="Registration Number"
+                          required
+                          htmlFor="registrationNumber"
+                        >
+                          <input
+                            id="registrationNumber"
+                            name="registrationNumber"
+                            type="text"
+                            required
+                            placeholder="Institute registration number"
+                            className={inputClass}
+                          />
+                        </Field>
+
+                        <Field
+                          label="Year of Study"
+                          required
+                          htmlFor="year"
+                        >
+                          <select
+                            id="year"
+                            name="year"
+                            required
+                            value={year}
+                            onChange={(e) => setYear(e.target.value)}
+                            className={inputClass}
+                          >
+                            <option value="" disabled>
+                              Select current year
+                            </option>
+
+                            {years.map((item) => (
+                              <option key={item} value={item}>
+                                {item}
+                              </option>
+                            ))}
+                          </select>
+                        </Field>
+                      </div>
+                    </FormSection>
+
+                    {/* -----------------------------------------
+                        STEP 03
+                    ------------------------------------------ */}
+                    <FormSection
+                      number="03"
+                      title="Technical interests"
+                      description="Choose the area where you want to contribute and grow."
+                    >
+                      <div className="space-y-7">
+                        <Field
+                          label="Primary Domain"
+                          required
+                          htmlFor="domain"
+                        >
+                          <div className="relative">
+                            <select
+                              id="domain"
+                              name="domain"
+                              required
+                              value={domain}
+                              onChange={(e) => setDomain(e.target.value)}
+                              className={`${inputClass} pr-10`}
+                            >
+                              <option value="" disabled>
+                                Select your primary domain
+                              </option>
+
+                              {domains.map((item) => (
+                                <option key={item} value={item}>
+                                  {item}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </Field>
+
+                        {domain === "Other" && (
+                          <Field
+                            label="Specify Your Domain"
+                            required
+                            htmlFor="otherDomain"
+                          >
+                            <input
+                              id="otherDomain"
+                              name="otherDomain"
+                              type="text"
+                              required
+                              placeholder="Your technical domain"
+                              className={inputClass}
+                            />
+                          </Field>
+                        )}
+
+                        <Field
+                          label="Profile URL"
+                          optional
+                          htmlFor="profileUrl"
+                        >
+                          <div className="relative">
+                            <ExternalLink
+                              size={14}
+                              className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-neutral-400"
+                            />
+
+                            <input
+                              id="profileUrl"
+                              name="profileUrl"
+                              type="url"
+                              placeholder="GitHub, LinkedIn or portfolio"
+                              className={`${inputClass} pl-6`}
+                            />
+                          </div>
+                        </Field>
+                      </div>
+                    </FormSection>
+
+                    {/* -----------------------------------------
+                        SUBMIT
+                    ------------------------------------------ */}
+                    <div className="border border-black/15 bg-[#141413] p-5 text-[#f5f3ee] sm:p-6">
+                      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="max-w-lg">
+                          <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-white/40">
+                            <Check size={12} />
+                            READY TO SUBMIT
+                          </div>
+
+                          <p className="mt-2 text-xs leading-5 text-white/55">
+                            By submitting, you confirm that the information
+                            provided is accurate and agree to receive society
+                            communications.
+                          </p>
+                        </div>
+
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="group inline-flex min-h-12 shrink-0 cursor-pointer items-center justify-center gap-3 bg-[#f5f3ee] px-6 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#141413] transition-all hover:bg-white disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <span className="h-3 w-3 animate-spin rounded-full border-2 border-black/20 border-t-black" />
+                              SUBMITTING
+                            </>
+                          ) : (
+                            <>
+                              SUBMIT APPLICATION
+                              <ArrowRight
+                                size={15}
+                                className="transition-transform duration-300 group-hover:translate-x-1"
+                              />
+                            </>
+                          )}
+                        </button>
+                      </div>
+
+                      {status === "error" && (
+                        <div className="mt-5 flex gap-3 border border-red-300/30 bg-red-50/10 p-3 text-red-200">
+                          <AlertCircle
+                            size={16}
+                            className="mt-0.5 shrink-0"
+                          />
+
+                          <p className="text-xs leading-5">
+                            {errorMessage}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </form>
+                </AnimatedSection>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* =====================================================
+          BOTTOM MICRO CTA
+      ====================================================== */}
+      {status !== "success" && (
+        <section className="border-b border-black/15 bg-[#f5f3ee] px-4 py-8 sm:px-6 lg:px-10">
+          <div className="mx-auto flex max-w-7xl flex-col gap-3 font-mono text-[9px] uppercase tracking-[0.15em] text-neutral-400 sm:flex-row sm:items-center sm:justify-between">
+            <span>QUESTIONS ABOUT THE SOCIETY?</span>
+
+            <Link
+              href="/"
+              className="group inline-flex w-fit items-center gap-2 text-neutral-700 transition-colors hover:text-black"
+            >
+              BACK TO CSE SOCIETY
+              <ArrowRight
+                size={12}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </Link>
+          </div>
+        </section>
+      )}
     </main>
   );
 }
+
+/* =========================================================
+   FORM SECTION
+========================================================= */
+
+function FormSection({
+  number,
+  title,
+  description,
+  children,
+}: {
+  number: string;
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="border border-black/15 bg-[#f5f3ee]">
+      <div className="flex items-start gap-4 border-b border-black/10 px-5 py-4 sm:px-6">
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center bg-[#141413] font-mono text-[9px] font-bold text-[#f5f3ee]">
+          {number}
+        </span>
+
+        <div className="min-w-0">
+          <h2 className="text-sm font-semibold tracking-tight sm:text-base">
+            {title}
+          </h2>
+
+          <p className="mt-0.5 text-[11px] leading-5 text-neutral-500">
+            {description}
+          </p>
+        </div>
+      </div>
+
+      <div className="px-5 py-6 sm:px-6 sm:py-7">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+function Field({
+  label,
+  required,
+  optional,
+  htmlFor,
+  children,
+  className = "",
+}: {
+  label: string;
+  required?: boolean;
+  optional?: boolean;
+  htmlFor: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={className}>
+      <div className="flex items-center justify-between gap-3">
+        <label
+          htmlFor={htmlFor}
+          className="font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-neutral-700"
+        >
+          {label}
+
+          {required && (
+            <span className="ml-1 text-black">*</span>
+          )}
+        </label>
+
+        {optional && (
+          <span className="font-mono text-[8px] uppercase tracking-widest text-neutral-400">
+            OPTIONAL
+          </span>
+        )}
+      </div>
+
+      <div className="mt-2">{children}</div>
+    </div>
+  );
+}
+
+/* =========================================================
+   SUCCESS STATE
+========================================================= */
+
+function SuccessState({
+  onReset,
+}: {
+  onReset: () => void;
+}) {
+  return (
+    <AnimatedSection>
+      <div className="mx-auto max-w-4xl border border-black/15 bg-[#f5f3ee]">
+        <div className="grid md:grid-cols-[180px_1fr]">
+          <div className="flex min-h-44 items-center justify-center border-b border-black/10 bg-[#141413] text-[#f5f3ee] md:border-b-0 md:border-r">
+            <div className="text-center">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-white/15">
+                <CheckCircle2 size={27} strokeWidth={1.5} />
+              </div>
+
+              <span className="mt-4 block font-mono text-[8px] uppercase tracking-[0.18em] text-white/40">
+                RECEIVED
+              </span>
+            </div>
+          </div>
+
+          <div className="p-7 sm:p-10">
+            <TechnicalLabel
+              index="APPLICATION / COMPLETE"
+              title="SUBMISSION RECEIVED"
+              category="CSE SOCIETY"
+            />
+
+            <h1 className="mt-5 text-[clamp(2.2rem,5vw,4.5rem)] font-medium leading-[0.95] tracking-[-0.055em]">
+              Thank you for
+              <br />
+              <span className="text-neutral-400">
+                applying.
+              </span>
+            </h1>
+
+            <p className="mt-5 max-w-xl text-sm leading-6 text-neutral-600">
+              Your application has been received successfully. The CSE
+              Society team will review your details and contact you regarding
+              onboarding and upcoming activities.
+            </p>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={onReset}
+                className="group inline-flex cursor-pointer items-center gap-3 bg-[#141413] px-5 py-3.5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#f5f3ee] transition-colors hover:bg-black"
+              >
+                SUBMIT ANOTHER
+                <ArrowRight
+                  size={14}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </button>
+
+              <Link
+                href="/"
+                className="inline-flex cursor-pointer items-center gap-2 border border-black/15 px-5 py-3.5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] transition-colors hover:border-black"
+              >
+                BACK HOME
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </AnimatedSection>
+  );
+}
+
+const inputClass =
+  "w-full border-b border-black/20 bg-transparent px-0 py-3 text-sm text-[#141413] outline-none transition-all placeholder:text-neutral-400 hover:border-black/35 focus:border-black focus:ring-0";

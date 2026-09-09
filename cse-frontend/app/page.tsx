@@ -1,7 +1,6 @@
 import Hero from "@/components/home/Hero";
 import TechMarquee from "@/components/ui/TechMarquee";
 import Intro from "@/components/home/Intro";
-import TypographicTransition from "@/components/home/TypographicTransition";
 import Impact from "@/components/home/Impact";
 import FeaturedEvents from "@/components/home/FeaturedEvents";
 import WorkshopsPreview from "@/components/home/WorkshopsPreview";
@@ -38,47 +37,54 @@ const secondaryDomains = [
 export default function Home() {
   return (
     <main className="w-full overflow-x-hidden">
-      {/* 1. Hero Section */}
+      {/* 1. Hero */}
       <Hero />
 
-      {/* 2. Signature Single Tech Marquee Banner */}
+      {/* 2. Technology Marquee */}
       <div className="border-b border-black/15 bg-[#141413] py-1 text-white">
-        <TechMarquee items={primaryTechStack} direction="left" speed={28} variant="dark" />
+        <TechMarquee
+          items={primaryTechStack}
+          direction="left"
+          speed={28}
+          variant="dark"
+        />
       </div>
 
-      {/* 3. Introduction Editorial Section */}
+      {/* 3. Introduction */}
       <Intro />
 
-      {/* 4. Typographic Transition Sequence */}
-      <TypographicTransition />
-
-      {/* 5. Impact Pillars */}
+      {/* 4. Interactive Society Pillars */}
       <Impact />
 
-      {/* 6. Featured Events Showcase */}
+      {/* 5. Featured Events */}
       <FeaturedEvents />
 
-      {/* 7. Workshops Technical Index */}
+      {/* 6. Workshops */}
       <WorkshopsPreview />
 
-      {/* 8. Student Projects ("WHAT WE BUILD") */}
+      {/* 7. What We Build */}
       <ProjectShowcase />
 
-      {/* 9. Domain Tech Ticker Strip */}
+      {/* 8. Secondary Domain Marquee */}
       <div className="border-y border-black/15 bg-[#faf9f6]">
-        <TechMarquee items={secondaryDomains} direction="right" speed={32} variant="default" />
+        <TechMarquee
+          items={secondaryDomains}
+          direction="right"
+          speed={32}
+          variant="default"
+        />
       </div>
 
-      {/* 10. CSE @ BIT Sindri Departmental Academics */}
+      {/* 9. CSE @ BIT Sindri */}
       <CseAtBits />
 
-      {/* 11. Featured Alumni Stories */}
+      {/* 10. Alumni */}
       <AlumniPreview />
 
-      {/* 12. Culture & Moments Gallery */}
+      {/* 11. Gallery */}
       <GalleryPreview />
 
-      {/* 13. Final High-Impact CTA */}
+      {/* 12. Final CTA */}
       <JoinCta />
     </main>
   );

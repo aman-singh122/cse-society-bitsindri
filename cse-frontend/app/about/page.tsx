@@ -1,26 +1,72 @@
-import React from "react";
-import Link from "next/link";
-import TechnicalLabel from "@/components/ui/TechnicalLabel";
-import AnimatedSection from "@/components/ui/AnimatedSection";
-import TechMarquee from "@/components/ui/TechMarquee";
-import { ArrowRight, ArrowUpRight, Award, Beaker, BookOpen, Clock } from "lucide-react";
+"use client";
 
-const areas = [
-  "Algorithms & Data Structures",
-  "Artificial Intelligence",
-  "Computer Networks",
-  "Database Systems",
-  "Operating Systems",
-  "Software Engineering",
-  "Compiler Design",
-  "Advanced Programming",
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BrainCircuit,
+  Code2,
+  Database,
+  Globe2,
+  GitBranch,
+  Network,
+  Server,
+  Terminal,
+} from "lucide-react";
+
+const disciplines = [
+  {
+    id: "01",
+    title: "Algorithms & Data Structures",
+    icon: GitBranch,
+  },
+  {
+    id: "02",
+    title: "Artificial Intelligence",
+    icon: BrainCircuit,
+  },
+  {
+    id: "03",
+    title: "Computer Networks",
+    icon: Network,
+  },
+  {
+    id: "04",
+    title: "Database Systems",
+    icon: Database,
+  },
+  {
+    id: "05",
+    title: "Operating Systems",
+    icon: Server,
+  },
+  {
+    id: "06",
+    title: "Software Engineering",
+    icon: Code2,
+  },
+  {
+    id: "07",
+    title: "Compiler Design",
+    icon: Terminal,
+  },
+  {
+    id: "08",
+    title: "Web Technologies",
+    icon: Globe2,
+  },
 ];
 
-const labs = [
+const labsLeft = [
   "DBMS Lab",
   "DAA Lab",
   "Operating System Lab",
   "Compiler Design Lab",
+];
+
+const labsRight = [
   "Computer Architecture Lab",
   "Computer Networks Lab",
   "Artificial Intelligence Lab",
@@ -28,182 +74,657 @@ const labs = [
 ];
 
 const timeline = [
-  { year: "1987", title: "Department Established", desc: "Founding of the Department of Computer Science & Engineering at BIT Sindri." },
-  { year: "1991", title: "First Batch Graduated", desc: "First cohort of B.Tech CSE graduates entered leading tech industries and academia." },
-  { year: "2010s", title: "Expansion of Computing Infrastructure", desc: "State-of-the-art labs and high-speed network facilities added across campus." },
-  { year: "Present", title: "Student Society & AI Era", desc: "Active student community building modern web platforms, competitive programming culture, and AI research." },
+  {
+    year: "1987",
+    title: "Department Established",
+    text: "The Department of Computer Science & Engineering was established at BIT Sindri.",
+  },
+  {
+    year: "1991",
+    title: "First Batch Graduated",
+    text: "The first undergraduate batch of Computer Science & Engineering completed its programme.",
+  },
 ];
 
-export default function AboutPage() {
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.08 }
+    );
+
+    observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <main className="pt-24 w-full overflow-x-hidden">
-      {/* Hero */}
-      <section className="border-b border-black/15 bg-[#f5f3ee] px-4 py-20 sm:px-6 lg:px-10 lg:py-32">
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${
+        visible
+          ? "translate-y-0 opacity-100"
+          : "translate-y-5 opacity-0"
+      } ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function SectionLabel({
+  number,
+  title,
+  category,
+}: {
+  number: string;
+  title: string;
+  category: string;
+}) {
+  return (
+    <div className="flex items-center gap-3 font-mono text-[8px] uppercase tracking-[0.22em] text-neutral-400 sm:text-[9px]">
+      <span>{number}</span>
+      <span className="h-px w-7 bg-black/20" />
+      <span className="font-semibold text-neutral-500">{title}</span>
+      <span className="text-neutral-300">/</span>
+      <span>{category}</span>
+    </div>
+  );
+}
+
+export default function AboutPage() {
+  const [activeDiscipline, setActiveDiscipline] = useState(1);
+
+  const ActiveIcon = disciplines[activeDiscipline].icon;
+
+  return (
+    <main className="w-full overflow-x-hidden bg-[#f7f5f0] text-[#141413]">
+      {/* =====================================================
+          HERO
+      ====================================================== */}
+
+      <section className="border-b border-black/10 px-5 pb-14 pt-28 sm:px-8 sm:pt-32 lg:px-10 lg:pb-16">
         <div className="mx-auto max-w-7xl">
-          <TechnicalLabel index="ABOUT / 01" title="DEPARTMENT & SOCIETY" category="BIT SINDRI" />
+          <Reveal>
+            <SectionLabel
+              number="01"
+              title="ABOUT"
+              category="DEPARTMENT & SOCIETY"
+            />
+          </Reveal>
 
-          <div className="mt-8 max-w-6xl">
-            <h1 className="text-clamp-hero font-semibold tracking-[-0.055em] text-[#141413]">
-              Computer Science <br />
-              <span className="text-neutral-400 font-normal">& Engineering.</span>
-            </h1>
-          </div>
+          <div className="mt-9 grid gap-10 lg:grid-cols-12 lg:items-center">
+            {/* LEFT */}
 
-          <div className="mt-14 grid gap-8 border-t border-black/15 pt-8 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-4">
-              <p className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-400">
-                FOUNDATION YEAR
-              </p>
-              <p className="mt-2 font-mono text-6xl font-bold tracking-tight text-[#141413] sm:text-7xl">
-                1987
-              </p>
-            </div>
+            <div className="lg:col-span-6">
+              <Reveal delay={80}>
+                <h1 className="text-[clamp(4rem,8vw,8.2rem)] font-medium leading-[0.82] tracking-[-0.075em]">
+                  Computer
+                  <br />
+                  Science
+                  <br />
+                  <span className="text-black/25">
+                    & Engineering.
+                  </span>
+                </h1>
+              </Reveal>
 
-            <div className="lg:col-span-8 lg:pl-6">
-              <p className="text-base leading-8 text-neutral-600 sm:text-lg">
-                The Department of Computer Science & Engineering at BIT Sindri has been a cornerstone of engineering education since 1987. We combine deep theoretical computer science with evolving software paradigms, empowering students to innovate across web technologies, systems programming, and artificial intelligence.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+              <Reveal delay={160}>
+                <p className="mt-8 max-w-lg text-[14px] leading-6 text-neutral-600 sm:text-[15px]">
+                  A department rooted in rigorous engineering,
+                  computational thinking, and real-world
+                  problem solving since 1987.
+                </p>
+              </Reveal>
 
-      {/* Marquee Accent */}
-      <TechMarquee
-        items={["EST. 1987", "BIT SINDRI", "COMPUTATIONAL EXCELLENCE", "SOFTWARE ENGINEERING", "SYSTEM DESIGN"]}
-        speed={25}
-        variant="dark"
-      />
-
-      {/* History Timeline Section */}
-      <section className="border-b border-black/15 bg-[#faf9f6] px-4 py-20 sm:px-6 lg:px-10 lg:py-32">
-        <div className="mx-auto max-w-7xl">
-          <AnimatedSection>
-            <TechnicalLabel index="02" title="DEPARTMENT LEGACY" category="TIMELINE" />
-            <h2 className="mt-4 text-clamp-display font-medium tracking-tight text-[#141413]">
-              Four decades of <span className="text-neutral-400 font-normal">engineering education.</span>
-            </h2>
-
-            <div className="mt-16 border-t border-black/15">
-              {timeline.map((item, idx) => (
-                <div
-                  key={item.year}
-                  className="group grid gap-6 border-b border-black/15 py-8 md:grid-cols-12 md:items-center"
-                >
-                  <div className="md:col-span-3">
-                    <span className="font-mono text-3xl font-bold tracking-tight text-neutral-400 group-hover:text-black transition-colors">
-                      {item.year}
-                    </span>
+              <Reveal delay={220}>
+                <div className="mt-8 flex items-center gap-8">
+                  <div>
+                    <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-neutral-400">
+                      ESTABLISHED
+                    </p>
+                    <p className="mt-1 text-3xl font-medium tracking-tight">
+                      1987
+                    </p>
                   </div>
 
-                  <div className="md:col-span-4">
-                    <h3 className="text-xl font-semibold text-[#141413] group-hover:text-black">
-                      {item.title}
-                    </h3>
-                  </div>
+                  <div className="h-10 w-px bg-black/15" />
 
-                  <div className="md:col-span-5">
-                    <p className="text-sm leading-6 text-neutral-600">
-                      {item.desc}
+                  <div>
+                    <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-neutral-400">
+                      FIRST BATCH
+                    </p>
+                    <p className="mt-1 text-3xl font-medium tracking-tight">
+                      1991
                     </p>
                   </div>
                 </div>
-              ))}
+              </Reveal>
+
+              <Reveal delay={280}>
+                <Link
+                  href="#legacy"
+                  className="group mt-8 inline-flex items-center gap-3 bg-[#141413] px-5 py-3.5 font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-white transition-transform duration-300 hover:-translate-y-0.5"
+                >
+                  Explore Our Journey
+                  <ArrowRight
+                    size={13}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </Link>
+              </Reveal>
             </div>
-          </AnimatedSection>
+
+            {/* RIGHT IMAGE */}
+
+            <Reveal
+              delay={180}
+              className="relative lg:col-span-6"
+            >
+              <div className="group relative overflow-hidden border border-black/10 bg-[#dedbd2]">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src="/images/about/cse-hero.png"
+                    alt="BIT Sindri campus"
+                    fill
+                    priority
+                    className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.035]"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+
+                  <div className="absolute left-5 top-5">
+                 
+                  </div>
+
+                  <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
+                 
+
+                    <ArrowUpRight size={15} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Small side marker */}
+
+              <div className="absolute -right-1 bottom-[-34px] hidden border-l border-black/20 pl-5 font-mono text-[8px] uppercase tracking-[0.2em] text-neutral-400 lg:block">
+                <span className="block">TECHNOLOGY</span>
+                <span className="block">PEOPLE</span>
+                <span className="block">PURPOSE</span>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* Academic Disciplines Grid */}
-      <section className="border-b border-black/15 bg-[#f5f3ee] px-4 py-20 sm:px-6 lg:px-10 lg:py-32">
-        <div className="mx-auto max-w-7xl">
-          <AnimatedSection>
-            <TechnicalLabel index="03" title="CURRICULUM FOCUS" category="AREAS OF STUDY" />
-            <h2 className="mt-4 text-clamp-display font-medium tracking-tight text-[#141413]">
-              From fundamentals <span className="text-neutral-400 font-normal">to modern tech.</span>
-            </h2>
+      {/* =====================================================
+          LEGACY
+      ====================================================== */}
 
-            <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {areas.map((area, index) => (
+      <section
+        id="legacy"
+        className="border-b border-black/10 bg-[#faf9f6] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"
+      >
+        <div className="mx-auto max-w-7xl">
+          <Reveal>
+            <SectionLabel
+              number="02"
+              title="DEPARTMENT LEGACY"
+              category="HISTORY"
+            />
+          </Reveal>
+
+          <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-end">
+            <Reveal delay={80} className="lg:col-span-7">
+              <h2 className="text-[clamp(3rem,5.5vw,5.5rem)] font-medium leading-[0.88] tracking-[-0.065em]">
+                A foundation built
+                <br />
+                <span className="text-black/25">
+                  over decades.
+                </span>
+              </h2>
+            </Reveal>
+
+            <Reveal delay={150} className="lg:col-span-4 lg:col-start-9">
+              <p className="text-[12px] leading-5 text-neutral-500 sm:text-[13px]">
+                The Department of Computer Science &
+                Engineering was established in 1987 at BIT
+                Sindri, creating a foundation for generations
+                of computer science education.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-10 grid border-t border-black/10 md:grid-cols-2">
+            {timeline.map((item, index) => (
+              <Reveal
+                key={item.year}
+                delay={index * 100}
+              >
                 <div
-                  key={area}
-                  className="group flex flex-col justify-between border border-black/15 bg-[#faf9f6] p-6 transition-all duration-300 hover:border-black hover:shadow-lg"
+                  className={`grid gap-5 border-b border-black/10 py-7 sm:grid-cols-[100px_1fr] ${
+                    index === 0
+                      ? "md:border-r md:pr-8"
+                      : "md:pl-8"
+                  }`}
                 >
-                  <span className="font-mono text-xs font-semibold text-neutral-400 group-hover:text-black">
-                    {String(index + 1).padStart(2, "0")}
+                  <span className="text-3xl font-medium tracking-[-0.05em] text-black/35">
+                    {item.year}
                   </span>
 
-                  <div className="mt-8">
-                    <h3 className="font-mono text-sm font-bold uppercase tracking-wider text-[#141413]">
-                      {area}
+                  <div>
+                    <h3 className="text-[15px] font-semibold">
+                      {item.title}
                     </h3>
+
+                    <p className="mt-2 max-w-sm text-[11px] leading-5 text-neutral-500">
+                      {item.text}
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </AnimatedSection>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Laboratories Catalog */}
-      <section className="border-b border-black/15 bg-[#faf9f6] px-4 py-20 sm:px-6 lg:px-10 lg:py-32">
-        <div className="mx-auto max-w-7xl">
-          <AnimatedSection>
-            <TechnicalLabel index="04" title="INFRASTRUCTURE" category="LABORATORIES" />
-            <h2 className="mt-4 text-clamp-display font-medium tracking-tight text-[#141413]">
-              Dedicated computing <span className="text-neutral-400 font-normal">labs.</span>
-            </h2>
+      {/* =====================================================
+          DISCIPLINES
+      ====================================================== */}
 
-            <div className="mt-14 border-t border-black/15">
-              {labs.map((lab, index) => (
+      <section className="border-b border-black/10 px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
+        <div className="mx-auto max-w-7xl">
+          <Reveal>
+            <SectionLabel
+              number="03"
+              title="CURRICULUM FOCUS"
+              category="AREAS OF STUDY"
+            />
+          </Reveal>
+
+          <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-end">
+            <Reveal delay={80} className="lg:col-span-7">
+              <h2 className="text-[clamp(3rem,5.5vw,5.5rem)] font-medium leading-[0.88] tracking-[-0.065em]">
+                The disciplines
+                <br />
+                <span className="text-black/25">
+                  behind the craft.
+                </span>
+              </h2>
+            </Reveal>
+
+            <Reveal delay={140} className="lg:col-span-4 lg:col-start-9">
+              <p className="text-[12px] leading-5 text-neutral-500">
+                From algorithms and systems to artificial
+                intelligence, networks, databases and software
+                engineering, the department covers core areas
+                of computer science.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-10 grid gap-4 lg:grid-cols-12">
+            {/* Cards */}
+
+            <div className="grid gap-2 sm:grid-cols-2 lg:col-span-8">
+              {disciplines.map((item, index) => {
+                const Icon = item.icon;
+                const active = activeDiscipline === index;
+
+                return (
+                  <Reveal
+                    key={item.id}
+                    delay={index * 40}
+                  >
+                    <button
+                      type="button"
+                      onMouseEnter={() =>
+                        setActiveDiscipline(index)
+                      }
+                      onFocus={() =>
+                        setActiveDiscipline(index)
+                      }
+                      onClick={() =>
+                        setActiveDiscipline(index)
+                      }
+                      className={`
+                        group flex min-h-[92px] w-full
+                        items-center gap-4
+                        border border-black/10
+                        px-4 text-left
+                        transition-all duration-300
+                        ${
+                          active
+                            ? "bg-[#141413] text-white"
+                            : "bg-transparent hover:bg-white/70"
+                        }
+                      `}
+                    >
+                      <Icon
+                        size={19}
+                        strokeWidth={1.3}
+                        className={
+                          active
+                            ? "text-white"
+                            : "text-neutral-500"
+                        }
+                      />
+
+                      <div className="flex-1">
+                        <span
+                          className={`font-mono text-[7px] tracking-[0.18em] ${
+                            active
+                              ? "text-white/35"
+                              : "text-neutral-400"
+                          }`}
+                        >
+                          {item.id}
+                        </span>
+
+                        <h3 className="mt-1 text-[12px] font-semibold leading-4 sm:text-[13px]">
+                          {item.title}
+                        </h3>
+                      </div>
+
+                      <ArrowUpRight
+                        size={13}
+                        className={`transition-all duration-300 ${
+                          active
+                            ? "translate-x-0 opacity-100"
+                            : "translate-x-1 opacity-0"
+                        }`}
+                      />
+                    </button>
+                  </Reveal>
+                );
+              })}
+            </div>
+
+            {/* Visual */}
+
+            <Reveal
+              delay={120}
+              className="hidden lg:col-span-4 lg:block"
+            >
+              <div className="relative h-full min-h-[382px] overflow-hidden bg-[#141413] text-white">
                 <div
-                  key={lab}
-                  className="group flex items-center justify-between border-b border-black/15 py-6 transition-colors hover:bg-black/[0.015]"
-                >
-                  <div className="flex items-center gap-6">
-                    <span className="font-mono text-xs text-neutral-400 group-hover:text-black">
-                      {String(index + 1).padStart(2, "0")}
+                  className="absolute inset-0 opacity-[0.09]"
+                  style={{
+                    backgroundImage: `
+                      linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)
+                    `,
+                    backgroundSize: "40px 40px",
+                  }}
+                />
+
+                <div className="absolute left-5 top-5 font-mono text-[7px] uppercase tracking-[0.2em] text-white/35">
+                  DOMAIN / {disciplines[activeDiscipline].id}
+                </div>
+
+                <div className="absolute right-5 top-5 font-mono text-[7px] uppercase tracking-[0.2em] text-white/35">
+                  CSE / ACADEMICS
+                </div>
+
+                <div className="absolute left-1/2 top-[43%] -translate-x-1/2 -translate-y-1/2">
+                  <div className="flex h-28 w-28 items-center justify-center rounded-full border border-white/10">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full border border-dashed border-white/15">
+                      <ActiveIcon
+                        key={disciplines[activeDiscipline].id}
+                        size={26}
+                        strokeWidth={1.1}
+                        className="animate-[aboutIcon_450ms_ease-out]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 p-5">
+                  <span className="font-mono text-[7px] uppercase tracking-[0.2em] text-white/30">
+                    ACTIVE DISCIPLINE
+                  </span>
+
+                  <h3 className="mt-2 text-lg font-medium">
+                    {disciplines[activeDiscipline].title}
+                  </h3>
+
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="font-mono text-[7px] uppercase tracking-[0.2em] text-white/25">
+                      BIT SINDRI / CSE
                     </span>
-                    <span className="text-lg font-semibold text-[#141413]">
-                      {lab}
+
+                    <span className="flex items-center gap-2 font-mono text-[7px] uppercase tracking-[0.2em] text-white/35">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      ACTIVE
                     </span>
                   </div>
-
-                  <span className="font-mono text-xs uppercase tracking-wider text-neutral-400 group-hover:text-black">
-                    DEPT OF CSE · BIT SINDRI
-                  </span>
                 </div>
-              ))}
-            </div>
-          </AnimatedSection>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* Society Vision Dark CTA */}
-      <section className="bg-[#141413] px-4 py-20 text-[#f5f3ee] sm:px-6 lg:px-10 lg:py-32">
+      {/* =====================================================
+          LABS
+      ====================================================== */}
+
+      <section className="border-b border-black/10 bg-[#faf9f6] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-7xl">
-          <AnimatedSection>
-            <TechnicalLabel index="05" title="SOCIETY MANDATE" category="VISION" dark />
+          <Reveal>
+            <SectionLabel
+              number="04"
+              title="INFRASTRUCTURE"
+              category="LABORATORIES"
+            />
+          </Reveal>
 
-            <h2 className="mt-8 max-w-4xl text-clamp-section font-medium leading-tight text-[#f5f3ee]">
-              The department provides the foundation. <br />
-              <span className="text-white/40">The community takes it forward.</span>
-            </h2>
+          <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-start">
+            <Reveal delay={80} className="lg:col-span-6">
+              <h2 className="text-[clamp(3rem,5.5vw,5.5rem)] font-medium leading-[0.88] tracking-[-0.065em]">
+                Where theory
+                <br />
+                meets{" "}
+                <span className="text-black/25">
+                  practice.
+                </span>
+              </h2>
+            </Reveal>
 
-            <p className="mt-8 max-w-2xl text-base leading-7 text-white/70">
-              The CSE Society is a student-run ecosystem fostering continuous learning, competition, project development, and alumni mentorship beyond classroom bounds.
-            </p>
+            <Reveal
+              delay={130}
+              className="lg:col-span-3"
+            >
+              <p className="text-[12px] leading-5 text-neutral-500">
+                Dedicated laboratories support practical
+                exploration across core Computer Science &
+                Engineering disciplines.
+              </p>
+            </Reveal>
 
-            <div className="mt-10">
+            <Reveal
+              delay={180}
+              className="lg:col-span-3"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900">
+                <Image
+                  src="/images/about/cse-hero.png"
+                  alt="Computer Science laboratory"
+                  fill
+                  className="object-cover transition-transform duration-700 hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 25vw"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+
+                <span className="absolute bottom-4 left-4 font-mono text-[7px] uppercase tracking-[0.18em] text-white">
+                  IDEAS INTO REAL-WORLD SOLUTIONS
+                </span>
+              </div>
+            </Reveal>
+          </div>
+
+          <div className="mt-10 grid gap-x-10 md:grid-cols-2">
+            <div className="border-t border-black/10">
+              {labsLeft.map((lab, index) => (
+                <Reveal key={lab} delay={index * 50}>
+                  <div className="group flex items-center justify-between border-b border-black/10 py-4">
+                    <div className="flex items-center gap-4">
+                      <span className="font-mono text-[7px] text-neutral-400">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      <span className="text-[12px] font-medium">
+                        {lab}
+                      </span>
+                    </div>
+
+                    <ArrowUpRight
+                      size={12}
+                      className="text-neutral-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-black"
+                    />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
+            <div className="border-t border-black/10">
+              {labsRight.map((lab, index) => (
+                <Reveal key={lab} delay={index * 50}>
+                  <div className="group flex items-center justify-between border-b border-black/10 py-4">
+                    <div className="flex items-center gap-4">
+                      <span className="font-mono text-[7px] text-neutral-400">
+                        {String(index + 5).padStart(2, "0")}
+                      </span>
+
+                      <span className="text-[12px] font-medium">
+                        {lab}
+                      </span>
+                    </div>
+
+                    <ArrowUpRight
+                      size={12}
+                      className="text-neutral-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-black"
+                    />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          SOCIETY CTA
+      ====================================================== */}
+
+      <section className="relative overflow-hidden bg-[#141413] px-5 py-16 text-[#f7f5f0] sm:px-8 lg:px-10 lg:py-20">
+        <div className="pointer-events-none absolute right-[-120px] top-[-170px] h-[500px] w-[500px] rounded-full border border-white/[0.05]" />
+
+        <div className="pointer-events-none absolute right-[-70px] top-[-120px] h-[390px] w-[390px] rounded-full border border-dashed border-white/[0.06] animate-[spin_35s_linear_infinite]" />
+
+        <div className="relative mx-auto max-w-7xl">
+          <Reveal>
+            <SectionLabel
+              number="05"
+              title="CSE SOCIETY"
+              category="COMMUNITY"
+            />
+          </Reveal>
+
+          <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:items-end">
+            <Reveal delay={80} className="lg:col-span-8">
+              <h2 className="text-[clamp(3rem,5.5vw,5.8rem)] font-medium leading-[0.86] tracking-[-0.065em]">
+                The department
+                <br />
+                gives us the{" "}
+                <span className="text-white/25">
+                  foundation.
+                </span>
+              </h2>
+
+              <p className="mt-6 max-w-2xl text-[12px] leading-6 text-white/50 sm:text-[13px]">
+                The CSE Society extends that foundation into
+                a student-driven environment for continuous
+                learning, project development, competition,
+                and connection.
+              </p>
+            </Reveal>
+
+            <Reveal
+              delay={160}
+              className="lg:col-span-4"
+            >
+              <div className="relative mx-auto h-48 w-48 lg:h-56 lg:w-56">
+                <div className="absolute inset-0 rounded-full border border-white/10" />
+                <div className="absolute inset-6 rounded-full border border-dashed border-white/10 animate-[spin_25s_linear_infinite]" />
+
+                <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-400 shadow-[0_0_20px_rgba(52,211,153,.25)]" />
+
+                <div className="absolute right-2 top-[35%] font-mono text-[7px] uppercase tracking-[0.2em] text-white/40">
+                  LEARN
+                </div>
+
+                <div className="absolute right-[-2px] top-[50%] font-mono text-[7px] uppercase tracking-[0.2em] text-white/40">
+                  BUILD
+                </div>
+
+                <div className="absolute right-2 top-[65%] font-mono text-[7px] uppercase tracking-[0.2em] text-white/40">
+                  COMPETE
+                </div>
+
+                <div className="absolute right-6 top-[80%] font-mono text-[7px] uppercase tracking-[0.2em] text-white/40">
+                  CONNECT
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={220}>
+            <div className="mt-9 flex flex-wrap gap-3">
               <Link
                 href="/events"
-                className="group inline-flex items-center gap-3 bg-white px-8 py-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#141413] transition-all hover:bg-neutral-200"
+                className="group inline-flex items-center gap-3 bg-[#f7f5f0] px-5 py-3.5 font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-[#141413] transition-transform duration-300 hover:-translate-y-0.5"
               >
-                <span>EXPLORE SOCIETY ACTIVITIES</span>
-                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                Explore Society Activities
+                <ArrowRight
+                  size={13}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </Link>
+
+              <Link
+                href="/team"
+                className="group inline-flex items-center gap-3 border border-white/20 px-5 py-3.5 font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-white/10"
+              >
+                Meet The Team
+                <ArrowUpRight
+                  size={13}
+                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
               </Link>
             </div>
-          </AnimatedSection>
+          </Reveal>
         </div>
       </section>
     </main>

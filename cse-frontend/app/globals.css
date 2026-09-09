@@ -318,3 +318,593 @@ body {
     transform: none;
   }
 }
+
+/* =========================================================
+   CSE SOCIETY — FINAL HERO SYSTEM
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   HERO ROOT
+--------------------------------------------------------- */
+
+.hero-premium {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+
+  isolation: isolate;
+}
+
+
+/* ---------------------------------------------------------
+   BACKGROUND GRID
+--------------------------------------------------------- */
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(20, 20, 18, 0.065) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(20, 20, 18, 0.065) 1px,
+      transparent 1px
+    );
+
+  background-size: 42px 42px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 7%,
+    black 93%,
+    transparent 100%
+  );
+}
+
+
+/* ---------------------------------------------------------
+   MOUSE SPOTLIGHT
+--------------------------------------------------------- */
+
+.hero-spotlight {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      520px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.92),
+      rgba(255, 255, 255, 0.38) 38%,
+      transparent 73%
+    );
+
+  opacity: 0.72;
+
+  pointer-events: none;
+
+  transition:
+    background 120ms ease-out,
+    opacity 300ms ease;
+}
+
+
+/* ---------------------------------------------------------
+   SOFT CENTER LIGHT
+--------------------------------------------------------- */
+
+.hero-atmosphere {
+  position: absolute;
+
+  width: 650px;
+  height: 650px;
+
+  left: 63%;
+  top: 47%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(255, 255, 255, 0.28) 42%,
+      transparent 73%
+    );
+
+  filter: blur(15px);
+
+  opacity: 0.8;
+}
+
+
+/* ---------------------------------------------------------
+   BACKGROUND TECH SYMBOLS
+--------------------------------------------------------- */
+
+.hero-tech-symbol {
+  color: rgba(25, 25, 22, 0.32);
+
+  text-shadow:
+    0 0 1px rgba(25, 25, 22, 0.08);
+
+  animation:
+    heroTechFloat
+    6s
+    ease-in-out
+    infinite;
+
+  will-change: transform;
+
+  user-select: none;
+}
+
+@keyframes heroTechFloat {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform:
+      translate3d(0, -10px, 0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   ORBIT 01
+--------------------------------------------------------- */
+
+.hero-orbit-slow {
+  animation:
+    heroOrbitSlow
+    20s
+    linear
+    infinite;
+}
+
+@keyframes heroOrbitSlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   ORBIT 02
+--------------------------------------------------------- */
+
+.hero-orbit-reverse {
+  animation:
+    heroOrbitReverse
+    24s
+    linear
+    infinite;
+}
+
+@keyframes heroOrbitReverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   OUTER CROSS RING
+--------------------------------------------------------- */
+
+.hero-cross-ring {
+  animation:
+    heroCrossRotate
+    28s
+    linear
+    infinite;
+}
+
+@keyframes heroCrossRotate {
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(360deg);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   CENTER CORE
+--------------------------------------------------------- */
+
+.hero-core {
+  animation:
+    heroCoreBreath
+    4.5s
+    ease-in-out
+    infinite;
+}
+
+@keyframes heroCoreBreath {
+  0%,
+  100% {
+    box-shadow:
+      0 25px 85px rgba(0, 0, 0, 0.10);
+  }
+
+  50% {
+    box-shadow:
+      0 34px 105px rgba(0, 0, 0, 0.16);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   CENTER DASHED RING
+--------------------------------------------------------- */
+
+.hero-core-spin {
+  animation:
+    heroCoreSpin
+    17s
+    linear
+    infinite;
+}
+
+@keyframes heroCoreSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   ORBIT DOTS
+--------------------------------------------------------- */
+
+.hero-orbit-dot {
+  position: absolute;
+
+  z-index: 8;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 999px;
+
+  background: rgba(25, 25, 22, 0.45);
+
+  box-shadow:
+    0 0 0 5px rgba(25, 25, 22, 0.045);
+
+  pointer-events: none;
+}
+
+
+.hero-dot-one {
+  left: 22%;
+  top: 10%;
+
+  animation:
+    heroDotOne
+    4.5s
+    ease-in-out
+    infinite;
+}
+
+
+.hero-dot-two {
+  right: 14%;
+  top: 45%;
+
+  animation:
+    heroDotTwo
+    5s
+    ease-in-out
+    infinite;
+}
+
+
+.hero-dot-three {
+  left: 27%;
+  bottom: 12%;
+
+  animation:
+    heroDotThree
+    5.5s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes heroDotOne {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(14px, 9px);
+  }
+}
+
+
+@keyframes heroDotTwo {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-11px, -13px);
+  }
+}
+
+
+@keyframes heroDotThree {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(11px, -10px);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   TITLE ENTRANCE
+--------------------------------------------------------- */
+
+.hero-title {
+  animation:
+    heroTitleReveal
+    900ms
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+@keyframes heroTitleReveal {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(28px);
+
+    filter: blur(7px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+
+    filter: blur(0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   META ENTRANCE
+--------------------------------------------------------- */
+
+.hero-meta {
+  animation:
+    heroMetaReveal
+    750ms
+    100ms
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+@keyframes heroMetaReveal {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   DOMAIN CARDS
+--------------------------------------------------------- */
+
+.hero-domain {
+  transition:
+    transform 450ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 450ms ease;
+}
+
+.hero-domain:hover {
+  filter:
+    drop-shadow(
+      0 18px 32px rgba(0, 0, 0, 0.13)
+    );
+}
+
+
+/* ---------------------------------------------------------
+   DESKTOP LARGE SCREEN
+--------------------------------------------------------- */
+
+@media (min-width: 1400px) {
+  .hero-grid {
+    background-size: 46px 46px;
+  }
+
+  .hero-atmosphere {
+    width: 730px;
+    height: 730px;
+  }
+
+  .hero-tech-symbol {
+    color: rgba(25, 25, 22, 0.34);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   TABLET
+--------------------------------------------------------- */
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .hero-grid {
+    background-size: 36px 36px;
+  }
+
+  .hero-atmosphere {
+    width: 520px;
+    height: 520px;
+  }
+
+  .hero-domain > div {
+    min-width: 125px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .hero-grid {
+    background-size: 30px 30px;
+  }
+
+  .hero-spotlight {
+    opacity: 0.28;
+
+    background:
+      radial-gradient(
+        300px circle at 50% 30%,
+        rgba(255, 255, 255, 0.78),
+        transparent 72%
+      );
+  }
+
+  .hero-atmosphere {
+    width: 390px;
+    height: 390px;
+
+    left: 50%;
+    top: 52%;
+
+    opacity: 0.65;
+  }
+
+  .hero-tech-symbol {
+    color: rgba(25, 25, 22, 0.27);
+  }
+
+  .hero-domain > div {
+    min-width: 108px;
+    padding: 9px 10px;
+  }
+
+  .hero-domain > div > div:first-child {
+    width: 28px;
+    height: 28px;
+  }
+
+  .hero-domain p:first-child {
+    font-size: 7px;
+  }
+
+  .hero-domain p:last-child {
+    font-size: 5px;
+  }
+
+  .hero-orbit-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .hero-engineering {
+    color: rgba(20, 20, 18, 0.30);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   ACCESSIBILITY
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-tech-symbol,
+  .hero-orbit-slow,
+  .hero-orbit-reverse,
+  .hero-cross-ring,
+  .hero-core,
+  .hero-core-spin,
+  .hero-orbit-dot,
+  .hero-title,
+  .hero-meta {
+    animation: none !important;
+  }
+
+  .hero-premium *,
+  .hero-premium *::before,
+  .hero-premium *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
