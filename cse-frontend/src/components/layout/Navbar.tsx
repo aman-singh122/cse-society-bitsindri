@@ -229,15 +229,16 @@ export default function Navbar() {
               DESKTOP NAVIGATION
           ================================================== */}
 
-          <div
-            className="
-              absolute left-1/2
-              hidden -translate-x-1/2
-              items-center gap-7
-              md:flex
-              lg:gap-9
-            "
-          >
+       <div
+  className="
+    absolute left-[48%]
+    hidden -translate-x-1/2
+    items-center gap-5
+    md:flex
+    lg:gap-7
+    xl:gap-8
+  "
+>
             {navLinks.map((link) => {
               const isActive = isActiveRoute(link.href);
 
@@ -301,7 +302,7 @@ export default function Navbar() {
               DESKTOP RIGHT SIDE
           ================================================== */}
 
-          <div className="ml-auto hidden items-center gap-3 md:flex">
+          <div className="ml-auto hidden items-center gap-4 md:flex">
             <div className="nav-live hidden items-center gap-2 border-r border-black/10 pr-3 lg:flex">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inset-0 animate-ping rounded-full bg-emerald-500/50" />

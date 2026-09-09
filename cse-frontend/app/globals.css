@@ -2459,3 +2459,23 @@ html.dark-theme .about-page .about-cta h2 span {
 html.dark-theme .about-page .about-cta p {
   color: rgba(242, 241, 236, 0.52) !important;
 }
+
+
+/* =========================================================
+   NAVBAR — DESKTOP SPACING FIX
+   ========================================================= */
+
+@media (min-width: 1024px) {
+  .navbar-desktop-links {
+    gap: 3.25rem !important;
+  }
+
+  .navbar-socials {
+    margin-left: 2.25rem !important;
+    gap: 1.1rem !important;
+  }
+
+  .navbar-socials + .theme-toggle {
+    margin-left: 1rem !important;
+  }
+}
