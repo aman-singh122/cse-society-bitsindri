@@ -9,6 +9,7 @@ import {
   LinkedinIcon,
   GithubIcon,
 } from "@/components/ui/SocialIcons";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const navLinks = [
   { name: "About", href: "/about" },
@@ -116,10 +117,7 @@ export default function Navbar() {
       return pathname === "/";
     }
 
-    return (
-      pathname === href ||
-      pathname.startsWith(`${href}/`)
-    );
+    return pathname === href || pathname.startsWith(`${href}/`);
   };
 
   return (
@@ -133,11 +131,7 @@ export default function Navbar() {
             ? "-translate-y-[120%] opacity-0"
             : "translate-y-0 opacity-100"
         }
-        ${
-          isScrolled
-            ? "pt-2"
-            : "pt-3 sm:pt-4"
-        }
+        ${isScrolled ? "pt-2" : "pt-3 sm:pt-4"}
       `}
     >
       <div
@@ -152,8 +146,9 @@ export default function Navbar() {
 
         <nav
           aria-label="Main Navigation"
-          className={`
-            relative flex items-center justify-between
+        className={`
+  cse-navbar
+  relative flex items-center justify-between
             overflow-hidden
             border border-black/15
             bg-[#f5f3ee]/96
@@ -213,11 +208,7 @@ export default function Navbar() {
                 transition-all duration-500
                 group-hover:-translate-y-0.5
                 group-hover:shadow-[0_7px_18px_rgba(0,0,0,0.14)]
-                ${
-                  isScrolled
-                    ? "h-8 w-8 text-xs"
-                    : "h-9 w-9 text-sm"
-                }
+                ${isScrolled ? "h-8 w-8 text-xs" : "h-9 w-9 text-sm"}
               `}
             >
               C
@@ -228,7 +219,7 @@ export default function Navbar() {
                 CSE SOCIETY
               </p>
 
-              <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.28em] text-neutral-500">
+              <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.28em] text-black/65">
                 BIT SINDRI
               </p>
             </div>
@@ -255,33 +246,52 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   className={`
-                    group relative py-2
+                    nav-link group relative flex items-center gap-2
+                    overflow-hidden rounded-full px-3 py-2
                     font-mono text-[11px]
                     font-semibold uppercase
                     tracking-[0.18em]
-                    transition-colors duration-300
-                    ${
-                      isActive
-                        ? "text-[#141413]"
-                        : "text-neutral-500 hover:text-[#141413]"
-                    }
+                    transition-all duration-300
+                    ${isActive ? "nav-link-active" : "nav-link-inactive"}
                   `}
                 >
-                  <span>{link.name}</span>
-
                   <span
                     className={`
-                      absolute bottom-0 left-0 h-px
-                      bg-[#141413]
+                      nav-link-bg absolute inset-0 z-0 rounded-full
                       transition-all duration-300
-                      ease-out
                       ${
                         isActive
-                          ? "w-full"
-                          : "w-0 group-hover:w-full"
+                          ? "scale-100 opacity-100"
+                          : "scale-75 opacity-0 group-hover:scale-100 group-hover:opacity-100"
                       }
                     `}
                   />
+
+                  <span
+                    className={`
+                      nav-link-dot relative z-10 h-1.5 w-1.5 rounded-full
+                      transition-all duration-300
+                      ${
+                        isActive
+                          ? "scale-100 bg-emerald-500 opacity-100"
+                          : "scale-0 bg-black opacity-0 group-hover:scale-100 group-hover:opacity-40"
+                      }
+                    `}
+                  />
+
+                  <span className="relative z-10">{link.name}</span>
+
+                 <span
+  className={`
+    nav-link-line absolute bottom-1.5 z-10 left-3 right-3 h-px
+    transition-all duration-300 ease-out
+    ${
+      isActive
+        ? "nav-link-line-active scale-x-100"
+        : "nav-link-line-inactive scale-x-0 group-hover:scale-x-100"
+    }
+  `}
+/>
                 </Link>
               );
             })}
@@ -292,6 +302,16 @@ export default function Navbar() {
           ================================================== */}
 
           <div className="ml-auto hidden items-center gap-3 md:flex">
+            <div className="nav-live hidden items-center gap-2 border-r border-black/10 pr-3 lg:flex">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inset-0 animate-ping rounded-full bg-emerald-500/50" />
+                <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              </span>
+              <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.18em] text-black/52">
+                ONLINE
+              </span>
+            </div>
+
             {/* SOCIALS */}
 
             <div
@@ -309,7 +329,7 @@ export default function Navbar() {
                 title="Instagram"
                 className="
                   flex h-8 w-8 items-center justify-center
-                  text-neutral-500
+                  text-black/65
                   transition-all duration-300
                   hover:-translate-y-0.5
                   hover:text-[#141413]
@@ -326,7 +346,7 @@ export default function Navbar() {
                 title="LinkedIn"
                 className="
                   flex h-8 w-8 items-center justify-center
-                  text-neutral-500
+                  text-black/65
                   transition-all duration-300
                   hover:-translate-y-0.5
                   hover:text-[#141413]
@@ -343,7 +363,7 @@ export default function Navbar() {
                 title="GitHub"
                 className="
                   flex h-8 w-8 items-center justify-center
-                  text-neutral-500
+                  text-black/65
                   transition-all duration-300
                   hover:-translate-y-0.5
                   hover:text-[#141413]
@@ -352,6 +372,10 @@ export default function Navbar() {
                 <GithubIcon className="h-[15px] w-[15px]" />
               </a>
             </div>
+
+            {/* THEME */}
+
+            <ThemeToggle />
 
             {/* JOIN */}
 
@@ -415,33 +439,19 @@ export default function Navbar() {
             <span
               className={`
                 absolute transition-all duration-300
-                ${
-                  isOpen
-                    ? "rotate-90 opacity-0"
-                    : "rotate-0 opacity-100"
-                }
+                ${isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"}
               `}
             >
-              <Menu
-                size={19}
-                strokeWidth={1.7}
-              />
+              <Menu size={19} strokeWidth={1.7} />
             </span>
 
             <span
               className={`
                 absolute transition-all duration-300
-                ${
-                  isOpen
-                    ? "rotate-0 opacity-100"
-                    : "-rotate-90 opacity-0"
-                }
+                ${isOpen ? "rotate-0 opacity-100" : "-rotate-90 opacity-0"}
               `}
             >
-              <X
-                size={19}
-                strokeWidth={1.7}
-              />
+              <X size={19} strokeWidth={1.7} />
             </span>
           </button>
         </nav>
@@ -489,13 +499,13 @@ export default function Navbar() {
                   font-mono text-[9px]
                   font-semibold uppercase
                   tracking-[0.24em]
-                  text-neutral-400
+                  text-black/52
                 "
               >
                 CSE SOCIETY / NAVIGATION
               </span>
 
-              <span className="font-mono text-[9px] text-neutral-400">
+              <span className="font-mono text-[9px] text-black/52">
                 {String(navLinks.length + 1).padStart(2, "0")} ITEMS
               </span>
             </div>
@@ -511,15 +521,18 @@ export default function Navbar() {
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="
-                      group flex min-h-[54px]
+                    className={`
+                      nav-mobile-link group flex min-h-[54px]
                       items-center justify-between
                       border-b border-black/10
                       transition-colors duration-300
-                    "
+                    `}
+                    style={{
+                      transitionDelay: isOpen ? `${index * 55}ms` : "0ms",
+                    }}
                   >
                     <div className="flex items-center gap-4">
-                      <span className="font-mono text-[9px] text-neutral-400">
+                      <span className="font-mono text-[9px] text-black/52">
                         {String(index + 1).padStart(2, "0")}
                       </span>
 
@@ -531,7 +544,7 @@ export default function Navbar() {
                           ${
                             isActive
                               ? "font-bold text-[#141413]"
-                              : "text-neutral-600 group-hover:translate-x-1 group-hover:text-[#141413]"
+                              : "text-black/72 group-hover:translate-x-1 group-hover:text-[#141413]"
                           }
                         `}
                       >
@@ -547,7 +560,7 @@ export default function Navbar() {
                         ${
                           isActive
                             ? "translate-x-0 text-[#141413] opacity-100"
-                            : "text-neutral-400 opacity-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+                            : "text-black/52 opacity-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
                         }
                       `}
                     />
@@ -569,7 +582,7 @@ export default function Navbar() {
                   border border-black/10
                   font-mono text-[9px]
                   uppercase tracking-[0.12em]
-                  text-neutral-500
+                  text-black/65
                   transition-all duration-300
                   hover:border-black/20
                   hover:text-[#141413]
@@ -589,7 +602,7 @@ export default function Navbar() {
                   border border-black/10
                   font-mono text-[9px]
                   uppercase tracking-[0.12em]
-                  text-neutral-500
+                  text-black/65
                   transition-all duration-300
                   hover:border-black/20
                   hover:text-[#141413]
@@ -609,7 +622,7 @@ export default function Navbar() {
                   border border-black/10
                   font-mono text-[9px]
                   uppercase tracking-[0.12em]
-                  text-neutral-500
+                  text-black/65
                   transition-all duration-300
                   hover:border-black/20
                   hover:text-[#141413]
@@ -618,6 +631,15 @@ export default function Navbar() {
                 <GithubIcon className="h-3.5 w-3.5" />
                 GitHub
               </a>
+            </div>
+
+            {/* MOBILE THEME */}
+
+            <div className="mt-3 flex items-center justify-between border-t border-black/10 pt-4">
+              <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-black/52">
+                Appearance
+              </span>
+              <ThemeToggle />
             </div>
 
             {/* MOBILE CTA */}

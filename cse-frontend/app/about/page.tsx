@@ -143,9 +143,15 @@ function SectionLabel({
   return (
     <div className="flex items-center gap-3 font-mono text-[8px] uppercase tracking-[0.22em] text-neutral-400 sm:text-[9px]">
       <span>{number}</span>
+
       <span className="h-px w-7 bg-black/20" />
-      <span className="font-semibold text-neutral-500">{title}</span>
+
+      <span className="font-semibold text-neutral-500">
+        {title}
+      </span>
+
       <span className="text-neutral-300">/</span>
+
       <span>{category}</span>
     </div>
   );
@@ -157,13 +163,15 @@ export default function AboutPage() {
   const ActiveIcon = disciplines[activeDiscipline].icon;
 
   return (
-    <main className="w-full overflow-x-hidden bg-[#f7f5f0] text-[#141413]">
+    <main className="about-page w-full overflow-x-hidden bg-[#f7f5f0] text-[#141413]">
+
       {/* =====================================================
           HERO
       ====================================================== */}
 
-      <section className="border-b border-black/10 px-5 pb-14 pt-28 sm:px-8 sm:pt-32 lg:px-10 lg:pb-16">
+      <section className="about-hero border-b border-black/10 px-5 pb-14 pt-28 sm:px-8 sm:pt-32 lg:px-10 lg:pb-16">
         <div className="mx-auto max-w-7xl">
+
           <Reveal>
             <SectionLabel
               number="01"
@@ -173,15 +181,18 @@ export default function AboutPage() {
           </Reveal>
 
           <div className="mt-9 grid gap-10 lg:grid-cols-12 lg:items-center">
+
             {/* LEFT */}
 
             <div className="lg:col-span-6">
+
               <Reveal delay={80}>
                 <h1 className="text-[clamp(4rem,8vw,8.2rem)] font-medium leading-[0.82] tracking-[-0.075em]">
                   Computer
                   <br />
                   Science
                   <br />
+
                   <span className="text-black/25">
                     & Engineering.
                   </span>
@@ -198,10 +209,12 @@ export default function AboutPage() {
 
               <Reveal delay={220}>
                 <div className="mt-8 flex items-center gap-8">
+
                   <div>
                     <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-neutral-400">
                       ESTABLISHED
                     </p>
+
                     <p className="mt-1 text-3xl font-medium tracking-tight">
                       1987
                     </p>
@@ -213,10 +226,12 @@ export default function AboutPage() {
                     <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-neutral-400">
                       FIRST BATCH
                     </p>
+
                     <p className="mt-1 text-3xl font-medium tracking-tight">
                       1991
                     </p>
                   </div>
+
                 </div>
               </Reveal>
 
@@ -226,12 +241,14 @@ export default function AboutPage() {
                   className="group mt-8 inline-flex items-center gap-3 bg-[#141413] px-5 py-3.5 font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-white transition-transform duration-300 hover:-translate-y-0.5"
                 >
                   Explore Our Journey
+
                   <ArrowRight
                     size={13}
                     className="transition-transform duration-300 group-hover:translate-x-1"
                   />
                 </Link>
               </Reveal>
+
             </div>
 
             {/* RIGHT IMAGE */}
@@ -241,7 +258,9 @@ export default function AboutPage() {
               className="relative lg:col-span-6"
             >
               <div className="group relative overflow-hidden border border-black/10 bg-[#dedbd2]">
+
                 <div className="relative aspect-[4/3] overflow-hidden">
+
                   <Image
                     src="/images/about/cse-hero.png"
                     alt="BIT Sindri campus"
@@ -254,14 +273,12 @@ export default function AboutPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
 
                   <div className="absolute left-5 top-5">
-                 
                   </div>
 
                   <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
-                 
-
                     <ArrowUpRight size={15} />
                   </div>
+
                 </div>
               </div>
 
@@ -272,10 +289,13 @@ export default function AboutPage() {
                 <span className="block">PEOPLE</span>
                 <span className="block">PURPOSE</span>
               </div>
+
             </Reveal>
+
           </div>
         </div>
       </section>
+
 
       {/* =====================================================
           LEGACY
@@ -283,9 +303,10 @@ export default function AboutPage() {
 
       <section
         id="legacy"
-        className="border-b border-black/10 bg-[#faf9f6] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"
+        className="about-legacy border-b border-black/10 bg-[#faf9f6] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"
       >
         <div className="mx-auto max-w-7xl">
+
           <Reveal>
             <SectionLabel
               number="02"
@@ -295,17 +316,25 @@ export default function AboutPage() {
           </Reveal>
 
           <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-end">
-            <Reveal delay={80} className="lg:col-span-7">
+
+            <Reveal
+              delay={80}
+              className="lg:col-span-7"
+            >
               <h2 className="text-[clamp(3rem,5.5vw,5.5rem)] font-medium leading-[0.88] tracking-[-0.065em]">
                 A foundation built
                 <br />
+
                 <span className="text-black/25">
                   over decades.
                 </span>
               </h2>
             </Reveal>
 
-            <Reveal delay={150} className="lg:col-span-4 lg:col-start-9">
+            <Reveal
+              delay={150}
+              className="lg:col-span-4 lg:col-start-9"
+            >
               <p className="text-[12px] leading-5 text-neutral-500 sm:text-[13px]">
                 The Department of Computer Science &
                 Engineering was established in 1987 at BIT
@@ -313,9 +342,11 @@ export default function AboutPage() {
                 of computer science education.
               </p>
             </Reveal>
+
           </div>
 
           <div className="mt-10 grid border-t border-black/10 md:grid-cols-2">
+
             {timeline.map((item, index) => (
               <Reveal
                 key={item.year}
@@ -328,11 +359,13 @@ export default function AboutPage() {
                       : "md:pl-8"
                   }`}
                 >
+
                   <span className="text-3xl font-medium tracking-[-0.05em] text-black/35">
                     {item.year}
                   </span>
 
                   <div>
+
                     <h3 className="text-[15px] font-semibold">
                       {item.title}
                     </h3>
@@ -340,20 +373,26 @@ export default function AboutPage() {
                     <p className="mt-2 max-w-sm text-[11px] leading-5 text-neutral-500">
                       {item.text}
                     </p>
+
                   </div>
+
                 </div>
               </Reveal>
             ))}
+
           </div>
+
         </div>
       </section>
+
 
       {/* =====================================================
           DISCIPLINES
       ====================================================== */}
 
-      <section className="border-b border-black/10 px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
+      <section className="about-disciplines border-b border-black/10 px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-7xl">
+
           <Reveal>
             <SectionLabel
               number="03"
@@ -363,17 +402,25 @@ export default function AboutPage() {
           </Reveal>
 
           <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-end">
-            <Reveal delay={80} className="lg:col-span-7">
+
+            <Reveal
+              delay={80}
+              className="lg:col-span-7"
+            >
               <h2 className="text-[clamp(3rem,5.5vw,5.5rem)] font-medium leading-[0.88] tracking-[-0.065em]">
                 The disciplines
                 <br />
+
                 <span className="text-black/25">
                   behind the craft.
                 </span>
               </h2>
             </Reveal>
 
-            <Reveal delay={140} className="lg:col-span-4 lg:col-start-9">
+            <Reveal
+              delay={140}
+              className="lg:col-span-4 lg:col-start-9"
+            >
               <p className="text-[12px] leading-5 text-neutral-500">
                 From algorithms and systems to artificial
                 intelligence, networks, databases and software
@@ -381,12 +428,15 @@ export default function AboutPage() {
                 of computer science.
               </p>
             </Reveal>
+
           </div>
 
           <div className="mt-10 grid gap-4 lg:grid-cols-12">
+
             {/* Cards */}
 
             <div className="grid gap-2 sm:grid-cols-2 lg:col-span-8">
+
               {disciplines.map((item, index) => {
                 const Icon = item.icon;
                 const active = activeDiscipline === index;
@@ -420,6 +470,7 @@ export default function AboutPage() {
                         }
                       `}
                     >
+
                       <Icon
                         size={19}
                         strokeWidth={1.3}
@@ -431,6 +482,7 @@ export default function AboutPage() {
                       />
 
                       <div className="flex-1">
+
                         <span
                           className={`font-mono text-[7px] tracking-[0.18em] ${
                             active
@@ -444,6 +496,7 @@ export default function AboutPage() {
                         <h3 className="mt-1 text-[12px] font-semibold leading-4 sm:text-[13px]">
                           {item.title}
                         </h3>
+
                       </div>
 
                       <ArrowUpRight
@@ -454,11 +507,14 @@ export default function AboutPage() {
                             : "translate-x-1 opacity-0"
                         }`}
                       />
+
                     </button>
                   </Reveal>
                 );
               })}
+
             </div>
+
 
             {/* Visual */}
 
@@ -467,6 +523,7 @@ export default function AboutPage() {
               className="hidden lg:col-span-4 lg:block"
             >
               <div className="relative h-full min-h-[382px] overflow-hidden bg-[#141413] text-white">
+
                 <div
                   className="absolute inset-0 opacity-[0.09]"
                   style={{
@@ -487,19 +544,26 @@ export default function AboutPage() {
                 </div>
 
                 <div className="absolute left-1/2 top-[43%] -translate-x-1/2 -translate-y-1/2">
+
                   <div className="flex h-28 w-28 items-center justify-center rounded-full border border-white/10">
+
                     <div className="flex h-20 w-20 items-center justify-center rounded-full border border-dashed border-white/15">
+
                       <ActiveIcon
                         key={disciplines[activeDiscipline].id}
                         size={26}
                         strokeWidth={1.1}
                         className="animate-[aboutIcon_450ms_ease-out]"
                       />
+
                     </div>
+
                   </div>
+
                 </div>
 
                 <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 p-5">
+
                   <span className="font-mono text-[7px] uppercase tracking-[0.2em] text-white/30">
                     ACTIVE DISCIPLINE
                   </span>
@@ -509,28 +573,40 @@ export default function AboutPage() {
                   </h3>
 
                   <div className="mt-4 flex items-center justify-between">
+
                     <span className="font-mono text-[7px] uppercase tracking-[0.2em] text-white/25">
                       BIT SINDRI / CSE
                     </span>
 
                     <span className="flex items-center gap-2 font-mono text-[7px] uppercase tracking-[0.2em] text-white/35">
+
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+
                       ACTIVE
+
                     </span>
+
                   </div>
+
                 </div>
+
               </div>
             </Reveal>
+
           </div>
         </div>
       </section>
+
 
       {/* =====================================================
           LABS
       ====================================================== */}
 
-      <section className="border-b border-black/10 bg-[#faf9f6] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
+      <section
+        className="about-labs border-b border-black/10 bg-[#faf9f6] px-5 py-16 sm:px-8 lg:px-10 lg:py-20"
+      >
         <div className="mx-auto max-w-7xl">
+
           <Reveal>
             <SectionLabel
               number="04"
@@ -540,10 +616,15 @@ export default function AboutPage() {
           </Reveal>
 
           <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-start">
-            <Reveal delay={80} className="lg:col-span-6">
+
+            <Reveal
+              delay={80}
+              className="lg:col-span-6"
+            >
               <h2 className="text-[clamp(3rem,5.5vw,5.5rem)] font-medium leading-[0.88] tracking-[-0.065em]">
                 Where theory
                 <br />
+
                 meets{" "}
                 <span className="text-black/25">
                   practice.
@@ -567,6 +648,7 @@ export default function AboutPage() {
               className="lg:col-span-3"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900">
+
                 <Image
                   src="/images/about/cse-hero.png"
                   alt="Computer Science laboratory"
@@ -580,16 +662,27 @@ export default function AboutPage() {
                 <span className="absolute bottom-4 left-4 font-mono text-[7px] uppercase tracking-[0.18em] text-white">
                   IDEAS INTO REAL-WORLD SOLUTIONS
                 </span>
+
               </div>
             </Reveal>
+
           </div>
 
           <div className="mt-10 grid gap-x-10 md:grid-cols-2">
+
+            {/* LEFT LABS */}
+
             <div className="border-t border-black/10">
+
               {labsLeft.map((lab, index) => (
-                <Reveal key={lab} delay={index * 50}>
+                <Reveal
+                  key={lab}
+                  delay={index * 50}
+                >
                   <div className="group flex items-center justify-between border-b border-black/10 py-4">
+
                     <div className="flex items-center gap-4">
+
                       <span className="font-mono text-[7px] text-neutral-400">
                         {String(index + 1).padStart(2, "0")}
                       </span>
@@ -597,22 +690,34 @@ export default function AboutPage() {
                       <span className="text-[12px] font-medium">
                         {lab}
                       </span>
+
                     </div>
 
                     <ArrowUpRight
                       size={12}
                       className="text-neutral-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-black"
                     />
+
                   </div>
                 </Reveal>
               ))}
+
             </div>
 
+
+            {/* RIGHT LABS */}
+
             <div className="border-t border-black/10">
+
               {labsRight.map((lab, index) => (
-                <Reveal key={lab} delay={index * 50}>
+                <Reveal
+                  key={lab}
+                  delay={index * 50}
+                >
                   <div className="group flex items-center justify-between border-b border-black/10 py-4">
+
                     <div className="flex items-center gap-4">
+
                       <span className="font-mono text-[7px] text-neutral-400">
                         {String(index + 5).padStart(2, "0")}
                       </span>
@@ -620,30 +725,40 @@ export default function AboutPage() {
                       <span className="text-[12px] font-medium">
                         {lab}
                       </span>
+
                     </div>
 
                     <ArrowUpRight
                       size={12}
                       className="text-neutral-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-black"
                     />
+
                   </div>
                 </Reveal>
               ))}
+
             </div>
+
           </div>
+
         </div>
       </section>
+
 
       {/* =====================================================
           SOCIETY CTA
       ====================================================== */}
 
-      <section className="relative overflow-hidden bg-[#141413] px-5 py-16 text-[#f7f5f0] sm:px-8 lg:px-10 lg:py-20">
+      <section
+        className="about-cta relative overflow-hidden bg-[#141413] px-5 py-16 text-[#f7f5f0] sm:px-8 lg:px-10 lg:py-20"
+      >
+
         <div className="pointer-events-none absolute right-[-120px] top-[-170px] h-[500px] w-[500px] rounded-full border border-white/[0.05]" />
 
         <div className="pointer-events-none absolute right-[-70px] top-[-120px] h-[390px] w-[390px] rounded-full border border-dashed border-white/[0.06] animate-[spin_35s_linear_infinite]" />
 
         <div className="relative mx-auto max-w-7xl">
+
           <Reveal>
             <SectionLabel
               number="05"
@@ -653,7 +768,11 @@ export default function AboutPage() {
           </Reveal>
 
           <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:items-end">
-            <Reveal delay={80} className="lg:col-span-8">
+
+            <Reveal
+              delay={80}
+              className="lg:col-span-8"
+            >
               <h2 className="text-[clamp(3rem,5.5vw,5.8rem)] font-medium leading-[0.86] tracking-[-0.065em]">
                 The department
                 <br />
@@ -676,7 +795,9 @@ export default function AboutPage() {
               className="lg:col-span-4"
             >
               <div className="relative mx-auto h-48 w-48 lg:h-56 lg:w-56">
+
                 <div className="absolute inset-0 rounded-full border border-white/10" />
+
                 <div className="absolute inset-6 rounded-full border border-dashed border-white/10 animate-[spin_25s_linear_infinite]" />
 
                 <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-400 shadow-[0_0_20px_rgba(52,211,153,.25)]" />
@@ -696,17 +817,21 @@ export default function AboutPage() {
                 <div className="absolute right-6 top-[80%] font-mono text-[7px] uppercase tracking-[0.2em] text-white/40">
                   CONNECT
                 </div>
+
               </div>
             </Reveal>
+
           </div>
 
           <Reveal delay={220}>
             <div className="mt-9 flex flex-wrap gap-3">
+
               <Link
                 href="/events"
                 className="group inline-flex items-center gap-3 bg-[#f7f5f0] px-5 py-3.5 font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-[#141413] transition-transform duration-300 hover:-translate-y-0.5"
               >
                 Explore Society Activities
+
                 <ArrowRight
                   size={13}
                   className="transition-transform duration-300 group-hover:translate-x-1"
@@ -718,15 +843,19 @@ export default function AboutPage() {
                 className="group inline-flex items-center gap-3 border border-white/20 px-5 py-3.5 font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-white/10"
               >
                 Meet The Team
+
                 <ArrowUpRight
                   size={13}
                   className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 />
               </Link>
+
             </div>
           </Reveal>
+
         </div>
       </section>
+
     </main>
   );
 }

@@ -60,6 +60,7 @@ function TechnicalVisual({
 
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#181817] text-[#f5f3ee]">
+
       {/* Grid */}
 
       <div
@@ -119,6 +120,7 @@ function TechnicalVisual({
 
 export default function GalleryPreview() {
   const sectionRef = useRef<HTMLElement | null>(null);
+
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -133,7 +135,9 @@ export default function GalleryPreview() {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      {
+        threshold: 0.1,
+      }
     );
 
     observer.observe(element);
@@ -146,8 +150,8 @@ export default function GalleryPreview() {
       ref={sectionRef}
       className={`
         relative overflow-hidden
-        border-b border-black/10
-        bg-[#f5f3ee]
+        border-b cse-border
+        bg-[var(--cse-bg)]
         px-5 py-20
         sm:px-7 sm:py-24
         lg:px-10 lg:py-28
@@ -159,78 +163,194 @@ export default function GalleryPreview() {
         }
       `}
     >
-      <div className="relative z-10 mx-auto max-w-7xl">
-        {/* Header */}
 
-        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+      {/* =====================================================
+          BACKGROUND GRID
+      ====================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute inset-0
+          cse-grid
+          opacity-70
+          [background-size:48px_48px]
+        "
+      />
+
+      {/* =====================================================
+          ORBITAL DETAIL
+      ====================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-28
+          top-10
+          h-[420px]
+          w-[420px]
+          rounded-full
+          border
+          cse-border
+          opacity-50
+        "
+      />
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-10
+          top-28
+          h-[300px]
+          w-[300px]
+          rounded-full
+          border
+          border-dashed
+          cse-border
+          opacity-40
+          animate-[spin_42s_linear_infinite]
+        "
+      />
+
+      {/* =====================================================
+          CONTENT
+      ====================================================== */}
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+
+        {/* =================================================
+            HEADER
+        ================================================== */}
+
+        <div
+          className={`
+            flex flex-col
+            justify-between
+            gap-8
+            md:flex-row
+            md:items-end
+            transition-all
+            duration-800
+            ${
+              visible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-5 opacity-0"
+            }
+          `}
+        >
+
           <div>
+
+            {/* LABEL */}
+
             <div className="mb-5 flex items-center gap-3">
-              <span className="font-mono text-[9px] font-semibold tracking-[0.24em] text-neutral-400">
+
+              <span className="font-mono text-[9px] font-semibold tracking-[0.24em] cse-text-soft">
                 09
               </span>
 
-              <span className="h-px w-8 bg-black/20" />
+              <span className="h-px w-8 bg-[var(--cse-border)]" />
 
-              <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-neutral-500">
+              <span className="font-mono text-[9px] uppercase tracking-[0.22em] cse-text">
                 CULTURE & MOMENTS
               </span>
 
-              <span className="text-neutral-300">/</span>
+              <span className="cse-text-soft">
+                /
+              </span>
 
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-400">
+              <span className="font-mono text-[9px] uppercase tracking-[0.2em] cse-text-soft">
                 GALLERY
               </span>
+
             </div>
 
-            <h2 className="max-w-4xl text-[clamp(3rem,6vw,6rem)] font-medium leading-[0.88] tracking-[-0.065em] text-[#141413]">
+            {/* TITLE */}
+
+            <h2
+              className="
+                max-w-4xl
+                text-[clamp(3rem,6vw,6rem)]
+                font-medium
+                leading-[0.88]
+                tracking-[-0.065em]
+                cse-text-strong
+              "
+            >
               Life inside{" "}
-              <span className="text-black/25">
+
+              <span className="cse-text-muted opacity-60">
                 the society.
               </span>
             </h2>
+
           </div>
 
+
+          {/* DESCRIPTION */}
+
           <div className="max-w-xs">
+
             <div className="mb-3 flex items-center gap-2">
+
               <Camera
                 size={14}
                 strokeWidth={1.2}
-                className="text-neutral-400"
+                className="cse-text-soft"
               />
 
-              <span className="font-mono text-[8px] uppercase tracking-[0.22em] text-neutral-400">
+              <span className="font-mono text-[8px] uppercase tracking-[0.22em] cse-text-soft">
                 VISUAL ARCHIVE
               </span>
+
             </div>
 
-            <p className="font-mono text-[9px] leading-5 text-neutral-500">
+            <p className="font-mono text-[9px] leading-5 cse-text-muted">
               Moments of collaboration, coding,
               hackathons, workshops and technical
               presentations.
             </p>
+
           </div>
+
         </div>
 
-        {/* Gallery */}
+
+        {/* =================================================
+            GALLERY GRID
+        ================================================== */}
 
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-12 lg:grid-rows-[260px_260px]">
-          {galleryItems.map((item, index) => (
+
+          {galleryItems.map((item) => (
+
             <article
               key={item.id}
               className={`
-                group relative overflow-hidden
-                border border-black/10
+                group
+                relative
+                overflow-hidden
+                border
+                cse-border
                 bg-[#171716]
                 ${item.layout}
-                transition-all duration-700
+                transition-all
+                duration-700
                 hover:-translate-y-1
-                hover:shadow-[0_24px_70px_rgba(0,0,0,0.14)]
+                hover:shadow-[0_24px_70px_rgba(0,0,0,0.18)]
               `}
             >
-              {/* Visual */}
+
+              {/* =================================================
+                  VISUAL
+              ================================================== */}
 
               <div className="absolute inset-0">
+
                 {"imagePath" in item && item.imagePath ? (
+
                   <Image
                     src={item.imagePath}
                     alt={item.title}
@@ -238,36 +358,82 @@ export default function GalleryPreview() {
                     sizes="(max-width: 768px) 100vw, 70vw"
                     className="
                       object-cover
-                      transition-transform duration-1000 ease-out
+                      transition-transform
+                      duration-1000
+                      ease-out
                       group-hover:scale-105
                     "
                   />
+
                 ) : (
+
                   <TechnicalVisual type={item.visual} />
+
                 )}
+
               </div>
 
-              {/* Overlay */}
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-black/5 opacity-80 transition-opacity duration-500 group-hover:opacity-90" />
+              {/* =================================================
+                  IMAGE OVERLAY
+              ================================================== */}
 
-              {/* Top metadata */}
+              <div
+                className="
+                  absolute inset-0
+                  bg-gradient-to-t
+                  from-black/90
+                  via-black/15
+                  to-black/5
+                  opacity-80
+                  transition-opacity
+                  duration-500
+                  group-hover:opacity-90
+                "
+              />
+
+
+              {/* =================================================
+                  TOP METADATA
+              ================================================== */}
 
               <div className="absolute left-5 right-5 top-5 flex items-start justify-between">
+
                 <span className="font-mono text-[8px] tracking-[0.2em] text-white/55">
                   {item.id}
                 </span>
 
-                <span className="border border-white/15 bg-black/10 px-2 py-1 font-mono text-[7px] uppercase tracking-[0.18em] text-white/55 backdrop-blur-sm">
+                <span
+                  className="
+                    border
+                    border-white/15
+                    bg-black/10
+                    px-2
+                    py-1
+                    font-mono
+                    text-[7px]
+                    uppercase
+                    tracking-[0.18em]
+                    text-white/55
+                    backdrop-blur-sm
+                  "
+                >
                   {item.category}
                 </span>
+
               </div>
 
-              {/* Bottom */}
+
+              {/* =================================================
+                  BOTTOM CONTENT
+              ================================================== */}
 
               <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+
                 <div className="flex items-end justify-between gap-5">
+
                   <div>
+
                     <p className="mb-2 font-mono text-[7px] uppercase tracking-[0.24em] text-white/45">
                       CSE / BIT SINDRI
                     </p>
@@ -275,17 +441,28 @@ export default function GalleryPreview() {
                     <h3 className="max-w-xl text-xl font-medium leading-tight tracking-tight text-white sm:text-2xl">
                       {item.title}
                     </h3>
+
                   </div>
+
+
+                  {/* ARROW */}
 
                   <div
                     className="
-                      flex h-9 w-9 shrink-0
-                      items-center justify-center
-                      rounded-full border border-white/20
+                      flex
+                      h-9
+                      w-9
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-full
+                      border
+                      border-white/20
                       bg-black/10
                       text-white/70
                       backdrop-blur-sm
-                      transition-all duration-500
+                      transition-all
+                      duration-500
                       group-hover:bg-white
                       group-hover:text-black
                     "
@@ -295,51 +472,90 @@ export default function GalleryPreview() {
                       strokeWidth={1.2}
                     />
                   </div>
+
                 </div>
+
               </div>
 
-              {/* Scan line */}
+
+              {/* =================================================
+                  SCAN LINE
+              ================================================== */}
 
               <div
                 className="
-                  absolute left-0 top-0
-                  h-px w-0
+                  absolute
+                  left-0
+                  top-0
+                  h-px
+                  w-0
                   bg-white/70
-                  transition-all duration-1000
+                  transition-all
+                  duration-1000
                   group-hover:w-full
                 "
               />
 
+
+              {/* =================================================
+                  EXPAND ICON
+              ================================================== */}
+
               <div
                 className="
-                  pointer-events-none absolute
-                  right-5 top-16
+                  pointer-events-none
+                  absolute
+                  right-5
+                  top-16
                   opacity-0
-                  transition-opacity duration-500
+                  transition-opacity
+                  duration-500
                   group-hover:opacity-100
                 "
               >
                 <Maximize2
                   size={13}
-                  strokeWidth={1}
+                  strokeWidth={1.2}
                   className="text-white/35"
                 />
               </div>
+
             </article>
+
           ))}
+
         </div>
 
-        {/* Footer */}
 
-        <div className="mt-6 flex flex-col justify-between gap-4 border-t border-black/10 pt-5 sm:flex-row sm:items-center">
-          <span className="font-mono text-[8px] uppercase tracking-[0.22em] text-neutral-400">
+        {/* =================================================
+            FOOTER
+        ================================================== */}
+
+        <div
+          className="
+            mt-6
+            flex
+            flex-col
+            justify-between
+            gap-4
+            border-t
+            cse-border
+            pt-5
+            sm:flex-row
+            sm:items-center
+          "
+        >
+
+          <span className="font-mono text-[8px] uppercase tracking-[0.22em] cse-text-soft">
             VISUAL ARCHIVE / 001 — 004
           </span>
 
-          <span className="font-mono text-[8px] uppercase tracking-[0.22em] text-neutral-400">
+          <span className="font-mono text-[8px] uppercase tracking-[0.22em] cse-text-soft">
             MOMENTS / PEOPLE / PROCESS
           </span>
+
         </div>
+
       </div>
     </section>
   );

@@ -134,6 +134,7 @@ export default function Hero() {
 
   const [activeDomain, setActiveDomain] = useState("ai");
   const [scrollY, setScrollY] = useState(0);
+  
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -166,7 +167,17 @@ export default function Hero() {
 
         hero.style.setProperty(
           "--rotate-y",
-          `${(x - 50) * 0.012}deg`
+          `${(x - 50) * 0.018}deg`
+        );
+
+        hero.style.setProperty(
+          "--map-x",
+          `${(x - 50) * 0.12}px`
+        );
+
+        hero.style.setProperty(
+          "--map-y",
+          `${(y - 50) * 0.10}px`
         );
       });
     };
@@ -194,6 +205,8 @@ export default function Hero() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+
 
   /*
    * Very subtle scroll movement.
@@ -368,7 +381,7 @@ export default function Hero() {
               INTRO
           ================================================== */}
 
-          <div className="mt-8 max-w-[570px] border-l border-black/28 pl-5 sm:mt-10 sm:pl-6">
+          <div className="hero-intro mt-8 max-w-[570px] border-l border-black/28 pl-5 sm:mt-10 sm:pl-6">
             <h2 className="text-[clamp(2rem,3.2vw,3.35rem)] font-medium leading-[0.96] tracking-[-0.045em] text-[#3f3f3d]">
               Where ideas{" "}
               <span className="font-serif italic text-black/60">
@@ -391,10 +404,14 @@ export default function Hero() {
         ================================================== */}
 
         <div
-          className="relative z-10 mx-auto mt-2 w-full max-w-[650px] lg:mt-8"
+          className="hero-map-shell relative z-10 mx-auto mt-2 w-full max-w-[650px] lg:mt-8"
           style={{
             transform: `
-              translate3d(0, ${visualParallax}px, 0)
+              translate3d(
+                var(--map-x),
+                calc(${visualParallax}px + var(--map-y)),
+                0
+              )
               rotateX(var(--rotate-x))
               rotateY(var(--rotate-y))
             `,
@@ -402,7 +419,8 @@ export default function Hero() {
             transition: "transform 180ms ease-out",
           }}
         >
-          <div className="relative aspect-square w-full">
+          <div className="hero-map relative aspect-square w-full">
+            <div className="hero-scanline pointer-events-none absolute inset-x-[8%] top-1/2 z-[5] h-px" />
             {/* Main orbital rings */}
 
             <div className="absolute inset-[1%] rounded-full border border-black/[0.16]" />
@@ -450,6 +468,7 @@ export default function Hero() {
               </defs>
 
               <line
+                className="hero-network-line"
                 x1="350"
                 y1="350"
                 x2="100"
@@ -459,6 +478,7 @@ export default function Hero() {
               />
 
               <line
+                className="hero-network-line"
                 x1="350"
                 y1="350"
                 x2="600"
@@ -468,6 +488,7 @@ export default function Hero() {
               />
 
               <line
+                className="hero-network-line"
                 x1="350"
                 y1="350"
                 x2="95"
@@ -477,6 +498,7 @@ export default function Hero() {
               />
 
               <line
+                className="hero-network-line"
                 x1="350"
                 y1="350"
                 x2="605"
@@ -486,6 +508,7 @@ export default function Hero() {
               />
 
               <line
+                className="hero-network-line"
                 x1="350"
                 y1="350"
                 x2="350"
@@ -538,6 +561,10 @@ export default function Hero() {
             <span className="hero-orbit-dot hero-dot-two" />
             <span className="hero-orbit-dot hero-dot-three" />
 
+            <span className="hero-signal hero-signal-one" />
+            <span className="hero-signal hero-signal-two" />
+            <span className="hero-signal hero-signal-three" />
+
             {/* =================================================
                 CENTER
             ================================================== */}
@@ -580,18 +607,13 @@ export default function Hero() {
               const active = activeDomain === domain.id;
 
               return (
-                <button
-                  key={domain.id}
-                  type="button"
-                  onMouseEnter={() =>
-                    setActiveDomain(domain.id)
-                  }
-                  onFocus={() =>
-                    setActiveDomain(domain.id)
-                  }
-                  className={`hero-domain absolute z-30 -translate-x-1/2 -translate-y-1/2 ${
-                    active ? "scale-[1.055]" : "scale-100"
-                  }`}
+             <button
+  key={domain.id}
+  type="button"
+  onClick={() => setActiveDomain(domain.id)}
+  className={`hero-domain absolute z-30 -translate-x-1/2 -translate-y-1/2 ${
+    active ? "scale-[1.055]" : "scale-100"
+  }`}
                   style={{
                     left: domain.x,
                     top: domain.y,
@@ -695,7 +717,7 @@ export default function Hero() {
           LOWER ACTION BAR
       ====================================================== */}
 
-      <div className="relative z-20 mx-auto mt-7 flex w-[91%] max-w-[1180px] flex-col gap-6 border-t border-black/15 py-6 sm:flex-row sm:items-center sm:justify-between lg:mt-0">
+      <div className="hero-actions relative z-20 mx-auto mt-7 flex w-[91%] max-w-[1180px] flex-col gap-6 border-t border-black/15 py-6 sm:flex-row sm:items-center sm:justify-between lg:mt-0">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[8px] font-medium uppercase tracking-[0.22em] text-black/55">
           <span className="flex items-center gap-2">
             <Cpu size={11} />
@@ -746,7 +768,7 @@ export default function Hero() {
           FOOTER
       ====================================================== */}
 
-      <div className="relative z-20 mx-auto flex w-[91%] max-w-[1180px] items-center justify-between pb-6">
+      <div className="hero-footer relative z-20 mx-auto flex w-[91%] max-w-[1180px] items-center justify-between pb-6">
         <div className="flex items-center gap-3">
           <div className="flex h-7 w-7 items-center justify-center rounded-full border border-black/18">
             <ArrowDown
