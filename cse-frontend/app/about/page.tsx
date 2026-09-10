@@ -647,14 +647,14 @@ export default function AboutPage() {
               delay={180}
               className="lg:col-span-3"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900">
+              <div className="relative w-full aspect-square overflow-hidden bg-neutral-900">
 
                 <Image
                   src="/images/about/about.png"
                   alt="Computer Science laboratory"
                   fill
                   className="object-cover transition-transform duration-700 hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 25vw"
+                  sizes="(max-width: 1024px) 100vw, 30vw"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
