@@ -452,7 +452,7 @@ export default function JoinPage() {
                               required
                               value={domain}
                               onChange={(e) => setDomain(e.target.value)}
-                              className={`${inputClass} pr-10`}
+                              className={`${inputClass} pr-10 cursor-pointer`}
                             >
                               <option value="" disabled>
                                 Select your primary domain
