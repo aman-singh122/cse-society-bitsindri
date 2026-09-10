@@ -12,7 +12,7 @@ export default function AlumniPreview() {
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState<number | null>(null);
 
-  const featuredAlumni = alumni.slice(0, 2);
+  const featuredAlumni = [alumni[0], alumni[5]];
 
   useEffect(() => {
     const element = sectionRef.current;

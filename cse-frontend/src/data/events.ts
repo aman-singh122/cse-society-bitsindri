@@ -1,6 +1,6 @@
 export const events = [
   {
-    id: "02",
+    id: "01",
     title: "CodeSprint",
     category: "Competitive Programming",
     date: "13 September 2026",
