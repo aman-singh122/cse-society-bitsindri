@@ -15,11 +15,18 @@ export const alumni: Alumni[] = [
     url: "https://www.linkedin.com/in/ruma-karn-668893201/",
   },
   {
-    name: "Swati Jha",
-    batch: 2021,
-    role: "Software Engineer II",
-    company: "Microsoft",
-    url: "https://www.linkedin.com/in/swati-jha2906/",
+    name: "Kumar Abhishek",
+    batch: 2024,
+    role: "Software Engineer",
+    company: "Samsung R&D",
+    url: "https://www.linkedin.com/in/kumar-abhishek45/",
+  },
+  {
+    name: "Ravi Shankar",
+    batch: 2022,
+    role: "Associate software Engineer",
+    company: "Xiaomi India",
+    url: "https://www.linkedin.com/in/premravi2615/",
   },
   {
     name: "Alvika Bhushan",
@@ -34,6 +41,13 @@ export const alumni: Alumni[] = [
     role: "Lead Software Engineer",
     company: "Samsung",
     url: "https://www.linkedin.com/in/waquar-haseeb/",
+  },
+  {
+    name: "Swati Jha",
+    batch: 2021,
+    role: "Software Engineer II",
+    company: "Microsoft",
+    url: "https://www.linkedin.com/in/swati-jha2906/",
   },
   {
     name: "Pooja Bharti",
