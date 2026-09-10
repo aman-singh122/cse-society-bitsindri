@@ -255,18 +255,18 @@ export default function AboutPage() {
 
             <Reveal
               delay={180}
-              className="relative lg:col-span-6"
+              className="relative lg:col-span-6 flex justify-center"
             >
-              <div className="group relative overflow-hidden border border-black/10 bg-[#dedbd2]">
+              <div className="group relative -mt-50 w-full max-w-[450px] overflow-hidden border border-black/10 bg-[#dedbd2]">
 
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-square overflow-hidden">
 
                   <Image
-                    src="/images/about/cse-hero.png"
+                    src="/images/about/about.png"
                     alt="BIT Sindri campus"
                     fill
                     priority
-                    className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.035]"
+                    className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.035] "
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
 
@@ -650,7 +650,7 @@ export default function AboutPage() {
               <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900">
 
                 <Image
-                  src="/images/about/cse-hero.png"
+                  src="/images/about/about.png"
                   alt="Computer Science laboratory"
                   fill
                   className="object-cover transition-transform duration-700 hover:scale-105"

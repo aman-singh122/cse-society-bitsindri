@@ -9,7 +9,7 @@ export interface Alumni {
 export const alumni: Alumni[] = [
   {
     name: "Ruma Karn",
-    batch: 2026,
+    batch: 2025,
     role: "Cloud Associate",
     company: "Amazon Web Services (AWS)",
     url: "https://www.linkedin.com/in/ruma-karn-668893201/",

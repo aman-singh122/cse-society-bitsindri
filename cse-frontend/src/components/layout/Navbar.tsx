@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import {
@@ -164,22 +165,27 @@ export default function Navbar() {
         >
           <div
             className={`
-              flex items-center justify-center
+              relative flex items-center justify-center overflow-hidden rounded-md
               bg-[#141413]
-              font-mono font-bold
-              text-[#f5f3ee]
               shadow-sm
               transition-all duration-500
               group-hover:-translate-y-0.5
               group-hover:shadow-[0_7px_18px_rgba(0,0,0,0.14)]
               ${
                 isScrolled
-                  ? "h-9 w-9 text-sm sm:h-10 sm:w-10 sm:text-base"
-                  : "h-10 w-10 text-base sm:h-11 sm:w-11 sm:text-lg"
+                  ? "h-9 w-9 sm:h-10 sm:w-10"
+                  : "h-10 w-10 sm:h-11 sm:w-11"
               }
             `}
           >
-            C
+            <Image
+              src="/images/about/society-logo.png"
+              alt="CSE Society Logo"
+              width={44}
+              height={44}
+              className="h-full w-full object-contain p-0.5"
+              priority
+            />
           </div>
 
           <div className="hidden leading-tight min-[420px]:block">
