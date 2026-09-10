@@ -2,38 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  Building2,
-  MoveUpRight,
-} from "lucide-react";
-
-const featuredAlumni = [
-  {
-    number: "01",
-    name: "Swati Jha",
-    company: "Microsoft",
-    tagline: "BIT Sindri Alumna",
-    description:
-      "Built her professional engineering career in the tech industry.",
-    companyBg: "MICROSOFT",
-  },
-  {
-    number: "02",
-    name: "Ruma Karn",
-    company: "Amazon",
-    tagline: "BIT Sindri Alumna",
-    description:
-      "Working in the technology industry at Amazon.",
-    companyBg: "AMAZON",
-  },
-];
+import { ArrowUpRight, Building2, MoveUpRight } from "lucide-react";
+import { alumni } from "@/data/alumni";
+import { LinkedinIcon } from "@/components/ui/SocialIcons";
 
 export default function AlumniPreview() {
   const sectionRef = useRef<HTMLElement | null>(null);
 
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState<number | null>(null);
+
+  const featuredAlumni = alumni.slice(0, 2);
 
   useEffect(() => {
     const element = sectionRef.current;
@@ -75,10 +54,7 @@ export default function AlumniPreview() {
         }
       `}
     >
-      {/* =====================================================
-          BACKGROUND ORBITS
-      ====================================================== */}
-
+      {/* BACKGROUND ORBITS */}
       <div
         className="
           pointer-events-none
@@ -115,16 +91,9 @@ export default function AlumniPreview() {
         />
       </div>
 
-      {/* =====================================================
-          CONTENT
-      ====================================================== */}
-
+      {/* CONTENT */}
       <div className="relative z-10 mx-auto max-w-7xl">
-
-        {/* =================================================
-            HEADER
-        ================================================== */}
-
+        {/* HEADER */}
         <div
           className={`
             flex flex-col
@@ -142,11 +111,8 @@ export default function AlumniPreview() {
           `}
         >
           <div>
-
             {/* LABEL */}
-
             <div className="mb-5 flex items-center gap-3">
-
               <span className="font-mono text-[9px] font-semibold tracking-[0.24em] cse-text-soft">
                 08
               </span>
@@ -157,18 +123,14 @@ export default function AlumniPreview() {
                 ALUMNI NETWORK
               </span>
 
-              <span className="cse-text-soft">
-                /
-              </span>
+              <span className="cse-text-soft">/</span>
 
               <span className="font-mono text-[9px] uppercase tracking-[0.2em] cse-text-soft">
                 FEATURED STORIES
               </span>
-
             </div>
 
             {/* TITLE */}
-
             <h2
               className="
                 text-[clamp(3rem,6vw,6rem)]
@@ -179,16 +141,11 @@ export default function AlumniPreview() {
               "
             >
               Built here.
-
-              <span className="cse-text-muted opacity-60">
-                {" "}Impact beyond.
-              </span>
+              <span className="cse-text-muted opacity-60"> Impact beyond.</span>
             </h2>
-
           </div>
 
           {/* EXPLORE */}
-
           <Link
             href="/alumni"
             className="
@@ -212,7 +169,6 @@ export default function AlumniPreview() {
             "
           >
             Explore Alumni Network
-
             <ArrowUpRight
               size={13}
               strokeWidth={1.4}
@@ -224,16 +180,10 @@ export default function AlumniPreview() {
               "
             />
           </Link>
-
         </div>
 
-
-        {/* =================================================
-            ALUMNI CARDS
-        ================================================== */}
-
+        {/* ALUMNI CARDS */}
         <div className="mt-12 grid gap-5 md:grid-cols-2">
-
           {featuredAlumni.map((alum, index) => {
             const isActive = active === index;
 
@@ -263,11 +213,7 @@ export default function AlumniPreview() {
                   }
                 `}
               >
-
-                {/* =================================================
-                    GIANT COMPANY WATERMARK
-                ================================================== */}
-
+                {/* GIANT COMPANY WATERMARK */}
                 <div
                   className="
                     pointer-events-none
@@ -289,18 +235,13 @@ export default function AlumniPreview() {
                     sm:text-[7rem]
                   "
                 >
-                  {alum.companyBg}
+                  {alum.company.toUpperCase().slice(0, 10)}
                 </div>
 
-
-                {/* =================================================
-                    TOP
-                ================================================== */}
-
+                {/* TOP */}
                 <div className="relative z-10 flex items-start justify-between">
-
                   <span className="font-mono text-[9px] tracking-[0.2em] cse-text-soft">
-                    {alum.number}
+                    {String(index + 1).padStart(2, "0")}
                   </span>
 
                   <div
@@ -328,18 +269,12 @@ export default function AlumniPreview() {
                       {alum.company}
                     </span>
                   </div>
-
                 </div>
 
-
-                {/* =================================================
-                    NAME
-                ================================================== */}
-
-                <div className="relative z-10 mt-20">
-
+                {/* NAME */}
+                <div className="relative z-10 mt-16">
                   <p className="font-mono text-[8px] uppercase tracking-[0.22em] cse-text-soft">
-                    {alum.tagline}
+                    BIT Sindri · Batch '{String(alum.batch).slice(-2)}
                   </p>
 
                   <h3
@@ -357,14 +292,9 @@ export default function AlumniPreview() {
                   >
                     {alum.name}
                   </h3>
-
                 </div>
 
-
-                {/* =================================================
-                    BOTTOM INFO
-                ================================================== */}
-
+                {/* BOTTOM INFO */}
                 <div
                   className="
                     absolute
@@ -379,33 +309,33 @@ export default function AlumniPreview() {
                     lg:p-10
                   "
                 >
-
                   <div className="flex items-end justify-between gap-6">
-
                     <div>
-
-                      <p className="max-w-md text-[12px] leading-5 cse-text-muted">
-                        {alum.description}
+                      <p className="max-w-md text-[12px] font-mono uppercase tracking-wide leading-5 cse-text-muted">
+                        {alum.role}
                       </p>
 
-                      <p className="mt-4 font-mono text-[7px] uppercase tracking-[0.22em] cse-text-soft">
+                      <p className="mt-2 font-mono text-[7px] uppercase tracking-[0.22em] cse-text-soft">
                         CSE / BIT SINDRI
                       </p>
-
                     </div>
 
-
-                    {/* ARROW */}
-
-                    <div
+                    {/* LINKEDIN BUTTON */}
+                    <a
+                      href={alum.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`
                         flex
                         h-9
-                        w-9
-                        shrink-0
                         items-center
-                        justify-center
-                        rounded-full
+                        gap-2
+                        px-3
+                        font-mono
+                        text-[9px]
+                        font-bold
+                        uppercase
+                        tracking-[0.14em]
                         border
                         cse-border
                         transition-all
@@ -413,25 +343,18 @@ export default function AlumniPreview() {
                         ${
                           isActive
                             ? "bg-[var(--cse-text)] text-[var(--cse-bg)]"
-                            : "cse-text-muted"
+                            : "cse-text-muted hover:text-black"
                         }
                       `}
                     >
-                      <MoveUpRight
-                        size={14}
-                        strokeWidth={1.2}
-                      />
-                    </div>
-
+                      <LinkedinIcon className="h-3.5 w-3.5" />
+                      <span>LinkedIn</span>
+                      <MoveUpRight size={12} strokeWidth={1.4} />
+                    </a>
                   </div>
-
                 </div>
 
-
-                {/* =================================================
-                    ACTIVE LINE
-                ================================================== */}
-
+                {/* ACTIVE LINE */}
                 <div
                   className={`
                     absolute
@@ -441,25 +364,15 @@ export default function AlumniPreview() {
                     cse-accent-bg
                     transition-all
                     duration-700
-                    ${
-                      isActive
-                        ? "w-full"
-                        : "w-0 group-hover:w-full"
-                    }
+                    ${isActive ? "w-full" : "w-0 group-hover:w-full"}
                   `}
                 />
-
               </article>
             );
           })}
-
         </div>
 
-
-        {/* =================================================
-            FOOTER STATUS
-        ================================================== */}
-
+        {/* FOOTER STATUS */}
         <div
           className={`
             mt-6
@@ -475,25 +388,20 @@ export default function AlumniPreview() {
             }
           `}
         >
-
           <div className="flex items-center gap-2">
-
             <span className="h-1.5 w-1.5 rounded-full cse-accent-bg animate-pulse" />
 
             <span className="font-mono text-[8px] uppercase tracking-[0.22em] cse-text-soft">
               {active !== null
-                ? `PROFILE / ${featuredAlumni[active].number} ACTIVE`
+                ? `PROFILE / ${String(active + 1).padStart(2, "0")} ACTIVE`
                 : "ALUMNI / FEATURED NETWORK"}
             </span>
-
           </div>
 
           <span className="hidden font-mono text-[8px] uppercase tracking-[0.2em] cse-text-soft sm:block">
-            02 FEATURED
+            {alumni.length} ALUMNI TOTAL
           </span>
-
         </div>
-
       </div>
     </section>
   );

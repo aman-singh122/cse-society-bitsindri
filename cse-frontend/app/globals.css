@@ -1288,6 +1288,14 @@ html.dark-theme .bg-\[\#f5f3ee\] {
   background-color: #0b0d0e !important;
 }
 
+html.dark-theme .bg-\[\#f7f6f1\] {
+  background-color: #0b0d0e !important;
+}
+
+html.dark-theme .bg-\[\#f8f7f2\] {
+  background-color: #0b0d0e !important;
+}
+
 html.dark-theme .bg-\[\#faf9f6\] {
   background-color: #111415 !important;
 }
@@ -1319,43 +1327,119 @@ html.dark-theme .bg-black {
 
 
 /* =========================================================
-   PRIMARY TEXT
+   PRIMARY & NEUTRAL TEXT (DARK THEME CORRECTIONS)
    ========================================================= */
 
-html.dark-theme .text-\[\#141413\] {
-  color: #f2f1ec !important;
-}
-
+html.dark-theme .text-\[\#141413\],
+html.dark-theme .text-\[\#151514\],
+html.dark-theme .text-\[\#111415\],
+html.dark-theme .text-\[\#1a1a19\],
 html.dark-theme .text-black {
   color: #f2f1ec !important;
 }
 
+html.dark-theme .text-neutral-950,
 html.dark-theme .text-neutral-900 {
-  color: #f0efea !important;
+  color: #f2f1ec !important;
 }
 
 html.dark-theme .text-neutral-800 {
-  color: #deded8 !important;
+  color: #e8e6df !important;
 }
 
 html.dark-theme .text-neutral-700 {
-  color: #c7c8c3 !important;
+  color: #dad7cc !important;
 }
 
 html.dark-theme .text-neutral-600 {
-  color: #aeb1ad !important;
+  color: #c6c3b7 !important;
 }
 
 html.dark-theme .text-neutral-500 {
-  color: #929691 !important;
+  color: #b2afa2 !important;
 }
 
 html.dark-theme .text-neutral-400 {
-  color: #767a76 !important;
+  color: #9f9c90 !important;
 }
 
 html.dark-theme .text-neutral-300 {
-  color: #626662 !important;
+  color: #8c897c !important;
+}
+
+html.dark-theme .text-neutral-200 {
+  color: #797669 !important;
+}
+
+
+/* =========================================================
+   BLACK TEXT OPACITY OVERRIDES (DARK THEME)
+   ========================================================= */
+
+html.dark-theme .text-black\/95,
+html.dark-theme .text-black\/90,
+html.dark-theme .text-black\/85,
+html.dark-theme .text-black\/82,
+html.dark-theme .text-black\/80 {
+  color: rgba(242, 241, 236, 0.90) !important;
+}
+
+html.dark-theme .text-black\/75,
+html.dark-theme .text-black\/72,
+html.dark-theme .text-black\/70,
+html.dark-theme .text-black\/66,
+html.dark-theme .text-black\/65 {
+  color: rgba(242, 241, 236, 0.82) !important;
+}
+
+html.dark-theme .text-black\/60,
+html.dark-theme .text-black\/58,
+html.dark-theme .text-black\/55,
+html.dark-theme .text-black\/52,
+html.dark-theme .text-black\/50 {
+  color: rgba(242, 241, 236, 0.72) !important;
+}
+
+html.dark-theme .text-black\/48,
+html.dark-theme .text-black\/45,
+html.dark-theme .text-black\/40,
+html.dark-theme .text-black\/38,
+html.dark-theme .text-black\/35,
+html.dark-theme .text-black\/30 {
+  color: rgba(242, 241, 236, 0.58) !important;
+}
+
+html.dark-theme .text-black\/28,
+html.dark-theme .text-black\/25,
+html.dark-theme .text-black\/20,
+html.dark-theme .text-black\/16,
+html.dark-theme .text-black\/15,
+html.dark-theme .text-black\/12,
+html.dark-theme .text-black\/10 {
+  color: rgba(242, 241, 236, 0.42) !important;
+}
+
+/* Watermark text opacities */
+html.dark-theme .text-black\/\[0\.08\],
+html.dark-theme .text-black\/\[0\.07\],
+html.dark-theme .text-black\/\[0\.06\],
+html.dark-theme .text-black\/\[0\.055\],
+html.dark-theme .text-black\/\[0\.05\],
+html.dark-theme .text-black\/\[0\.035\],
+html.dark-theme .text-black\/\[0\.03\] {
+  color: rgba(255, 255, 255, 0.08) !important;
+}
+
+
+/* =========================================================
+   HOVER STATES & INTERACTIONS (DARK THEME)
+   ========================================================= */
+
+html.dark-theme .hover\:text-black:hover,
+html.dark-theme .group:hover .group-hover\:text-black,
+html.dark-theme .group:hover .group-hover\:text-\[\#141413\],
+html.dark-theme .group:hover .group-hover\:text-\[\#151514\] {
+  color: #ffffff !important;
 }
 
 
@@ -2458,6 +2542,88 @@ html.dark-theme .about-page .about-cta h2 span {
 
 html.dark-theme .about-page .about-cta p {
   color: rgba(242, 241, 236, 0.52) !important;
+}
+
+
+/* =========================================================
+   ALUMNI PAGE — DARK THEME CORRECTIONS
+   ========================================================= */
+
+html.dark-theme .alumni-page {
+  background-color: #0b0d0e !important;
+  color: #f2f1ec !important;
+}
+
+html.dark-theme .alumni-page section {
+  border-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+/* Featured cards */
+html.dark-theme .alumni-page article {
+  background-color: #111415 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark-theme .alumni-page article .bg-\[\#faf9f6\] {
+  background-color: #181b1c !important;
+  color: #f2f1ec !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Watermark text */
+html.dark-theme .alumni-page article [class*="text-black/"] {
+  color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Directory rows hover */
+html.dark-theme .alumni-page article.group:hover {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+html.dark-theme .alumni-page article.group:hover .group-hover\:text-black {
+  color: #f2f1ec !important;
+}
+
+/* Search input */
+html.dark-theme .alumni-page input[type="text"] {
+  background-color: #16191a !important;
+  color: #f2f1ec !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+html.dark-theme .alumni-page input[type="text"]::placeholder {
+  color: rgba(242, 241, 236, 0.40) !important;
+}
+
+/* LinkedIn Buttons */
+html.dark-theme .alumni-page a[href*="linkedin.com"] {
+  background-color: #16191a !important;
+  color: #f2f1ec !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+}
+
+html.dark-theme .alumni-page a[href*="linkedin.com"]:hover {
+  background-color: #f2f1ec !important;
+  color: #141413 !important;
+  border-color: #f2f1ec !important;
+}
+
+/* Callout Box */
+html.dark-theme .alumni-page .alumni-callout-box {
+  background-color: #111415 !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+html.dark-theme .alumni-page .alumni-callout-box h3 {
+  color: #f2f1ec !important;
+}
+
+html.dark-theme .alumni-page .alumni-callout-box p {
+  color: rgba(242, 241, 236, 0.65) !important;
+}
+
+html.dark-theme .alumni-page .alumni-callout-box .text-black {
+  color: #f2f1ec !important;
 }
 
 
