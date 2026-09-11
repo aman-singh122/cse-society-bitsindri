@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 import {
   ArrowRight,
   ArrowUpRight,
@@ -10,9 +11,7 @@ import {
   Crown,
   Edit3,
   Landmark,
-  Palette,
   Search,
-  Shield,
   Sparkles,
   Trophy,
   Users,
@@ -25,9 +24,14 @@ import TechMarquee from "@/components/ui/TechMarquee";
 
 /* =========================================================
    TEAM DATA
-   ---------------------------------------------------------
-   Replace ONLY the values inside these objects later.
-   The layout does not need to be changed.
+
+   Later, when actual names/images are ready, update ONLY
+   these data objects.
+
+   IMAGE EXAMPLE:
+   image: "/images/team/president.jpg"
+
+   Keep image: null until the actual image exists.
 ========================================================= */
 
 const leadership = [
@@ -237,12 +241,24 @@ const successes = [
   },
 ];
 
-type SectionKey = "council" | "wings" | "members" | "success";
+type SectionKey =
+  | "council"
+  | "wings"
+  | "members"
+  | "success";
+
+/* =========================================================
+   PAGE
+========================================================= */
 
 export default function TeamPage() {
-  const [activeSection, setActiveSection] = useState<SectionKey>("council");
+  const [activeSection, setActiveSection] =
+    useState<SectionKey>("council");
+
   const [query, setQuery] = useState("");
-  const [openWing, setOpenWing] = useState<string | null>(null);
+
+  const [openWing, setOpenWing] =
+    useState<string | null>(null);
 
   const filteredMembers = useMemo(() => {
     const value = query.trim().toLowerCase();
@@ -256,10 +272,14 @@ export default function TeamPage() {
     );
   }, [query]);
 
-  const scrollToSection = (section: SectionKey) => {
+  const scrollToSection = (
+    section: SectionKey
+  ) => {
     setActiveSection(section);
 
-    const target = document.getElementById(`team-${section}`);
+    const target = document.getElementById(
+      `team-${section}`
+    );
 
     if (target) {
       target.scrollIntoView({
@@ -270,73 +290,71 @@ export default function TeamPage() {
   };
 
   return (
-    <main className="w-full overflow-x-hidden bg-[#f5f3ee] text-[#141413]">
+    <main className="team-page">
       {/* =====================================================
           HERO
-      ====================================================== */}
-      <section className="relative overflow-hidden border-b border-black/15 pt-24">
-        {/* technical background */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.42]">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(20,20,19,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(20,20,19,0.045) 1px, transparent 1px)",
-              backgroundSize: "52px 52px",
-            }}
-          />
+      ===================================================== */}
+
+      <section className="team-hero">
+        <div className="team-hero-grid" />
+
+        <div className="team-hero-glow team-glow-one" />
+        <div className="team-hero-glow team-glow-two" />
+
+        <div className="team-hero-code" aria-hidden="true">
+          <span>TEAM.init()</span>
+          <span>people.create()</span>
+          <span>ideas.connect()</span>
+          <span>community.build()</span>
+          <span>impact.ship()</span>
         </div>
 
-        <div className="pointer-events-none absolute -right-20 top-20 hidden h-80 w-80 rounded-full border border-black/10 lg:block" />
-        <div className="pointer-events-none absolute -right-10 top-30 hidden h-60 w-60 rounded-full border border-black/10 lg:block" />
-
-        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
-          <div className="flex items-start justify-between gap-8">
+        <div className="team-container team-hero-inner">
+          <div className="team-hero-top">
             <TechnicalLabel
               index="TEAM / 01"
               title="STUDENT COMMUNITY"
               category="BIT SINDRI"
             />
 
-            <div className="hidden text-right font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400 sm:block">
-              <div>ORGANIZATIONAL SYSTEM</div>
-              <div className="mt-1 text-neutral-700">CSE / SOCIETY</div>
+            <div className="team-system-meta">
+              <span>ORGANIZATIONAL SYSTEM</span>
+              <strong>CSE / SOCIETY</strong>
             </div>
           </div>
 
-          <div className="mt-10 max-w-5xl">
-            <h1 className="text-[clamp(3.5rem,8vw,7.8rem)] font-medium leading-[0.86] tracking-[-0.065em]">
+          <div className="team-hero-heading">
+            <div className="team-hero-kicker">
+              <i />
+              PEOPLE / LEADERSHIP / COMMUNITY
+            </div>
+
+            <h1>
               People behind
               <br />
-              <span className="font-normal text-neutral-400">
-                the community.
-              </span>
+              <span>the community.</span>
             </h1>
           </div>
 
-          <div className="mt-12 grid gap-8 border-t border-black/15 pt-7 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-8">
-              <p className="max-w-3xl text-sm leading-7 text-neutral-600 sm:text-base">
-                A student-led community is built by people who take
-                responsibility, create things, organize ideas, and move the
-                society forward. Explore the council, functional wings, active
-                members, and the achievements they create.
-              </p>
-            </div>
+          <div className="team-hero-bottom">
+            <p>
+              A student-led community is built by people
+              who take responsibility, create things,
+              organize ideas, and move the society forward.
+              Explore the council, functional wings,
+              active members, and the achievements they
+              create.
+            </p>
 
-            <div className="grid grid-cols-2 gap-6 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-400 md:col-span-4 md:text-right">
+            <div className="team-hero-stats">
               <div>
-                <span className="block text-2xl font-semibold tracking-tight text-[#141413]">
-                  05
-                </span>
-                <span>Core roles</span>
+                <strong>05</strong>
+                <span>CORE ROLES</span>
               </div>
 
               <div>
-                <span className="block text-2xl font-semibold tracking-tight text-[#141413]">
-                  06
-                </span>
-                <span>Society wings</span>
+                <strong>06</strong>
+                <span>SOCIETY WINGS</span>
               </div>
             </div>
           </div>
@@ -344,10 +362,11 @@ export default function TeamPage() {
       </section>
 
       {/* =====================================================
-          NAVIGATION STRIP
-      ====================================================== */}
-      <div className="sticky top-0 z-30 border-b border-black/15 bg-[#f5f3ee]/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto px-4 py-2.5 scrollbar-none sm:px-6 lg:px-10">
+          STICKY NAV
+      ===================================================== */}
+
+      <div className="team-nav">
+        <div className="team-container team-nav-inner">
           {[
             ["council", "CORE COUNCIL"],
             ["wings", "SOCIETY WINGS"],
@@ -356,18 +375,33 @@ export default function TeamPage() {
           ].map(([id, label]) => (
             <button
               key={id}
-              onClick={() => scrollToSection(id as SectionKey)}
-              className={`shrink-0 border px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] transition-all ${
+              type="button"
+              onClick={() =>
+                scrollToSection(
+                  id as SectionKey
+                )
+              }
+              className={
                 activeSection === id
-                  ? "border-[#141413] bg-[#141413] text-[#f5f3ee]"
-                  : "border-black/10 bg-white/30 text-neutral-500 hover:border-black/30 hover:text-black"
-              }`}
+                  ? "active"
+                  : ""
+              }
             >
+              <span>
+                {id === "council"
+                  ? "01"
+                  : id === "wings"
+                    ? "02"
+                    : id === "members"
+                      ? "03"
+                      : "04"}
+              </span>
+
               {label}
             </button>
           ))}
 
-          <div className="ml-auto hidden shrink-0 font-mono text-[10px] uppercase tracking-widest text-neutral-400 lg:block">
+          <div className="team-nav-info">
             CSE SOCIETY · TEAM DIRECTORY
           </div>
         </div>
@@ -375,8 +409,9 @@ export default function TeamPage() {
 
       {/* =====================================================
           MARQUEE
-      ====================================================== */}
-      <div className="border-b border-black/15 bg-[#141413] py-1 text-[#f5f3ee]">
+      ===================================================== */}
+
+      <div className="team-marquee">
         <TechMarquee
           items={[
             "PRESIDENT",
@@ -388,6 +423,7 @@ export default function TeamPage() {
             "R&D",
             "DESIGN & TECHNICAL",
             "SPORTS & CULTURAL",
+            "EVENTS & OPERATIONS",
           ]}
           speed={30}
           variant="dark"
@@ -396,14 +432,15 @@ export default function TeamPage() {
 
       {/* =====================================================
           CORE COUNCIL
-      ====================================================== */}
+      ===================================================== */}
+
       <section
         id="team-council"
-        className="scroll-mt-16 border-b border-black/15 px-4 py-14 sm:px-6 lg:px-10 lg:py-18"
+        className="team-section team-council-section"
       >
-        <div className="mx-auto max-w-7xl">
+        <div className="team-container">
           <AnimatedSection>
-            <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+            <div className="section-heading">
               <div>
                 <TechnicalLabel
                   index="02"
@@ -411,38 +448,49 @@ export default function TeamPage() {
                   category="LEADERSHIP"
                 />
 
-                <h2 className="mt-3 text-[clamp(2.2rem,4vw,4rem)] font-medium tracking-[-0.045em]">
+                <h2>
                   The people who
-                  <span className="font-normal text-neutral-400">
-                    {" "}
-                    steer it.
-                  </span>
+                  <span> steer it.</span>
                 </h2>
               </div>
 
-              <p className="max-w-sm font-mono text-[10px] uppercase leading-5 tracking-widest text-neutral-400 sm:text-right">
-                Office bearers &nbsp;·&nbsp; Student leadership
+              <p>
+                OFFICE BEARERS
                 <br />
-                Names and profiles can be updated later.
+                STUDENT LEADERSHIP
+                <br />
+                <em>
+                  Names and profiles can be
+                  updated later.
+                </em>
               </p>
             </div>
 
-            {/* President / Vice President */}
-            <div className="mt-10 grid gap-3 lg:grid-cols-12">
-              {leadership.slice(0, 2).map((person, index) => (
-                <PersonCard
-                  key={person.number}
-                  person={person}
-                  featured={index === 0}
-                />
-              ))}
+            {/* PRESIDENT + VP */}
+
+            <div className="leadership-feature-grid">
+              {leadership
+                .slice(0, 2)
+                .map((person, index) => (
+                  <PersonCard
+                    key={person.number}
+                    person={person}
+                    featured={index === 0}
+                  />
+                ))}
             </div>
 
-            {/* Secretaries + Treasurer */}
-            <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {leadership.slice(2).map((person) => (
-                <PersonCard key={person.number} person={person} />
-              ))}
+            {/* OTHER OFFICE BEARERS */}
+
+            <div className="leadership-small-grid">
+              {leadership
+                .slice(2)
+                .map((person) => (
+                  <PersonCard
+                    key={person.number}
+                    person={person}
+                  />
+                ))}
             </div>
           </AnimatedSection>
         </div>
@@ -450,14 +498,15 @@ export default function TeamPage() {
 
       {/* =====================================================
           WINGS
-      ====================================================== */}
+      ===================================================== */}
+
       <section
         id="team-wings"
-        className="scroll-mt-16 border-b border-black/15 bg-[#faf9f6] px-4 py-14 sm:px-6 lg:px-10 lg:py-18"
+        className="team-section team-wings-section"
       >
-        <div className="mx-auto max-w-7xl">
+        <div className="team-container">
           <AnimatedSection>
-            <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div className="section-heading">
               <div>
                 <TechnicalLabel
                   index="03"
@@ -465,102 +514,114 @@ export default function TeamPage() {
                   category="FUNCTIONAL TEAMS"
                 />
 
-                <h2 className="mt-3 text-[clamp(2.2rem,4vw,4rem)] font-medium tracking-[-0.045em]">
+                <h2>
                   Different strengths.
-                  <span className="font-normal text-neutral-400">
-                    {" "}
-                    One team.
-                  </span>
+                  <span> One team.</span>
                 </h2>
               </div>
 
-              <p className="max-w-md text-sm leading-6 text-neutral-500">
-                Each wing has a distinct responsibility. Add the actual leads
-                and members once the current committee is finalized.
+              <p className="normal-copy">
+                Each wing has a distinct
+                responsibility. Add the actual
+                leads and members once the
+                current committee is finalized.
               </p>
             </div>
 
-            <div className="mt-9 border-t border-black/15">
+            <div className="wings-list">
               {wings.map((wing) => {
                 const Icon = wing.icon;
-                const isOpen = openWing === wing.id;
+
+                const isOpen =
+                  openWing === wing.id;
 
                 return (
                   <div
                     key={wing.id}
-                    className="border-b border-black/15"
+                    className={`wing-row ${
+                      isOpen ? "open" : ""
+                    }`}
                   >
                     <button
+                      type="button"
                       onClick={() =>
-                        setOpenWing(isOpen ? null : wing.id)
+                        setOpenWing(
+                          isOpen
+                            ? null
+                            : wing.id
+                        )
                       }
-                      className="group flex w-full cursor-pointer items-center gap-4 py-5 text-left"
+                      className="wing-trigger"
                     >
-                      <span className="w-8 shrink-0 font-mono text-[10px] text-neutral-400">
+                      <span className="wing-number">
                         {wing.number}
                       </span>
 
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-black/10 bg-[#f5f3ee] transition-transform duration-300 group-hover:-rotate-6">
-                        <Icon size={15} strokeWidth={1.6} />
+                      <span className="wing-icon">
+                        <Icon
+                          size={16}
+                          strokeWidth={1.5}
+                        />
                       </span>
 
-                      <span className="min-w-0 flex-1">
-                        <span className="block text-lg font-semibold tracking-tight sm:text-xl">
+                      <span className="wing-title">
+                        <strong>
                           {wing.title}
-                        </span>
+                        </strong>
 
-                        <span className="mt-1 block font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-400">
+                        <small>
                           {wing.tag}
-                        </span>
+                        </small>
                       </span>
 
-                      <span className="hidden max-w-sm text-right text-xs leading-5 text-neutral-500 md:block">
+                      <span className="wing-description">
                         {wing.description}
                       </span>
 
-                      <ChevronDown
-                        size={17}
-                        className={`shrink-0 text-neutral-400 transition-transform duration-300 ${
-                          isOpen ? "rotate-180 text-black" : ""
-                        }`}
-                      />
+                      <span className="wing-chevron">
+                        <ChevronDown
+                          size={17}
+                          strokeWidth={1.5}
+                        />
+                      </span>
                     </button>
 
                     <div
-                      className={`grid transition-all duration-300 ${
+                      className={`wing-details ${
                         isOpen
-                          ? "grid-rows-[1fr] pb-5"
-                          : "grid-rows-[0fr]"
+                          ? "visible"
+                          : ""
                       }`}
                     >
-                      <div className="overflow-hidden">
-                        <div className="ml-12 grid gap-4 border-l border-black/10 pl-5 md:grid-cols-3">
-                          <div>
-                            <span className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                              RESPONSIBILITY
-                            </span>
-                            <p className="mt-1 text-xs leading-5 text-neutral-600">
-                              {wing.description}
-                            </p>
-                          </div>
+                      <div className="wing-details-inner">
+                        <div>
+                          <span>
+                            RESPONSIBILITY
+                          </span>
 
-                          <div>
-                            <span className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                              WING LEAD
-                            </span>
-                            <p className="mt-1 text-sm font-medium">
-                              {wing.lead}
-                            </p>
-                          </div>
+                          <p>
+                            {wing.description}
+                          </p>
+                        </div>
 
-                          <div>
-                            <span className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                              MEMBERS
-                            </span>
-                            <p className="mt-1 text-sm font-medium">
-                              {wing.members}
-                            </p>
-                          </div>
+                        <div>
+                          <span>
+                            WING LEAD
+                          </span>
+
+                          <strong>
+                            {wing.lead}
+                          </strong>
+                        </div>
+
+                        <div>
+                          <span>
+                            MEMBERS
+                          </span>
+
+                          <strong>
+                            {wing.members}
+                          </strong>
                         </div>
                       </div>
                     </div>
@@ -574,14 +635,15 @@ export default function TeamPage() {
 
       {/* =====================================================
           MEMBERS
-      ====================================================== */}
+      ===================================================== */}
+
       <section
         id="team-members"
-        className="scroll-mt-16 border-b border-black/15 px-4 py-14 sm:px-6 lg:px-10 lg:py-18"
+        className="team-section team-members-section"
       >
-        <div className="mx-auto max-w-7xl">
+        <div className="team-container">
           <AnimatedSection>
-            <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div className="section-heading">
               <div>
                 <TechnicalLabel
                   index="04"
@@ -589,49 +651,79 @@ export default function TeamPage() {
                   category="CONTRIBUTORS"
                 />
 
-                <h2 className="mt-3 text-[clamp(2.2rem,4vw,4rem)] font-medium tracking-[-0.045em]">
+                <h2>
                   The wider
-                  <span className="font-normal text-neutral-400">
-                    {" "}
-                    community.
-                  </span>
+                  <span> community.</span>
                 </h2>
               </div>
 
-              <div className="relative w-full md:w-72">
+              <div className="member-search">
                 <Search
-                  size={15}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
+                  size={14}
+                  strokeWidth={1.5}
                 />
 
                 <input
                   value={query}
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={(event) =>
+                    setQuery(
+                      event.target.value
+                    )
+                  }
                   placeholder="SEARCH MEMBERS"
-                  className="w-full border border-black/15 bg-[#faf9f6] py-3 pl-9 pr-3 font-mono text-[10px] uppercase tracking-widest outline-none transition-colors placeholder:text-neutral-400 focus:border-black"
+                  aria-label="Search members"
                 />
               </div>
             </div>
 
-            <div className="mt-9 grid gap-px border border-black/15 bg-black/15 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredMembers.map((member, index) => (
-                <MemberCard key={`${member.name}-${index}`} member={member} />
-              ))}
+            <div className="members-grid">
+              {filteredMembers.length > 0 ? (
+                filteredMembers.map(
+                  (member, index) => (
+                    <MemberCard
+                      key={`${member.name}-${index}`}
+                      member={member}
+                      index={index}
+                    />
+                  )
+                )
+              ) : (
+                <div className="members-empty">
+                  <Search
+                    size={18}
+                    strokeWidth={1.4}
+                  />
+
+                  <span>
+                    NO MEMBER FOUND
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setQuery("")
+                    }
+                  >
+                    CLEAR SEARCH
+                  </button>
+                </div>
+              )}
             </div>
           </AnimatedSection>
         </div>
       </section>
 
       {/* =====================================================
-          SUCCESS / ACHIEVEMENTS
-      ====================================================== */}
+          SUCCESS
+      ===================================================== */}
+
       <section
         id="team-success"
-        className="scroll-mt-16 border-b border-black/15 bg-[#faf9f6] px-4 py-14 sm:px-6 lg:px-10 lg:py-18"
+        className="team-section team-success-section"
       >
-        <div className="mx-auto max-w-7xl">
+        <div className="team-container">
           <AnimatedSection>
-            <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div className="section-heading">
               <div>
                 <TechnicalLabel
                   index="05"
@@ -639,25 +731,27 @@ export default function TeamPage() {
                   category="PEOPLE · IMPACT"
                 />
 
-                <h2 className="mt-3 text-[clamp(2.2rem,4vw,4rem)] font-medium tracking-[-0.045em]">
+                <h2>
                   People doing
-                  <span className="font-normal text-neutral-400">
-                    {" "}
-                    meaningful work.
-                  </span>
+                  <span> meaningful work.</span>
                 </h2>
               </div>
 
-              <p className="max-w-md text-sm leading-6 text-neutral-500">
-                A visual archive for notable achievements, internships,
-                competitions, projects, research, placements, and other
-                verified milestones.
+              <p className="normal-copy">
+                A visual archive for notable
+                achievements, internships,
+                competitions, projects,
+                research, placements, and
+                other verified milestones.
               </p>
             </div>
 
-            <div className="mt-9 grid gap-3 lg:grid-cols-3">
+            <div className="success-grid">
               {successes.map((success) => (
-                <SuccessCard key={success.number} success={success} />
+                <SuccessCard
+                  key={success.number}
+                  success={success}
+                />
               ))}
             </div>
           </AnimatedSection>
@@ -666,46 +760,2903 @@ export default function TeamPage() {
 
       {/* =====================================================
           JOIN CTA
-      ====================================================== */}
-      <section className="relative overflow-hidden bg-[#141413] px-4 py-14 text-[#f5f3ee] sm:px-6 lg:px-10 lg:py-18">
-        <div className="pointer-events-none absolute right-[-100px] top-[-100px] h-80 w-80 rounded-full border border-white/10" />
-        <div className="pointer-events-none absolute right-[-60px] top-[-60px] h-60 w-60 rounded-full border border-white/10" />
+      ===================================================== */}
 
-        <div className="relative mx-auto flex max-w-7xl flex-col justify-between gap-8 md:flex-row md:items-end">
-          <div>
-            <TechnicalLabel
-              index="06"
-              title="BECOME PART OF IT"
-              category="CONTRIBUTE"
-              dark
-            />
+      <section className="team-join">
+        <div className="team-join-grid" />
 
-            <h2 className="mt-5 max-w-3xl text-[clamp(2.4rem,5vw,5rem)] font-medium leading-[0.94] tracking-[-0.055em]">
-              The next chapter
-              <br />
-              <span className="text-white/35">could be yours.</span>
-            </h2>
+        <div className="team-join-orbit team-join-orbit-one" />
+        <div className="team-join-orbit team-join-orbit-two" />
+
+        <div className="team-container">
+          <div className="team-join-content">
+            <div>
+              <TechnicalLabel
+                index="06"
+                title="BECOME PART OF IT"
+                category="CONTRIBUTE"
+                dark
+              />
+
+              <h2>
+                The next chapter
+                <br />
+                <span>could be yours.</span>
+              </h2>
+            </div>
+
+            <div className="team-join-copy">
+              <p>
+                Join the community, contribute
+                to a wing, work on technical
+                projects, and grow alongside
+                other students at BIT Sindri.
+              </p>
+
+              <Link
+                href="/join"
+                className="team-join-button"
+              >
+                <span>
+                  JOIN THE SOCIETY
+                </span>
+
+                <i>
+                  <ArrowRight
+                    size={14}
+                    strokeWidth={1.5}
+                  />
+                </i>
+              </Link>
+            </div>
           </div>
 
-          <div className="max-w-sm">
-            <p className="text-sm leading-6 text-white/60">
-              Join the community, contribute to a wing, work on technical
-              projects, and grow alongside other students at BIT Sindri.
-            </p>
+          <div className="team-join-footer">
+            <span>
+              CSE SOCIETY / BIT SINDRI
+            </span>
 
-            <Link
-              href="/join"
-              className="group mt-6 inline-flex cursor-pointer items-center gap-3 bg-[#f5f3ee] px-5 py-3.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#141413] transition-all hover:bg-white"
-            >
-              JOIN THE SOCIETY
-              <ArrowRight
-                size={15}
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </Link>
+            <span>
+              PEOPLE · IDEAS · IMPACT
+            </span>
           </div>
         </div>
       </section>
+
+      {/* =====================================================
+          STYLES
+      ===================================================== */}
+
+      <style jsx global>{`
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .team-page {
+          --team-bg: var(--cse-bg);
+          --team-surface: var(--cse-surface);
+          --team-surface-2: var(--cse-surface-2);
+
+          --team-text: var(--cse-text);
+          --team-strong: var(--cse-text-strong);
+          --team-muted: var(--cse-text-muted);
+          --team-soft: var(--cse-text-soft);
+
+          --team-border: var(--cse-border);
+
+          --team-accent: #20c997;
+
+          width: 100%;
+          min-height: 100vh;
+
+          overflow-x: hidden;
+
+          background: var(--team-bg);
+          color: var(--team-text);
+        }
+
+        .team-page *,
+        .team-page *::before,
+        .team-page *::after {
+          box-sizing: border-box;
+        }
+
+        .team-page button,
+        .team-page a {
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        .team-container {
+          position: relative;
+
+          width: min(
+            1380px,
+            calc(100% - 64px)
+          );
+
+          margin-inline: auto;
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .team-hero {
+          position: relative;
+
+          min-height: min(
+            760px,
+            88vh
+          );
+
+          overflow: hidden;
+
+          background:
+            radial-gradient(
+              circle at 78% 35%,
+              rgba(32, 201, 151, 0.08),
+              transparent 28%
+            ),
+            #090b0c;
+
+          color: #f5f5f1;
+
+          border-bottom: 1px solid
+            rgba(255, 255, 255, 0.09);
+        }
+
+        .team-hero-grid {
+          position: absolute;
+          inset: -50px;
+
+          background-image:
+            linear-gradient(
+              rgba(255, 255, 255, 0.04) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              90deg,
+              rgba(255, 255, 255, 0.04) 1px,
+              transparent 1px
+            );
+
+          background-size: 58px 58px;
+
+          opacity: 0.65;
+
+          animation: teamGridMove 20s
+            linear infinite;
+        }
+
+        @keyframes teamGridMove {
+          to {
+            transform: translate3d(
+              58px,
+              58px,
+              0
+            );
+          }
+        }
+
+        .team-hero-glow {
+          position: absolute;
+
+          border-radius: 50%;
+
+          pointer-events: none;
+
+          filter: blur(15px);
+        }
+
+        .team-glow-one {
+          width: 460px;
+          height: 460px;
+
+          right: -150px;
+          top: -170px;
+
+          background: radial-gradient(
+            circle,
+            rgba(32, 201, 151, 0.12),
+            transparent 70%
+          );
+
+          animation: teamGlow 8s
+            ease-in-out infinite;
+        }
+
+        .team-glow-two {
+          width: 360px;
+          height: 360px;
+
+          left: -220px;
+          bottom: -230px;
+
+          background: radial-gradient(
+            circle,
+            rgba(77, 171, 247, 0.06),
+            transparent 70%
+          );
+
+          animation: teamGlow 10s
+            ease-in-out infinite reverse;
+        }
+
+        @keyframes teamGlow {
+          0%,
+          100% {
+            transform: scale(0.92);
+          }
+
+          50% {
+            transform: scale(1.08);
+          }
+        }
+
+        .team-hero-code {
+          position: absolute;
+
+          right: 5%;
+          top: 20%;
+
+          display: flex;
+          flex-direction: column;
+
+          gap: 14px;
+
+          opacity: 0.07;
+
+          transform: rotate(-8deg);
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 9px;
+          letter-spacing: 0.1em;
+
+          pointer-events: none;
+
+          animation: codeFloat 15s
+            linear infinite;
+        }
+
+        .team-hero-code span {
+          white-space: nowrap;
+        }
+
+        .team-hero-code span:nth-child(odd) {
+          color: #20c997;
+        }
+
+        @keyframes codeFloat {
+          from {
+            transform:
+              rotate(-8deg)
+              translateY(-30px);
+          }
+
+          to {
+            transform:
+              rotate(-8deg)
+              translateY(100px);
+          }
+        }
+
+        .team-hero-inner {
+          min-height: min(
+            760px,
+            88vh
+          );
+
+          display: flex;
+          flex-direction: column;
+
+          padding-top: 30px;
+          padding-bottom: 45px;
+        }
+
+        .team-hero-top {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+
+          padding-bottom: 18px;
+
+          border-bottom: 1px solid
+            rgba(255, 255, 255, 0.09);
+        }
+
+        .team-system-meta {
+          display: flex;
+          flex-direction: column;
+
+          gap: 5px;
+
+          text-align: right;
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          line-height: 1.5;
+
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+
+          color: rgba(
+            255,
+            255,
+            255,
+            0.25
+          );
+        }
+
+        .team-system-meta strong {
+          color: rgba(
+            255,
+            255,
+            255,
+            0.55
+          );
+
+          font-weight: 400;
+        }
+
+        .team-hero-heading {
+          flex: 1;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          padding: 75px 0 65px;
+        }
+
+        .team-hero-kicker {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+
+          margin-bottom: 19px;
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 7px;
+          letter-spacing: 0.18em;
+
+          color: rgba(
+            255,
+            255,
+            255,
+            0.3
+          );
+        }
+
+        .team-hero-kicker i {
+          width: 5px;
+          height: 5px;
+
+          border-radius: 50%;
+
+          background: #20c997;
+
+          box-shadow:
+            0 0 12px
+              rgba(
+                32,
+                201,
+                151,
+                0.7
+              );
+        }
+
+        .team-hero-heading h1 {
+          margin: 0;
+
+          max-width: 1100px;
+
+          font-size: clamp(
+            4.3rem,
+            8.5vw,
+            8.8rem
+          );
+
+          line-height: 0.81;
+
+          letter-spacing: -0.085em;
+
+          font-weight: 500;
+        }
+
+        .team-hero-heading h1 span {
+          color: rgba(
+            255,
+            255,
+            255,
+            0.25
+          );
+        }
+
+        .team-hero-bottom {
+          display: grid;
+
+          grid-template-columns:
+            minmax(0, 1fr)
+            auto;
+
+          align-items: end;
+
+          gap: 40px;
+
+          padding-top: 18px;
+
+          border-top: 1px solid
+            rgba(255, 255, 255, 0.09);
+        }
+
+        .team-hero-bottom p {
+          max-width: 680px;
+
+          margin: 0;
+
+          font-size: 12px;
+          line-height: 1.75;
+
+          color: rgba(
+            255,
+            255,
+            255,
+            0.42
+          );
+        }
+
+        .team-hero-stats {
+          display: flex;
+          gap: 45px;
+        }
+
+        .team-hero-stats div {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+        }
+
+        .team-hero-stats strong {
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 28px;
+          line-height: 1;
+
+          font-weight: 400;
+
+          letter-spacing: -0.08em;
+
+          color: rgba(
+            255,
+            255,
+            255,
+            0.8
+          );
+        }
+
+        .team-hero-stats span {
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.16em;
+
+          color: rgba(
+            255,
+            255,
+            255,
+            0.25
+          );
+        }
+
+        /* =====================================================
+           NAV
+        ===================================================== */
+
+        .team-nav {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+
+          border-bottom: 1px solid
+            var(--team-border);
+
+          background: color-mix(
+            in srgb,
+            var(--team-bg) 92%,
+            transparent
+          );
+
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+        }
+
+        .team-nav-inner {
+          display: flex;
+          align-items: center;
+
+          gap: 5px;
+
+          overflow-x: auto;
+
+          scrollbar-width: none;
+
+          padding: 7px 0;
+        }
+
+        .team-nav-inner::-webkit-scrollbar {
+          display: none;
+        }
+
+        .team-nav button {
+          flex-shrink: 0;
+
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+
+          padding: 9px 11px;
+
+          border: 1px solid
+            color-mix(
+              in srgb,
+              var(--team-text) 10%,
+              transparent
+            );
+
+          background: color-mix(
+            in srgb,
+            var(--team-surface) 55%,
+            transparent
+          );
+
+          color: var(--team-soft);
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 7px;
+          font-weight: 500;
+
+          letter-spacing: 0.12em;
+
+          transition:
+            color 250ms ease,
+            background 250ms ease,
+            border-color 250ms ease,
+            transform 250ms ease;
+        }
+
+        .team-nav button span {
+          opacity: 0.45;
+        }
+
+        .team-nav button:hover {
+          color: var(--team-text);
+
+          border-color: color-mix(
+            in srgb,
+            var(--team-text) 25%,
+            transparent
+          );
+
+          transform: translateY(-1px);
+        }
+
+        .team-nav button.active {
+          color: var(--cse-bg);
+
+          background: var(--team-text);
+
+          border-color: var(--team-text);
+        }
+
+        .team-nav button.active span {
+          opacity: 0.55;
+        }
+
+        .team-nav-info {
+          margin-left: auto;
+
+          flex-shrink: 0;
+
+          padding-left: 20px;
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.17em;
+
+          color: var(--team-soft);
+        }
+
+        /* =====================================================
+           MARQUEE
+        ===================================================== */
+
+        .team-marquee {
+          border-bottom: 1px solid
+            rgba(255, 255, 255, 0.08);
+
+          background: #0c0e0f;
+
+          color: #f5f5f1;
+        }
+
+        /* =====================================================
+           COMMON SECTION
+        ===================================================== */
+
+        .team-section {
+          position: relative;
+
+          /*
+           * The section nav is sticky. Without scroll-margin-top,
+           * scrollIntoView() can place the heading underneath the nav.
+           */
+          scroll-margin-top: 76px;
+
+          border-bottom: 1px solid
+            var(--team-border);
+        }
+
+        .team-council-section {
+          padding: 90px 0 105px;
+        }
+
+  .team-wings-section,
+.team-members-section,
+.team-success-section {
+  padding: 78px 0 88px;
+}
+
+        .team-wings-section,
+        .team-success-section {
+          background: color-mix(
+            in srgb,
+            var(--team-surface) 45%,
+            var(--team-bg)
+          );
+        }
+
+        .section-heading {
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+
+          gap: 40px;
+
+          padding-bottom: 25px;
+
+          border-bottom: 1px solid
+            var(--team-border);
+        }
+
+        .section-heading h2 {
+          margin: 16px 0 0;
+
+          /*
+           * Keep the editorial scale, but prevent the title from
+           * becoming so tall that the first line feels clipped or
+           * collides with the sticky navigation on smaller screens.
+           */
+          font-size: clamp(
+            2.25rem,
+            3.65vw,
+            4rem
+          );
+
+          line-height: 0.92;
+
+          letter-spacing: -0.062em;
+
+          font-weight: 500;
+
+          color: var(--team-strong);
+        }
+
+        .section-heading h2 span {
+          color: var(--team-soft);
+
+          font-weight: 400;
+        }
+
+        .section-heading > p {
+          max-width: 270px;
+
+          margin: 0;
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 7px;
+          line-height: 1.8;
+
+          letter-spacing: 0.15em;
+
+          color: var(--team-soft);
+
+          text-align: right;
+        }
+
+        .section-heading > p em {
+          display: block;
+
+          margin-top: 7px;
+
+          font-style: normal;
+
+          color: var(--team-muted);
+        }
+
+        .normal-copy {
+          font-family: inherit !important;
+
+          font-size: 11px !important;
+          line-height: 1.7 !important;
+
+          letter-spacing: normal !important;
+
+          text-transform: none;
+
+          color: var(--team-muted) !important;
+        }
+
+        /* =====================================================
+           LEADERSHIP GRID
+        ===================================================== */
+
+        .leadership-feature-grid {
+          display: grid;
+
+          grid-template-columns:
+            minmax(0, 1.35fr)
+            minmax(0, 0.9fr);
+
+          gap: 8px;
+
+          margin-top: 28px;
+        }
+
+        .leadership-small-grid {
+          display: grid;
+
+          grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+          gap: 8px;
+
+          margin-top: 8px;
+        }
+
+        /* =====================================================
+           PERSON CARD
+        ===================================================== */
+
+        .person-card {
+          --person-accent: #20c997;
+
+          position: relative;
+
+          min-height: 445px;
+
+          overflow: hidden;
+
+          border: 1px solid
+            color-mix(
+              in srgb,
+              var(--team-text) 12%,
+              transparent
+            );
+
+          background: var(--team-surface);
+
+          color: var(--team-text);
+
+          isolation: isolate;
+
+          transition:
+            transform 500ms
+              cubic-bezier(
+                0.22,
+                1,
+                0.36,
+                1
+              ),
+            border-color 350ms ease,
+            box-shadow 500ms ease;
+        }
+
+        .person-card.featured {
+          min-height: 510px;
+
+          background: #111313;
+
+          color: #f5f5f1;
+
+          border-color:
+            rgba(255, 255, 255, 0.12);
+        }
+
+        .person-card:hover {
+          transform: translateY(-6px);
+
+          border-color: color-mix(
+            in srgb,
+            var(--person-accent) 42%,
+            transparent
+          );
+
+          box-shadow:
+            0 35px 90px
+              rgba(0, 0, 0, 0.18);
+        }
+
+        .person-image {
+          position: absolute;
+
+          inset: 0 0 auto 0;
+
+          height: 63%;
+
+          overflow: hidden;
+
+          background: var(--team-surface-2);
+        }
+
+        .person-card.featured
+          .person-image {
+          background: #181b1b;
+        }
+
+        .person-image::after {
+          content: "";
+
+          position: absolute;
+
+          inset: 0;
+
+          background:
+            linear-gradient(
+              180deg,
+              transparent 45%,
+              rgba(0, 0, 0, 0.12),
+              rgba(0, 0, 0, 0.9)
+            );
+
+          pointer-events: none;
+        }
+
+        .person-image img {
+          transition:
+            transform 900ms
+              cubic-bezier(
+                0.22,
+                1,
+                0.36,
+                1
+              ),
+            filter 700ms ease;
+        }
+
+        .person-card:hover
+          .person-image img {
+          transform: scale(1.045);
+        }
+
+        .person-placeholder {
+          position: absolute;
+          inset: 0;
+
+          overflow: hidden;
+
+          background:
+            radial-gradient(
+              circle at 68% 28%,
+              rgba(
+                32,
+                201,
+                151,
+                0.11
+              ),
+              transparent 20%
+            ),
+            linear-gradient(
+              135deg,
+              #171a19,
+              #0e1010
+            );
+        }
+
+        .person-card:not(.featured)
+          .person-placeholder {
+          background:
+            radial-gradient(
+              circle at 70% 28%,
+              color-mix(
+                in srgb,
+                var(--person-accent) 10%,
+                transparent
+              ),
+              transparent 20%
+            ),
+            linear-gradient(
+              135deg,
+              var(--team-surface-2),
+              var(--team-surface)
+            );
+        }
+
+        .person-placeholder-grid {
+          position: absolute;
+          inset: 0;
+
+          background-image:
+            linear-gradient(
+              rgba(255, 255, 255, 0.045) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              90deg,
+              rgba(255, 255, 255, 0.045) 1px,
+              transparent 1px
+            );
+
+          background-size: 35px 35px;
+
+          opacity: 0.6;
+
+          animation: placeholderGrid 15s
+            linear infinite;
+        }
+
+        @keyframes placeholderGrid {
+          to {
+            transform: translate3d(
+              35px,
+              35px,
+              0
+            );
+          }
+        }
+
+        .person-placeholder-glow {
+          position: absolute;
+
+          width: 220px;
+          height: 220px;
+
+          left: 50%;
+          top: 45%;
+
+          transform: translate(
+            -50%,
+            -50%
+          );
+
+          border-radius: 50%;
+
+          background: radial-gradient(
+            circle,
+            rgba(
+              32,
+              201,
+              151,
+              0.08
+            ),
+            transparent 70%
+          );
+
+          animation: placeholderGlow 5s
+            ease-in-out infinite;
+        }
+
+        @keyframes placeholderGlow {
+          0%,
+          100% {
+            transform:
+              translate(-50%, -50%)
+              scale(0.9);
+          }
+
+          50% {
+            transform:
+              translate(-50%, -50%)
+              scale(1.1);
+          }
+        }
+
+        .person-placeholder-icon {
+          position: absolute;
+
+          left: 50%;
+          top: 50%;
+
+          transform:
+            translate(-50%, -50%);
+
+          width: 78px;
+          height: 78px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          border: 1px solid
+            rgba(32, 201, 151, 0.28);
+
+          border-radius: 50%;
+
+          color: rgba(
+            32,
+            201,
+            151,
+            0.65
+          );
+
+          background: rgba(
+            32,
+            201,
+            151,
+            0.04
+          );
+
+          box-shadow:
+            0 0 45px
+              rgba(32, 201, 151, 0.1);
+
+          animation:
+            placeholderIcon 4s
+            ease-in-out infinite;
+        }
+
+        @keyframes placeholderIcon {
+          0%,
+          100% {
+            transform:
+              translate(-50%, -50%)
+              scale(1);
+          }
+
+          50% {
+            transform:
+              translate(-50%, -50%)
+              scale(1.06);
+          }
+        }
+
+        .person-placeholder-icon::before,
+        .person-placeholder-icon::after {
+          content: "";
+
+          position: absolute;
+
+          border: 1px solid
+            rgba(32, 201, 151, 0.16);
+
+          border-radius: 50%;
+        }
+
+        .person-placeholder-icon::before {
+          width: 108px;
+          height: 108px;
+        }
+
+        .person-placeholder-icon::after {
+          width: 145px;
+          height: 145px;
+
+          border-style: dashed;
+
+          animation: placeholderRing 12s
+            linear infinite;
+        }
+
+        @keyframes placeholderRing {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        .person-placeholder-label {
+          position: absolute;
+
+          left: 18px;
+          bottom: 18px;
+
+          z-index: 2;
+
+          display: flex;
+          align-items: center;
+          gap: 7px;
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.16em;
+
+          color: rgba(
+            255,
+            255,
+            255,
+            0.28
+          );
+        }
+
+        .person-placeholder-label i {
+          width: 4px;
+          height: 4px;
+
+          border-radius: 50%;
+
+          background: #20c997;
+
+          box-shadow:
+            0 0 8px
+              rgba(
+                32,
+                201,
+                151,
+                0.7
+              );
+        }
+
+        .person-image-scan {
+          position: absolute;
+
+          z-index: 4;
+
+          left: -10%;
+          right: -10%;
+          top: 0;
+
+          height: 1px;
+
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(
+              32,
+              201,
+              151,
+              0.6
+            ),
+            transparent
+          );
+
+          animation: imageScan 5s
+            ease-in-out infinite;
+        }
+
+        @keyframes imageScan {
+          0% {
+            transform: translateY(0);
+            opacity: 0;
+          }
+
+          15% {
+            opacity: 0.7;
+          }
+
+          75% {
+            opacity: 0.25;
+          }
+
+          100% {
+            transform: translateY(330px);
+            opacity: 0;
+          }
+        }
+
+        .person-top {
+          position: absolute;
+
+          z-index: 8;
+
+          left: 18px;
+          right: 18px;
+          top: 18px;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .person-number {
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 7px;
+
+          color: var(--team-soft);
+        }
+
+        .person-card.featured
+          .person-number {
+          color: rgba(
+            255,
+            255,
+            255,
+            0.3
+          );
+        }
+
+        .person-domain {
+          padding: 6px 8px;
+
+          border: 1px solid
+            color-mix(
+              in srgb,
+              var(--team-text) 12%,
+              transparent
+            );
+
+          background: color-mix(
+            in srgb,
+            var(--team-surface) 75%,
+            transparent
+          );
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.12em;
+
+          color: var(--team-muted);
+        }
+
+        .person-card.featured
+          .person-domain {
+          border-color:
+            rgba(255, 255, 255, 0.13);
+
+          background:
+            rgba(255, 255, 255, 0.05);
+
+          color: rgba(
+            255,
+            255,
+            255,
+            0.5
+          );
+        }
+
+        .person-content {
+          position: absolute;
+
+          z-index: 10;
+
+          left: 0;
+          right: 0;
+          bottom: 0;
+
+          padding: 70px 20px 20px;
+
+          background:
+            linear-gradient(
+              180deg,
+              transparent,
+              var(--team-surface) 34%
+            );
+        }
+
+        .person-card.featured
+          .person-content {
+          background:
+            linear-gradient(
+              180deg,
+              transparent,
+              #111313 34%
+            );
+        }
+
+        .person-position {
+          margin: 0;
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 7px;
+          letter-spacing: 0.18em;
+
+          color: var(--team-soft);
+        }
+
+        .person-card.featured
+          .person-position {
+          color: rgba(
+            255,
+            255,
+            255,
+            0.38
+          );
+        }
+
+        .person-name-row {
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+
+          gap: 15px;
+
+          margin-top: 4px;
+        }
+
+        .person-name {
+          margin: 0;
+
+          font-size: clamp(
+            1.55rem,
+            2.3vw,
+            2.3rem
+          );
+
+          line-height: 0.95;
+
+          letter-spacing: -0.045em;
+
+          font-weight: 600;
+
+          color: var(--team-strong);
+        }
+
+        .person-card.featured
+          .person-name {
+          color: white;
+        }
+
+        .person-arrow {
+          width: 35px;
+          height: 35px;
+
+          flex-shrink: 0;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          border: 1px solid
+            color-mix(
+              in srgb,
+              var(--team-text) 14%,
+              transparent
+            );
+
+          border-radius: 50%;
+
+          color: var(--team-soft);
+
+          transition:
+            transform 400ms
+              cubic-bezier(
+                0.22,
+                1,
+                0.36,
+                1
+              ),
+            color 300ms ease,
+            border-color 300ms ease,
+            background 300ms ease;
+        }
+
+        .person-card.featured
+          .person-arrow {
+          border-color:
+            rgba(255, 255, 255, 0.13);
+
+          color: rgba(
+            255,
+            255,
+            255,
+            0.55
+          );
+        }
+
+        .person-card:hover
+          .person-arrow {
+          transform:
+            translate(3px, -3px)
+            rotate(5deg);
+
+          color: #07100d;
+
+          background: #20c997;
+
+          border-color: #20c997;
+        }
+
+        .person-batch {
+          margin-top: 5px;
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.16em;
+
+          color: var(--team-soft);
+        }
+
+        .person-card.featured
+          .person-batch {
+          color: rgba(
+            255,
+            255,
+            255,
+            0.3
+          );
+        }
+
+        .person-description {
+          max-width: 650px;
+
+          margin: 12px 0 0;
+
+          font-size: 10px;
+          line-height: 1.65;
+
+          color: var(--team-muted);
+        }
+
+        .person-card.featured
+          .person-description {
+          color: rgba(
+            255,
+            255,
+            255,
+            0.45
+          );
+        }
+
+        /* =====================================================
+           WINGS
+        ===================================================== */
+
+        .wings-list {
+          margin-top: 30px;
+
+          border-top: 1px solid
+            var(--team-border);
+        }
+
+        .wing-row {
+          border-bottom: 1px solid
+            var(--team-border);
+        }
+
+        .wing-trigger {
+          width: 100%;
+
+          cursor: pointer;
+
+          display: grid;
+
+          grid-template-columns:
+            45px
+            42px
+            minmax(200px, 1fr)
+            minmax(250px, 0.9fr)
+            35px;
+
+          align-items: center;
+
+          gap: 14px;
+
+          padding: 18px 3px;
+
+          border: 0;
+
+          background: transparent;
+
+          color: var(--team-text);
+
+          text-align: left;
+
+          transition:
+            padding 350ms
+              cubic-bezier(
+                0.22,
+                1,
+                0.36,
+                1
+              ),
+            background 250ms ease;
+        }
+
+        .wing-trigger:hover {
+          padding-left: 10px;
+
+          background: color-mix(
+            in srgb,
+            var(--team-text) 3%,
+            transparent
+          );
+        }
+
+        .wing-number {
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 7px;
+
+          color: var(--team-soft);
+        }
+
+        .wing-icon {
+          width: 38px;
+          height: 38px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          border: 1px solid
+            var(--team-border);
+
+          background: var(--team-surface);
+
+          color: var(--team-muted);
+
+          transition:
+            transform 350ms ease,
+            color 300ms ease,
+            border-color 300ms ease;
+        }
+
+        .wing-trigger:hover
+          .wing-icon {
+          transform:
+            rotate(-7deg);
+
+          color: var(--team-accent);
+
+          border-color:
+            rgba(32, 201, 151, 0.35);
+        }
+
+        .wing-title {
+          min-width: 0;
+
+          display: flex;
+          flex-direction: column;
+
+          gap: 5px;
+        }
+
+        .wing-title strong {
+          font-size: 18px;
+          line-height: 1;
+
+          letter-spacing: -0.035em;
+
+          font-weight: 600;
+        }
+
+        .wing-title small {
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.15em;
+
+          color: var(--team-soft);
+        }
+
+        .wing-description {
+          max-width: 420px;
+
+          justify-self: end;
+
+          font-size: 10px;
+          line-height: 1.55;
+
+          color: var(--team-muted);
+
+          text-align: right;
+        }
+
+        .wing-chevron {
+          width: 32px;
+          height: 32px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          border: 1px solid
+            var(--team-border);
+
+          border-radius: 50%;
+
+          color: var(--team-soft);
+
+          transition:
+            transform 350ms
+              cubic-bezier(
+                0.22,
+                1,
+                0.36,
+                1
+              ),
+            background 250ms ease,
+            color 250ms ease;
+        }
+
+        .wing-row.open
+          .wing-chevron {
+          transform: rotate(180deg);
+
+          color: var(--cse-bg);
+
+          background: var(--team-text);
+        }
+
+        .wing-row.open .wing-trigger {
+          background:
+            linear-gradient(
+              90deg,
+              color-mix(
+                in srgb,
+                var(--team-accent) 3%,
+                transparent
+              ),
+              transparent 48%
+            );
+        }
+
+        .wing-row.open .wing-icon {
+          color: var(--team-accent);
+          border-color: rgba(32, 201, 151, 0.35);
+        }
+
+        .wing-details {
+          display: grid;
+
+          grid-template-rows: 0fr;
+
+          transition:
+            grid-template-rows 450ms
+              cubic-bezier(
+                0.22,
+                1,
+                0.36,
+                1
+              );
+        }
+
+        .wing-details.visible {
+          grid-template-rows: 1fr;
+        }
+
+        .wing-details-inner {
+          overflow: hidden;
+
+          min-height: 0;
+
+          display: grid;
+
+          grid-template-columns:
+            1.4fr
+            0.8fr
+            0.8fr;
+
+          gap: 25px;
+
+          margin-left: 101px;
+
+          padding: 0 0 0 20px;
+
+          border-left: 1px solid
+            var(--team-border);
+
+          opacity: 0;
+
+          transform: translateY(-8px);
+
+          transition:
+            opacity 350ms ease,
+            transform 450ms ease,
+            padding 450ms ease;
+        }
+
+        .wing-details.visible
+          .wing-details-inner {
+          padding-bottom: 22px;
+
+          opacity: 1;
+
+          transform: translateY(0);
+        }
+
+        .wing-details-inner > div {
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+        }
+
+        .wing-details-inner span {
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.16em;
+
+          color: var(--team-soft);
+        }
+
+        .wing-details-inner p,
+        .wing-details-inner strong {
+          margin: 0;
+
+          font-size: 10px;
+          line-height: 1.55;
+
+          color: var(--team-muted);
+        }
+
+        .wing-details-inner strong {
+          color: var(--team-text);
+          font-weight: 500;
+        }
+
+        /* =====================================================
+           MEMBER SEARCH
+        ===================================================== */
+
+        .member-search {
+          position: relative;
+
+          width: min(
+            100%,
+            280px
+          );
+        }
+
+        .member-search svg {
+          position: absolute;
+
+          left: 12px;
+          top: 50%;
+
+          transform: translateY(-50%);
+
+          color: var(--team-soft);
+        }
+
+        .member-search input {
+          width: 100%;
+
+          cursor: text;
+
+          height: 38px;
+
+          padding: 0 12px 0 34px;
+
+          border: 1px solid
+            var(--team-border);
+
+          outline: none;
+
+          background: var(--team-surface);
+
+          color: var(--team-text);
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 7px;
+          letter-spacing: 0.12em;
+
+          transition:
+            border-color 250ms ease,
+            box-shadow 250ms ease;
+        }
+
+        .member-search input::placeholder {
+          color: var(--team-soft);
+        }
+
+        .member-search input:focus {
+          border-color:
+            rgba(32, 201, 151, 0.5);
+
+          box-shadow:
+            0 0 0 3px
+              rgba(32, 201, 151, 0.06);
+        }
+
+        /* =====================================================
+           MEMBERS
+        ===================================================== */
+
+        .members-grid {
+          display: grid;
+
+          grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+          gap: 1px;
+
+          margin-top: 30px;
+
+          border: 1px solid
+            var(--team-border);
+
+          background: var(--team-border);
+        }
+
+        .member-card {
+          position: relative;
+
+          min-height: 235px;
+
+          padding: 18px;
+
+          overflow: hidden;
+
+          background: var(--team-surface);
+
+          color: var(--team-text);
+
+          transition:
+            background 400ms ease,
+            color 400ms ease;
+        }
+
+        .member-card:hover {
+          background: #101313;
+          color: #f5f5f1;
+        }
+
+        .member-card-top {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+        }
+
+        .member-label {
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.16em;
+
+          color: var(--team-soft);
+        }
+
+        .member-arrow {
+          color: var(--team-soft);
+
+          transition:
+            transform 350ms ease,
+            color 250ms ease;
+        }
+
+        .member-card:hover
+          .member-arrow {
+          transform:
+            translate(3px, -3px);
+
+          color: #20c997;
+        }
+
+        .member-avatar {
+          position: absolute;
+
+          left: 18px;
+          bottom: 18px;
+
+          width: 50px;
+          height: 50px;
+
+          overflow: hidden;
+
+          border: 1px solid
+            var(--team-border);
+
+          border-radius: 50%;
+
+          background: var(--team-surface-2);
+        }
+
+        .member-avatar img {
+          width: 100%;
+          height: 100%;
+
+          object-fit: cover;
+
+          filter: grayscale(1);
+
+          transition:
+            transform 500ms ease,
+            filter 500ms ease;
+        }
+
+        .member-card:hover
+          .member-avatar img {
+          transform: scale(1.08);
+          filter: grayscale(0);
+        }
+
+        .member-avatar-placeholder {
+          width: 100%;
+          height: 100%;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+
+          color: var(--team-soft);
+        }
+
+        .member-info {
+          position: absolute;
+
+          left: 18px;
+          right: 18px;
+          bottom: 18px;
+
+          padding-left: 66px;
+        }
+
+        .member-info h3 {
+          margin: 0;
+
+          font-size: 18px;
+          line-height: 1;
+
+          letter-spacing: -0.04em;
+
+          font-weight: 600;
+        }
+
+        .member-meta {
+          display: flex;
+          flex-wrap: wrap;
+
+          gap: 7px;
+
+          margin-top: 7px;
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.12em;
+
+          color: var(--team-soft);
+        }
+
+        .member-domain {
+          margin-top: 9px;
+
+          font-size: 9px;
+
+          color: var(--team-muted);
+        }
+
+        .member-card:hover
+          .member-domain {
+          color: rgba(
+            255,
+            255,
+            255,
+            0.48
+          );
+        }
+
+        .members-empty {
+          grid-column: 1 / -1;
+
+          min-height: 240px;
+
+          display: flex;
+          flex-direction: column;
+
+          align-items: center;
+          justify-content: center;
+
+          gap: 12px;
+
+          background: var(--team-surface);
+
+          color: var(--team-soft);
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 7px;
+          letter-spacing: 0.15em;
+        }
+
+        .members-empty svg {
+          color: var(--team-accent);
+        }
+
+        .members-empty button {
+          padding: 8px 11px;
+
+          border: 1px solid
+            var(--team-border);
+
+          background: transparent;
+
+          color: var(--team-muted);
+
+          font-family: inherit;
+
+          font-size: 6px;
+          letter-spacing: 0.12em;
+
+          transition:
+            border-color 250ms ease,
+            color 250ms ease;
+        }
+
+        .members-empty button:hover {
+          border-color:
+            rgba(32, 201, 151, 0.4);
+
+          color: var(--team-accent);
+        }
+
+        /* =====================================================
+           SUCCESS
+        ===================================================== */
+
+        .success-grid {
+          display: grid;
+
+          grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+          gap: 8px;
+
+          margin-top: 30px;
+        }
+
+        .success-card {
+          overflow: hidden;
+
+          border: 1px solid
+            var(--team-border);
+
+          background: var(--team-bg);
+
+          transition:
+            transform 500ms
+              cubic-bezier(
+                0.22,
+                1,
+                0.36,
+                1
+              ),
+            border-color 300ms ease,
+            box-shadow 500ms ease;
+        }
+
+        .success-card:hover {
+          transform: translateY(-5px);
+
+          border-color:
+            rgba(32, 201, 151, 0.3);
+
+          box-shadow:
+            0 25px 65px
+              rgba(0, 0, 0, 0.12);
+        }
+
+        .success-image {
+          position: relative;
+
+          height: 245px;
+
+          overflow: hidden;
+
+          background: var(--team-surface-2);
+        }
+
+        .success-image img {
+          transition:
+            transform 800ms
+              cubic-bezier(
+                0.22,
+                1,
+                0.36,
+                1
+              ),
+            filter 600ms ease;
+        }
+
+        .success-card:hover
+          .success-image img {
+          transform: scale(1.05);
+          filter: grayscale(0);
+        }
+
+        .success-placeholder {
+          position: absolute;
+          inset: 0;
+
+          background:
+            linear-gradient(
+              135deg,
+              color-mix(
+                in srgb,
+                var(--team-text) 5%,
+                transparent
+              )
+              25%,
+              transparent 25%
+            ),
+            linear-gradient(
+              45deg,
+              transparent 74%,
+              color-mix(
+                in srgb,
+                var(--team-text) 4%,
+                transparent
+              )
+              74%
+            );
+
+          background-size: 36px 36px;
+
+          animation: successPattern 18s
+            linear infinite;
+        }
+
+        @keyframes successPattern {
+          to {
+            background-position:
+              36px 36px;
+          }
+        }
+
+        .success-placeholder-icon {
+          position: absolute;
+
+          left: 50%;
+          top: 50%;
+
+          transform:
+            translate(-50%, -50%);
+
+          color: var(--team-soft);
+
+          opacity: 0.45;
+        }
+
+        .success-placeholder-label {
+          position: absolute;
+
+          left: 15px;
+          bottom: 15px;
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.15em;
+
+          color: var(--team-soft);
+        }
+
+        .success-number {
+          position: absolute;
+
+          left: 15px;
+          top: 15px;
+
+          z-index: 4;
+
+          padding: 6px 8px;
+
+          border: 1px solid
+            var(--team-border);
+
+          background: color-mix(
+            in srgb,
+            var(--team-bg) 85%,
+            transparent
+          );
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+
+          color: var(--team-muted);
+        }
+
+        .success-content {
+          padding: 18px;
+        }
+
+        .success-meta {
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.15em;
+
+          color: var(--team-soft);
+        }
+
+        .success-content h3 {
+          margin: 9px 0 0;
+
+          font-size: 21px;
+          line-height: 1;
+
+          letter-spacing: -0.045em;
+
+          font-weight: 600;
+        }
+
+        .success-person {
+          margin-top: 6px;
+
+          font-size: 9px;
+
+          color: var(--team-muted);
+        }
+
+        .success-description {
+          margin: 17px 0 0;
+
+          font-size: 9px;
+          line-height: 1.65;
+
+          color: var(--team-muted);
+        }
+
+        .success-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          margin-top: 18px;
+
+          padding-top: 11px;
+
+          border-top: 1px solid
+            var(--team-border);
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.13em;
+
+          color: var(--team-soft);
+        }
+
+        .success-footer svg {
+          transition:
+            transform 300ms ease,
+            color 250ms ease;
+        }
+
+        .success-card:hover
+          .success-footer svg {
+          transform:
+            translate(3px, -3px);
+
+          color: var(--team-accent);
+        }
+
+        /* =====================================================
+           JOIN
+        ===================================================== */
+
+        .team-join {
+          position: relative;
+
+          min-height: 500px;
+
+          overflow: hidden;
+
+          background: #090b0c;
+
+          color: #f5f5f1;
+        }
+
+        .team-join-grid {
+          position: absolute;
+          inset: -50px;
+
+          background-image:
+            linear-gradient(
+              rgba(255, 255, 255, 0.04) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              90deg,
+              rgba(255, 255, 255, 0.04) 1px,
+              transparent 1px
+            );
+
+          background-size: 58px 58px;
+
+          opacity: 0.55;
+
+          animation: teamGridMove 20s
+            linear infinite;
+        }
+
+        .team-join-orbit {
+          position: absolute;
+
+          border: 1px solid
+            rgba(32, 201, 151, 0.14);
+
+          border-radius: 50%;
+
+          animation: ringRotate 24s
+            linear infinite;
+        }
+
+        .team-join-orbit-one {
+          width: 620px;
+          height: 620px;
+
+          right: -280px;
+          top: -260px;
+        }
+
+        .team-join-orbit-two {
+          width: 460px;
+          height: 460px;
+
+          right: -200px;
+          top: -180px;
+
+          border-style: dashed;
+
+          animation-direction: reverse;
+
+          animation-duration: 17s;
+        }
+
+        @keyframes ringRotate {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        .team-join
+          .team-container {
+          padding-top: 75px;
+          padding-bottom: 28px;
+        }
+
+        .team-join-content {
+          position: relative;
+          z-index: 2;
+
+          display: grid;
+
+          grid-template-columns:
+            minmax(0, 1.3fr)
+            minmax(280px, 0.7fr);
+
+          align-items: end;
+
+          gap: 70px;
+
+          padding: 75px 0 70px;
+        }
+
+        .team-join-content h2 {
+          margin: 20px 0 0;
+
+          font-size: clamp(
+            4rem,
+            7vw,
+            7.4rem
+          );
+
+          line-height: 0.76;
+
+          letter-spacing: -0.08em;
+
+          font-weight: 500;
+        }
+
+        .team-join-content h2 span {
+          color: rgba(
+            255,
+            255,
+            255,
+            0.2
+          );
+        }
+
+        .team-join-copy p {
+          max-width: 360px;
+
+          margin: 0 0 25px;
+
+          font-size: 11px;
+          line-height: 1.7;
+
+          color: rgba(
+            255,
+            255,
+            255,
+            0.4
+          );
+        }
+
+        .team-join-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: space-between;
+
+          min-width: 210px;
+
+          gap: 28px;
+
+          padding: 11px 12px 11px 16px;
+
+          background: #f5f5f1;
+
+          color: #090b0c;
+
+          text-decoration: none;
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 7px;
+          font-weight: 700;
+
+          letter-spacing: 0.14em;
+
+          transition:
+            transform 350ms
+              cubic-bezier(
+                0.22,
+                1,
+                0.36,
+                1
+              ),
+            box-shadow 350ms ease;
+        }
+
+        .team-join-button:hover {
+          transform: translateY(-3px);
+
+          box-shadow:
+            0 22px 50px
+              rgba(0, 0, 0, 0.3);
+        }
+
+        .team-join-button i {
+          width: 27px;
+          height: 27px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          border-radius: 50%;
+
+          background: #090b0c;
+
+          color: #f5f5f1;
+
+          transition:
+            transform 350ms ease;
+        }
+
+        .team-join-button:hover i {
+          transform:
+            translate(3px, -3px)
+            rotate(-6deg);
+        }
+
+        .team-join-footer {
+          position: relative;
+          z-index: 2;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          padding-top: 13px;
+
+          border-top: 1px solid
+            rgba(255, 255, 255, 0.1);
+
+          font-family: var(--font-mono),
+            monospace;
+
+          font-size: 6px;
+          letter-spacing: 0.17em;
+
+          color: rgba(
+            255,
+            255,
+            255,
+            0.22
+          );
+        }
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1050px) {
+          .team-container {
+            width: min(
+              100% - 44px,
+              900px
+            );
+          }
+
+          .team-hero-heading h1 {
+            font-size: clamp(
+              4.2rem,
+              10vw,
+              7rem
+            );
+          }
+
+          .leadership-feature-grid {
+            grid-template-columns:
+              1fr 1fr;
+          }
+
+          .leadership-small-grid {
+            grid-template-columns:
+              repeat(2, 1fr);
+          }
+
+          .wing-trigger {
+            grid-template-columns:
+              40px
+              42px
+              minmax(180px, 1fr)
+              35px;
+          }
+
+          .wing-description {
+            display: none;
+          }
+
+          .members-grid {
+            grid-template-columns:
+              repeat(2, 1fr);
+          }
+
+          .success-grid {
+            grid-template-columns:
+              repeat(2, 1fr);
+          }
+
+          .team-join-content {
+            grid-template-columns: 1fr;
+            gap: 35px;
+          }
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+          .team-container {
+            width: calc(100% - 32px);
+          }
+
+          .team-hero {
+            min-height: auto;
+          }
+
+          .team-hero-inner {
+            min-height: auto;
+
+            padding-top: 22px;
+            padding-bottom: 28px;
+          }
+
+          .team-system-meta {
+            display: none;
+          }
+
+          .team-hero-heading {
+            padding: 65px 0 55px;
+          }
+
+          .team-hero-heading h1 {
+            font-size: clamp(
+              3.6rem,
+              17vw,
+              5.8rem
+            );
+
+            line-height: 0.82;
+          }
+
+          .team-hero-bottom {
+            grid-template-columns: 1fr;
+
+            gap: 28px;
+          }
+
+          .team-hero-bottom p {
+            font-size: 11px;
+          }
+
+          .team-hero-stats {
+            gap: 35px;
+          }
+
+          .team-hero-stats strong {
+            font-size: 24px;
+          }
+
+          .team-nav-info {
+            display: none;
+          }
+
+          .team-nav-inner {
+            width: 100%;
+
+            padding-inline: 16px;
+          }
+
+          .team-nav button {
+            font-size: 6px;
+
+            padding: 8px 9px;
+          }
+
+          .team-council-section,
+          .team-wings-section,
+          .team-members-section,
+          .team-success-section {
+            padding: 60px 0 65px;
+            scroll-margin-top: 58px;
+          }
+
+          .section-heading {
+            flex-direction: column;
+            align-items: flex-start;
+
+            gap: 22px;
+          }
+
+.section-heading h2 {
+  font-size: clamp(
+    2.35rem,
+    10vw,
+    3.6rem
+  );
+}
+
+          .section-heading > p {
+            max-width: 100%;
+
+            text-align: left;
+          }
+
+          .leadership-feature-grid,
+          .leadership-small-grid {
+            grid-template-columns: 1fr;
+
+            gap: 7px;
+          }
+
+          .person-card,
+          .person-card.featured {
+            min-height: 410px;
+          }
+
+          .person-image {
+            height: 62%;
+          }
+
+          .person-content {
+            padding: 62px 16px 16px;
+          }
+
+          .person-top {
+            left: 14px;
+            right: 14px;
+            top: 14px;
+          }
+
+          .person-name {
+            font-size: 24px;
+          }
+
+          .person-description {
+            font-size: 9px;
+          }
+
+          .wing-trigger {
+            grid-template-columns:
+              28px
+              38px
+              minmax(0, 1fr)
+              31px;
+
+            gap: 9px;
+
+            padding: 15px 0;
+          }
+
+          .wing-number {
+            font-size: 6px;
+          }
+
+          .wing-icon {
+            width: 34px;
+            height: 34px;
+          }
+
+          .wing-title strong {
+            font-size: 15px;
+          }
+
+          .wing-title small {
+            font-size: 5px;
+          }
+
+          .wing-details-inner {
+            grid-template-columns: 1fr;
+
+            gap: 17px;
+
+            margin-left: 75px;
+          }
+
+          .member-search {
+            width: 100%;
+          }
+
+          .members-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .member-card {
+            min-height: 205px;
+          }
+
+          .success-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .success-image {
+            height: 220px;
+          }
+
+          .team-join {
+            min-height: 480px;
+          }
+
+          .team-join
+            .team-container {
+            padding-top: 55px;
+          }
+
+          .team-join-content {
+            padding: 55px 0 50px;
+          }
+
+          .team-join-content h2 {
+            font-size: clamp(
+              3.6rem,
+              17vw,
+              5.8rem
+            );
+          }
+
+          .team-join-copy p {
+            font-size: 10px;
+          }
+
+          .team-join-footer {
+            align-items: flex-start;
+
+            flex-direction: column;
+
+            gap: 9px;
+          }
+
+          .team-join-footer span:last-child {
+            display: none;
+          }
+
+          .team-join-orbit-one {
+            width: 480px;
+            height: 480px;
+
+            right: -270px;
+            top: -190px;
+          }
+
+          .team-join-orbit-two {
+            width: 360px;
+            height: 360px;
+
+            right: -210px;
+            top: -130px;
+          }
+        }
+
+        /* =====================================================
+           SMALL PHONES
+        ===================================================== */
+
+        @media (max-width: 390px) {
+          .team-container {
+            width: calc(100% - 24px);
+          }
+
+          .team-hero-heading h1 {
+            font-size: 3.35rem;
+          }
+
+          .person-card,
+          .person-card.featured {
+            min-height: 390px;
+          }
+
+          .person-name {
+            font-size: 21px;
+          }
+
+          .wing-trigger {
+            grid-template-columns:
+              23px
+              34px
+              minmax(0, 1fr)
+              28px;
+          }
+
+          .wing-title strong {
+            font-size: 14px;
+          }
+
+          .member-card {
+            min-height: 195px;
+          }
+        }
+
+        /* =====================================================
+           REDUCED MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+          .team-page *,
+          .team-page *::before,
+          .team-page *::after {
+            animation: none !important;
+            scroll-behavior: auto !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }
@@ -722,134 +3673,92 @@ function PersonCard({
   featured?: boolean;
 }) {
   return (
-    <div
-      className={`group relative overflow-hidden border border-black/15 ${
-        featured
-          ? "min-h-[390px] bg-[#141413] text-[#f5f3ee] lg:col-span-7"
-          : "min-h-[390px] bg-[#faf9f6] lg:col-span-5"
+    <article
+      className={`person-card ${
+        featured ? "featured" : ""
       }`}
     >
-      {/* image / visual area */}
-      <div
-        className={`absolute inset-x-0 top-0 h-[57%] overflow-hidden ${
-          featured ? "bg-[#1c1c1a]" : "bg-[#e8e5de]"
-        }`}
-      >
+      {/* IMAGE AREA */}
+
+      <div className="person-image">
         {person.image ? (
           <Image
             src={person.image}
             alt={person.name}
             fill
-            className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
-            sizes="(max-width: 768px) 100vw, 60vw"
+            sizes="
+              (max-width: 700px) 100vw,
+              (max-width: 1050px) 50vw,
+              60vw
+            "
+            className="object-cover grayscale"
           />
         ) : (
-          <>
-            <div
-              className={`absolute inset-0 transition-transform duration-700 group-hover:scale-105 ${
-                featured
-                  ? "bg-[radial-gradient(circle_at_70%_35%,rgba(255,255,255,0.16),transparent_28%),linear-gradient(135deg,#242421,#111110)]"
-                  : "bg-[radial-gradient(circle_at_70%_35%,rgba(0,0,0,0.09),transparent_25%),linear-gradient(135deg,#eeece6,#dedbd3)]"
-              }`}
-            />
+          <div className="person-placeholder">
+            <div className="person-placeholder-grid" />
 
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="person-placeholder-glow" />
+
+            <div className="person-placeholder-icon">
               <Crown
-                size={featured ? 76 : 62}
-                strokeWidth={0.65}
-                className={
-                  featured ? "text-white/15" : "text-black/[0.08]"
-                }
+                size={29}
+                strokeWidth={0.85}
               />
             </div>
 
-            <span
-              className={`absolute bottom-5 left-5 font-mono text-[9px] uppercase tracking-[0.18em] ${
-                featured ? "text-white/35" : "text-black/30"
-              }`}
-            >
-              PHOTO / TO BE ADDED
+            <span className="person-placeholder-label">
+              <i />
+              PROFILE / IMAGE PENDING
             </span>
-          </>
+          </div>
         )}
+
+        <div className="person-image-scan" />
       </div>
 
-      {/* top metadata */}
-      <div className="relative z-10 flex items-center justify-between p-5">
-        <span
-          className={`font-mono text-[10px] font-bold ${
-            featured ? "text-white/35" : "text-neutral-400"
-          }`}
-        >
+      {/* TOP INFO */}
+
+      <div className="person-top">
+        <span className="person-number">
           {person.number}
         </span>
 
-        <span
-          className={`border px-2 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] ${
-            featured
-              ? "border-white/15 bg-white/5 text-white/55"
-              : "border-black/10 bg-white/50 text-neutral-500"
-          }`}
-        >
+        <span className="person-domain">
           {person.domain}
         </span>
       </div>
 
-      {/* content */}
-      <div
-        className={`absolute inset-x-0 bottom-0 z-10 p-5 ${
-          featured
-            ? "bg-gradient-to-t from-[#141413] via-[#141413] to-transparent pt-16"
-            : "bg-gradient-to-t from-[#faf9f6] via-[#faf9f6] to-transparent pt-16"
-        }`}
-      >
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <p
-              className={`font-mono text-[9px] font-semibold uppercase tracking-[0.18em] ${
-                featured ? "text-white/40" : "text-neutral-400"
-              }`}
-            >
-              {person.position}
-            </p>
+      {/* CONTENT */}
 
-            <h3
-              className={`mt-1 text-2xl font-semibold tracking-[-0.035em] ${
-                featured ? "text-white" : "text-[#141413]"
-              }`}
-            >
+      <div className="person-content">
+        <p className="person-position">
+          {person.position}
+        </p>
+
+        <div className="person-name-row">
+          <div>
+            <h3 className="person-name">
               {person.name}
             </h3>
 
-            <div
-              className={`mt-1 font-mono text-[9px] uppercase tracking-widest ${
-                featured ? "text-white/35" : "text-neutral-400"
-              }`}
-            >
+            <div className="person-batch">
               {person.batch}
             </div>
           </div>
 
-          <div
-            className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all duration-300 group-hover:rotate-45 ${
-              featured
-                ? "border-white/15 text-white/60"
-                : "border-black/10 text-neutral-400"
-            }`}
-          >
-            <ArrowUpRight size={15} />
-          </div>
+          <span className="person-arrow">
+            <ArrowUpRight
+              size={15}
+              strokeWidth={1.4}
+            />
+          </span>
         </div>
 
-        <p
-          className={`mt-3 max-w-xl text-xs leading-5 ${
-            featured ? "text-white/55" : "text-neutral-500"
-          }`}
-        >
+        <p className="person-description">
           {person.description}
         </p>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -859,54 +3768,55 @@ function PersonCard({
 
 function MemberCard({
   member,
+  index,
 }: {
   member: (typeof members)[number];
+  index: number;
 }) {
   return (
-    <div className="group relative min-h-[205px] cursor-pointer bg-[#faf9f6] p-5 transition-all duration-300 hover:bg-[#141413] hover:text-white">
-      <div className="flex items-start justify-between">
-        <span className="font-mono text-[9px] text-neutral-400 group-hover:text-white/35">
-          MEMBER
+    <article className="member-card">
+      <div className="member-card-top">
+        <span className="member-label">
+          MEMBER /{" "}
+          {String(index + 1).padStart(2, "0")}
         </span>
 
         <ArrowUpRight
           size={15}
-          className="text-neutral-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white/60"
+          strokeWidth={1.4}
+          className="member-arrow"
         />
       </div>
 
-      <div className="absolute bottom-5 left-5 right-5">
-        <div className="mb-4 h-12 w-12 overflow-hidden rounded-full border border-black/10 bg-[#e8e5de] transition-transform duration-500 group-hover:scale-105 group-hover:border-white/20">
-          {member.image ? (
-            <Image
-              src={member.image}
-              alt={member.name}
-              width={48}
-              height={48}
-              className="h-full w-full object-cover grayscale"
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center font-mono text-[10px] text-neutral-400">
-              IMG
-            </div>
-          )}
-        </div>
+      <div className="member-avatar">
+        {member.image ? (
+          <Image
+            src={member.image}
+            alt={member.name}
+            width={50}
+            height={50}
+          />
+        ) : (
+          <div className="member-avatar-placeholder">
+            IMG
+          </div>
+        )}
+      </div>
 
-        <h3 className="text-lg font-semibold tracking-tight">
-          {member.name}
-        </h3>
+      <div className="member-info">
+        <h3>{member.name}</h3>
 
-        <div className="mt-1 flex flex-wrap gap-2 font-mono text-[9px] uppercase tracking-wider text-neutral-400 group-hover:text-white/40">
+        <div className="member-meta">
           <span>{member.batch}</span>
           <span>·</span>
           <span>{member.role}</span>
         </div>
 
-        <p className="mt-2 text-xs text-neutral-500 group-hover:text-white/55">
+        <p className="member-domain">
           {member.domain}
         </p>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -920,61 +3830,63 @@ function SuccessCard({
   success: (typeof successes)[number];
 }) {
   return (
-    <article className="group overflow-hidden border border-black/15 bg-[#f5f3ee]">
-      <div className="relative h-52 overflow-hidden bg-[#dedbd3]">
+    <article className="success-card">
+      <div className="success-image">
         {success.image ? (
           <Image
             src={success.image}
             alt={success.title}
             fill
-            className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
-            sizes="(max-width: 1024px) 100vw, 33vw"
+            sizes="
+              (max-width: 700px) 100vw,
+              (max-width: 1050px) 50vw,
+              33vw
+            "
+            className="object-cover grayscale"
           />
         ) : (
           <>
-            <div className="absolute inset-0 bg-[linear-gradient(135deg,#e9e6df_25%,#d9d6ce_25%,#d9d6ce_50%,#e9e6df_50%,#e9e6df_75%,#d9d6ce_75%)] bg-[length:34px_34px] opacity-40" />
+            <div className="success-placeholder" />
 
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="success-placeholder-icon">
               <Trophy
                 size={58}
-                strokeWidth={0.7}
-                className="text-black/10 transition-transform duration-500 group-hover:scale-110"
+                strokeWidth={0.65}
               />
             </div>
 
-            <span className="absolute bottom-4 left-4 font-mono text-[9px] uppercase tracking-widest text-black/30">
+            <span className="success-placeholder-label">
               SUCCESS IMAGE / TO BE ADDED
             </span>
           </>
         )}
 
-        <span className="absolute left-4 top-4 border border-black/10 bg-[#f5f3ee]/90 px-2 py-1 font-mono text-[9px] font-bold">
+        <span className="success-number">
           {success.number}
         </span>
       </div>
 
-      <div className="p-5">
-        <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-400">
+      <div className="success-content">
+        <div className="success-meta">
           {success.meta}
         </div>
 
-        <h3 className="mt-2 text-xl font-semibold tracking-tight">
-          {success.title}
-        </h3>
+        <h3>{success.title}</h3>
 
-        <p className="mt-1 text-xs font-medium text-neutral-500">
+        <p className="success-person">
           {success.person}
         </p>
 
-        <p className="mt-4 text-xs leading-5 text-neutral-500">
+        <p className="success-description">
           {success.description}
         </p>
 
-        <div className="mt-5 flex items-center justify-between border-t border-black/10 pt-3 font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+        <div className="success-footer">
           <span>CSE SOCIETY</span>
+
           <ArrowUpRight
             size={14}
-            className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-black"
+            strokeWidth={1.4}
           />
         </div>
       </div>
