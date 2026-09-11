@@ -255,9 +255,9 @@ export default function AboutPage() {
 
             <Reveal
               delay={180}
-              className="relative lg:col-span-6 flex justify-center"
+              className="relative flex justify-start lg:col-span-6 lg:justify-center"
             >
-              <div className="group relative -mt-50 w-full max-w-[450px] overflow-hidden border border-black/10 bg-[#dedbd2]">
+              <div className="group relative mt-0 w-full max-w-[450px] overflow-hidden border border-black/10 bg-[#dedbd2] lg:-mt-50">
 
                 <div className="relative aspect-square overflow-hidden">
 
@@ -828,8 +828,7 @@ export default function AboutPage() {
 
               <Link
                 href="/events"
-                className="group inline-flex items-center gap-3 bg-[#f7f5f0] px-5 py-3.5 font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-[#141413] transition-transform duration-300 hover:-translate-y-0.5"
-              >
+                className="group inline-flex items-center gap-3 !bg-[#f7f5f0] !text-[#141413] px-5 py-3.5 font-mono text-[8px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:-translate-y-0.5 hover:!bg-white"              >
                 Explore Society Activities
 
                 <ArrowRight

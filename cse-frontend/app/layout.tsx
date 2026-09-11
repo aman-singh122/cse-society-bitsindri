@@ -30,6 +30,9 @@ export const metadata: Metadata = {
     "AI",
     "Open Source",
   ],
+  icons: {
+    icon: "/images/about/society-logo.png",
+  },
 };
 
 export default function RootLayout({

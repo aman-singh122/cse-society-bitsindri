@@ -190,7 +190,7 @@ export default function Navbar() {
 
           <div className="hidden leading-tight min-[420px]:block">
             <p className="font-mono text-sm font-bold tracking-[0.01em] text-[#141413] sm:text-base lg:text-lg">
-              Computer Science & Engineering Society
+              CSE Society
             </p>
 
             <p className="mt-0.5 font-mono text-[9px] font-semibold uppercase tracking-[0.28em] text-black/65 sm:text-[10px]">

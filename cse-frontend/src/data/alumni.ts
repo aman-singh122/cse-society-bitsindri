@@ -22,6 +22,13 @@ export const alumni: Alumni[] = [
     url: "https://www.linkedin.com/in/kumar-abhishek45/",
   },
   {
+    name: "Bishnu Yadav",
+    batch: 2023,
+    role: "Software Engineer II",
+    company: "SLB",
+    url: "https://www.linkedin.com/in/bishnu-yadav/",
+  },
+  {
     name: "Ravi Shankar",
     batch: 2022,
     role: "Associate software Engineer",
@@ -50,6 +57,13 @@ export const alumni: Alumni[] = [
     url: "https://www.linkedin.com/in/swati-jha2906/",
   },
   {
+    name: "Shiwani kumari",
+    batch: 2020,
+    role: "SDE-2",
+    company: "Goldman Sachs",
+    url: "https://www.linkedin.com/in/shiwani19890/",
+  },
+  {
     name: "Pooja Bharti",
     batch: 2020,
     role: "SDE-2",
@@ -58,21 +72,21 @@ export const alumni: Alumni[] = [
   },
   {
     name: "Dheeraj Kumar",
-    batch: 2022,
+    batch: 2020,
     role: "SDE-2",
     company: "Lloyds",
     url: "https://www.linkedin.com/in/dheeraj-kumar-b2b119171/",
   },
   {
     name: "Deepak Kumar",
-    batch: 2022,
+    batch: 2020,
     role: "Senior SDE",
     company: "PayPal",
     url: "https://www.linkedin.com/in/deepak-kumar-b73252168/",
   },
   {
     name: "Anvesha Barnwal",
-    batch: 2021,
+    batch: 2019,
     role: "Senior Software Engineer",
     company: "Tekin Corp",
     url: "https://www.linkedin.com/in/anvesha-barnwal/",
@@ -83,6 +97,13 @@ export const alumni: Alumni[] = [
     role: "Senior Software Engineer",
     company: "MakeMyTrip",
     url: "https://www.linkedin.com/in/rahuldas790/",
+  },
+  {
+    name: "Manish Kumar",
+    batch: 2017,
+    role: "Deputy Manager",
+    company: "State Bank of India",
+    url: "https://www.linkedin.com/in/makk2901/",
   },
   {
     name: "Shanti Kumari",
