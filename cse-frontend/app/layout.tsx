@@ -41,12 +41,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html
+      lang="en"
+      className="dark-theme scroll-smooth"
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+    >
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-[#f5f3ee] text-[#141413] antialiased selection:bg-[#141413] selection:text-[#f5f3ee]`}
+        className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-[var(--cse-bg)] text-[var(--cse-text)] antialiased selection:bg-[var(--cse-text-strong)] selection:text-[var(--cse-bg)]`}
       >
         <Navbar />
-        {children}
+
+        <main>{children}</main>
+
         <Footer />
       </body>
     </html>

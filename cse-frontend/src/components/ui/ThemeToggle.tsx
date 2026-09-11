@@ -3,17 +3,17 @@
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
+type Theme = "dark" | "light";
+
 export default function ThemeToggle() {
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(true);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("cse-theme");
+    const saved = localStorage.getItem("cse-theme") as Theme | null;
 
-    const isDark =
-      saved === "dark" ||
-      (!saved &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    // Dark is the default theme.
+    const isDark = saved !== "light";
 
     document.documentElement.classList.toggle("dark-theme", isDark);
 
@@ -22,18 +22,26 @@ export default function ThemeToggle() {
   }, []);
 
   const toggleTheme = () => {
-    const next = !dark;
+    const nextDark = !dark;
 
     document.documentElement.classList.add("theme-transition");
 
-    document.documentElement.classList.toggle("dark-theme", next);
+    document.documentElement.classList.toggle(
+      "dark-theme",
+      nextDark
+    );
 
-    localStorage.setItem("cse-theme", next ? "dark" : "light");
+    localStorage.setItem(
+      "cse-theme",
+      nextDark ? "dark" : "light"
+    );
 
-    setDark(next);
+    setDark(nextDark);
 
     window.setTimeout(() => {
-      document.documentElement.classList.remove("theme-transition");
+      document.documentElement.classList.remove(
+        "theme-transition"
+      );
     }, 320);
   };
 
@@ -53,7 +61,11 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+      aria-label={
+        dark
+          ? "Switch to light theme"
+          : "Switch to dark theme"
+      }
       title={dark ? "Light theme" : "Dark theme"}
       className="theme-toggle"
     >
